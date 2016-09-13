@@ -19,4 +19,9 @@ public class Math
         }
         return n * Fact(n - 1);
     }
+
+    public double FindStrangeDouble()
+    {
+        return double.MaxValue;
+    }
 }

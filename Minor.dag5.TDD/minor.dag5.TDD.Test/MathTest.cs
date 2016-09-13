@@ -54,5 +54,20 @@ namespace minor.dag5.TDD.Test
             Assert.Equal(6, result);
         }
 
+        [Fact]
+        public void FindStrangeDouble()
+        {
+            //Arange
+            var target = new Math();
+
+            //Act
+            double value = target.FindStrangeDouble();
+            bool result = value == value + 1;
+
+            //Assert
+            Assert.Equal(true, result);
+        }
+
+
     }
 }
