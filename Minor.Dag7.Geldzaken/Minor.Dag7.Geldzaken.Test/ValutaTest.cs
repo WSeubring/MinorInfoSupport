@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Minor.Dag7.Geldzaken.Test
 {
     [TestClass]
-    public class MuntsoortenTest
+    public class ValutaTest
     {
         [TestMethod]
         public void TestMuntsoortEuro()
@@ -75,13 +75,41 @@ namespace Minor.Dag7.Geldzaken.Test
         public void TestValutaDukaatToString()
         {
             //Arrange
-            Valuta valuta = new Valuta(Muntsoort.Florijn, 2.50M);
+            Valuta valuta = new Valuta(Muntsoort.Dukaat, 2.556M);
 
             //Act
             String result = valuta.ToString();
 
             //Assert
-            Assert.AreEqual("2,50 fl", result);
+            Assert.AreEqual("2,56 HD", result);
         }
+        
+        //Eerst ValutaConvert Testen
+
+        //[TestMethod]
+        //public void TestValutaVanEuroNaarGulden()
+        //{
+        //    //Arrange
+        //    Valuta valuta = new Valuta(Muntsoort.Euro, 10M);
+
+        //    //Act
+        //    decimal result = valuta.ConvertTo(Muntsoort.Gulden);
+
+        //    //Assert
+        //    Assert.AreEqual(22.04M, result);
+        //}
+
+        //[TestMethod]
+        //public void TestValutaVanEuroNaarFlorijn()
+        //{
+        //    //Arrange
+        //    Valuta valuta = new Valuta(Muntsoort.Euro, 10.10M);
+
+        //    //Act
+        //    decimal result = valuta.ConvertTo(Muntsoort.Florijn);
+
+        //    //Assert
+        //    Assert.AreEqual(10.10M, result);
+        //}
     }
 }

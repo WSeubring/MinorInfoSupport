@@ -21,12 +21,24 @@ public struct Valuta
     private string GetValutaAfkorting(Muntsoort muntsoort)
     {
         switch (muntsoort) {
+            default:
+                throw new MuntsoortNietOndersteundException();
+
             case Muntsoort.Euro:
                 return "EUR";
+
             case Muntsoort.Gulden:
             case Muntsoort.Florijn:
                 return "fl";
+
+            case Muntsoort.Dukaat:
+                return "HD";
+            
         }
-        throw new MuntsoortNietOndersteundException();
+    }
+
+    public decimal ConvertTo(Muntsoort muntsoort)
+    {
+        return 0;
     }
 }
