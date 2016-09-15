@@ -45,9 +45,11 @@ public class ValutaConverter
         {
             convertionrate = convertionRatesVanEuro[muntsoort];
         }
-        catch (KeyNotFoundException){
+        catch (KeyNotFoundException)
+        {
             throw new MuntsoortNietOndersteundException();
         }
+
         return bedrag * convertionrate;
     }
 }
