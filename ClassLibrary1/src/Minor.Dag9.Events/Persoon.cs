@@ -14,7 +14,7 @@ namespace Minor.Dag9.Events
             set {
                 int oudeLeeftijd = _leeftijd;
                 _leeftijd = value;
-                onLeeftijdChanged(new LeeftijdChangedEventArgs(Naam, oudeLeeftijd, _leeftijd));
+                OnLeeftijdChanged(new LeeftijdChangedEventArgs(Naam, oudeLeeftijd, _leeftijd));
             }
         }
 
@@ -23,7 +23,7 @@ namespace Minor.Dag9.Events
             Naam = naam;
             _leeftijd = leeftijd;
         }
-        public virtual void onLeeftijdChanged(LeeftijdChangedEventArgs e)
+        protected virtual void OnLeeftijdChanged(LeeftijdChangedEventArgs e)
         {
             LeeftijdChanged?.Invoke(this, e);
         }
