@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 internal class Empty : BinaryTree
 {
@@ -16,5 +17,15 @@ internal class Empty : BinaryTree
         {
             return 0;
         }
+    }
+
+    public override bool Contains(int value)
+    {
+        return false;
+    }
+
+    public override IEnumerator<int> GetEnumerator()
+    {
+        yield return 0;
     }
 }

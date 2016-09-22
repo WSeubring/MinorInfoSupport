@@ -83,7 +83,8 @@ namespace Minor.Dag10.BinaryTreeExample.Test
             Assert.AreEqual(1, target.Count);
         }
 
-        public void BinaryTreeDepthIs3()
+        [TestMethod]
+        public void BinaryTreeCountIs3()
         {
             //Arrange
             var target = BinaryTree.Empty;
@@ -96,6 +97,81 @@ namespace Minor.Dag10.BinaryTreeExample.Test
 
             //Assert
             Assert.AreEqual(3, target.Count);
+        }
+
+        [TestMethod]
+        public void BinaryTreeContains()
+        {
+            //Arrange
+            var target = BinaryTree.Empty;
+            target = target.Add(10);
+            target = target.Add(1);
+            target = target.Add(12);
+
+            //Act
+            var result = target.Contains(12);
+
+
+            //Assert
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void BinaryTreeContainsItemNotInTree()
+        {
+            //Arrange
+            var target = BinaryTree.Empty;
+            target = target.Add(10);
+            target = target.Add(1);
+            target = target.Add(12);
+
+            //Act
+            var result = target.Contains(11);
+
+
+            //Assert
+            Assert.IsFalse(result);
+        }
+
+        [TestMethod]
+        public void ForEachThroughBinaryTreeWith1Item()
+        {
+            //Arrange
+            var target = BinaryTree.Empty;
+            target = target.Add(1);
+            int sum = 0;
+
+            //Act
+            foreach(var item in target)
+            {
+                sum += item;
+            }
+
+            //Assert
+            Assert.AreEqual(1, sum);
+        }
+
+        [TestMethod]
+        public void ForEachThroughBinaryTreeWith3Item()
+        {
+            //Arrange
+            var target = BinaryTree.Empty;
+            target = target.Add(5);
+            target = target.Add(10);
+            target = target.Add(15);
+            int sum = 0;
+            int count = 0;
+
+            //Act
+            foreach (var item in target)
+            {
+                count++; 
+                sum += item;
+            }
+
+            //Assert
+            Assert.AreEqual(30, sum);
+            Assert.AreEqual(3, count);
         }
     }
 }

@@ -1,16 +1,18 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 
 internal class Branch : BinaryTree
 {
-    public int Value { get; set; }
-    public BinaryTree Right { get; set; }
-    public BinaryTree Left { get; set; }
+    private int _value;
+    private BinaryTree _right;
+    private BinaryTree _left;
 
     public override int Count
     {
         get
         {
-            return 1 + Left.Count + Right.Count;
+            return 1 + _left.Count + _right.Count;
         }
     }
 
@@ -18,31 +20,69 @@ internal class Branch : BinaryTree
     {
         get
         {
-            return 1 + Math.Max(Left.Depth, Right.Depth);
+            return 1 + Math.Max(_left.Depth, _right.Depth);
         }
     }
 
     public Branch(int value)
     {
-        Value = value;
-        Left = new Empty();
-        Right = new Empty();
+        _value = value;
+        _left = new Empty();
+        _right = new Empty();
     }
 
     public override BinaryTree Add(int newValue)
     {
-        if( Value == newValue)
+        if( _value == newValue)
         {
             return this;
         }
-        else if(newValue < Value)
+        else if(newValue < _value)
         {
-            Left = new Branch(newValue);
+            _left = new Branch(newValue);
         }
-        else if(newValue > Value)
+        else if(newValue > _value)
         {
-            Right = new Branch(newValue);
+            _right = new Branch(newValue);
         }
         return this;
+    }
+
+    public override bool Contains(int value)
+    {
+        if(_value == value)
+        {
+            return true;
+        }
+        else if (value < _value)
+        {
+            return _left.Contains(value);
+        } 
+        else
+        {
+            return _right.Contains(value);
+        }
+    }
+
+    public override IEnumerator<int> GetEnumerator()
+    {
+        if (!(_left is Empty))
+        {
+            foreach (var value in _left)
+            {
+                yield return value;
+            }
+        }
+
+        yield return _value;
+
+        if (!(_right is Empty))
+        {
+            foreach (var value in _right)
+            {
+                yield return value;
+            }
+        }
+
     }
 }
