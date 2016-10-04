@@ -1,0 +1,18 @@
+﻿@model IEnumerable<Minor.Dag18.FrontEndOpdracht.Models.Monument>
+
+<table class="table">
+    @foreach (var item in Model)
+    {
+        <tr>
+            <th> @Html.DisplayFor(model => item.ID) </th>
+            <th> @Html.DisplayFor(model => item.Naam) </th>
+            <th> @Html.ActionLink("Delete", "Delete", "Monumenten", new {id = item.ID }) </th>
+        </tr>
+    }
+
+    <div class="row">
+        <div class="col">
+            <label>ID: </label> <input
+        </div>
+    </div>
+</table>
