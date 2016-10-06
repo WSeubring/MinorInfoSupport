@@ -33,14 +33,10 @@ namespace Minor.Dag18.FrontEndOpdracht.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult Add(Monument monument)
+        public IActionResult Create()
         {
-            if(monument != null)
-            {
-                _monumentAgent.Add(monument);
-            }
 
-            return RedirectToAction("Index");
+           return View();
         }
     }
 }

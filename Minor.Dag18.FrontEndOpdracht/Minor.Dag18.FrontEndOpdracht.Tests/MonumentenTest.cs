@@ -78,23 +78,23 @@ namespace Minor.Dag18.FrontEndOpdracht.Tests
             Assert.AreEqual(2, monumenten.Count());
         }
 
-        [TestMethod]
-        public void AddEenMonument()
-        {
-            //Assert
-            var monumentenAgent = new DummyMonumentenAgent();
-            monumentenAgent.Add(new Monument() { Naam = "TestMonument", ID = 1 });
+        //[TestMethod]
+        //public void AddEenMonument()
+        //{
+        //    //Assert
+        //    var monumentenAgent = new DummyMonumentenAgent();
+        //    monumentenAgent.Add(new Monument() { Naam = "TestMonument", ID = 1 });
 
-            var target = new MonumentenController(monumentenAgent);
+        //    var target = new MonumentenController(monumentenAgent);
 
-            //Act
-            IActionResult result = target.Add(new Monument() { Naam = "NieuwTestMonument", ID = 5});
+        //    //Act
+        //    IActionResult result = target.Add(new Monument() { Naam = "NieuwTestMonument", ID = 5});
 
 
-            //Assert
-            var monumenten = monumentenAgent.GetAllMonumenten();
-            Assert.AreEqual(2, monumenten.Count());
-            Assert.AreEqual("NieuwTestMonument", monumenten.Single(m => m.ID == 5).Naam);
-        }
+        //    //Assert
+        //    var monumenten = monumentenAgent.GetAllMonumenten();
+        //    Assert.AreEqual(2, monumenten.Count());
+        //    Assert.AreEqual("NieuwTestMonument", monumenten.Single(m => m.ID == 5).Naam);
+        //}
     }
 }
