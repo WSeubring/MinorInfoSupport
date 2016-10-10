@@ -1,0 +1,152 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1",
+    "title": "A Monument Service",
+    "description": "A RESTfull service for monument registration",
+    "termsOfService": "None"
+  },
+  "basePath": "/",
+  "paths": {
+    "/api/Monument": {
+      "get": {
+        "tags": [ "Monument" ],
+        "operationId": "Get",
+        "consumes": [],
+        "produces": [ "text/plain", "application/json", "text/json" ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": { "$ref": "#/definitions/Monument" }
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "post": {
+        "tags": [ "Monument" ],
+        "operationId": "Add",
+        "consumes": [ "application/json", "text/json", "application/json-patch+json" ],
+        "produces": [ "text/plain", "application/json", "text/json" ],
+        "parameters": [
+          {
+            "name": "item",
+            "in": "body",
+            "required": false,
+            "schema": { "$ref": "#/definitions/Monument" }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Client Error",
+            "schema": { "$ref": "#/definitions/BadRequestResult" }
+          },
+          "200": {
+            "description": "Success",
+            "schema": { "$ref": "#/definitions/OkResult" }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/api/Monument/{id}": {
+      "get": {
+        "tags": [ "Monument" ],
+        "operationId": "GetById",
+        "consumes": [],
+        "produces": [ "text/plain", "application/json", "text/json" ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Client Error",
+            "schema": { "$ref": "#/definitions/NotFoundResult" }
+          },
+          "200": {
+            "description": "Success",
+            "schema": { "$ref": "#/definitions/OkResult" }
+          }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": [ "Monument" ],
+        "operationId": "Delete",
+        "consumes": [],
+        "produces": [ "text/plain", "application/json", "text/json" ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Client Error",
+            "schema": { "$ref": "#/definitions/NotFoundResult" }
+          },
+          "200": {
+            "description": "Success",
+            "schema": { "$ref": "#/definitions/OkResult" }
+          }
+        },
+        "deprecated": false
+      }
+    }
+  },
+  "definitions": {
+    "Monument": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "naam": { "type": "string" }
+      }
+    },
+    "BadRequestResult": {
+      "type": "object",
+      "properties": {
+        "statusCode": {
+          "format": "int32",
+          "type": "integer",
+          "readOnly": true
+        }
+      }
+    },
+    "OkResult": {
+      "type": "object",
+      "properties": {
+        "statusCode": {
+          "format": "int32",
+          "type": "integer",
+          "readOnly": true
+        }
+      }
+    },
+    "NotFoundResult": {
+      "type": "object",
+      "properties": {
+        "statusCode": {
+          "format": "int32",
+          "type": "integer",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "securityDefinitions": {}
+}

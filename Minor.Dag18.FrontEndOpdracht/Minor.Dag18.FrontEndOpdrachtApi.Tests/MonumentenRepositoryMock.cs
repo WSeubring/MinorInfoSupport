@@ -5,7 +5,7 @@ using Enities;
 
 namespace Minor.Dag18.FrontEndOpdrachtApi.Tests
 {
-    internal class MonumentenRepositoryMock : IMonumentenRepository
+    internal class MonumentenRepositoryMock : IRepository<Monument, int>
     {
         public int FindAllCount { get; private set; }
         public List<int> GetByIdCalls { get; private set; }
@@ -27,13 +27,6 @@ namespace Minor.Dag18.FrontEndOpdrachtApi.Tests
             return null;
         }
 
-        public Monument FindById(int id)
-        {
-            GetByIdCalls.Add(id);
-
-            return null;
-        }
-
         public void Add(Monument item)
         {
             AddCalls.Add(item);
@@ -42,6 +35,13 @@ namespace Minor.Dag18.FrontEndOpdrachtApi.Tests
         public void Delete(int id)
         {
             DeleteCalls.Add(id);
+        }
+
+        public Monument FindByKey(int key)
+        {
+            GetByIdCalls.Add(key);
+
+            return null;
         }
     }
 }
