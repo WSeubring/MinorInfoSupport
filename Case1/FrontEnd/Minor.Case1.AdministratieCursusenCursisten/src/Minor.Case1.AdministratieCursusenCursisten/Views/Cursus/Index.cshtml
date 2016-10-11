@@ -1,0 +1,44 @@
+@model IEnumerable<Minor.Case1.AdministratieCursusenCursisten.ViewModels.CursusOverzicht>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CursusInstantie.Cursus.Titel)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.CursusInstantie.StartDatum)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CursusInstantie.Cursus.Duur)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AantalDeelNemers)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CursusInstantie.Cursus.Titel)
+                </td>
+                <td>
+                    @String.Format("{0:dd/MM/yyyy}", item.CursusInstantie.StartDatum)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CursusInstantie.Cursus.Duur)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AantalDeelNemers)
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
