@@ -63,7 +63,7 @@ namespace Minor.Case1.AdministratieCursusenCursistenApiTest.DAL
             var mockCursusTextFileParser = new CursusTextParserMock();
             var cursusInstantie = new CursusInstantie()
             {
-                CursusCode = "TESTCURSUS",
+                //CursusCode = "TESTCURSUS",
                 StartDatum = new DateTime(2016, 10, 10),
                 Cursus = new Cursus()
                 {
@@ -98,7 +98,7 @@ namespace Minor.Case1.AdministratieCursusenCursistenApiTest.DAL
             var mockCursusTextFileParser = new CursusTextParserMock();
             var cursusInstantie = new CursusInstantie()
             {
-                CursusCode = "TESTCURSUS",
+                //CursusCode = "TESTCURSUS",
                 StartDatum = new DateTime(2016, 10, 10),
                 Cursus = new Cursus()
                 {
@@ -107,7 +107,7 @@ namespace Minor.Case1.AdministratieCursusenCursistenApiTest.DAL
             };
             var cursusInstantie2 = new CursusInstantie()
             {
-                CursusCode = "TESTCURSUS2",
+                //CursusCode = "TESTCURSUS2",
                 StartDatum = new DateTime(2016, 1, 1),
                 Cursus = new Cursus()
                 {
@@ -143,7 +143,7 @@ namespace Minor.Case1.AdministratieCursusenCursistenApiTest.DAL
             {
                 new CursusInstantie()
                 {
-                    CursusCode = "TESTCURSUS",
+                    //CursusCode = "TESTCURSUS",
                     StartDatum = new DateTime(2016, 10, 10),
                     Cursus = new Cursus()
                     {
@@ -152,7 +152,7 @@ namespace Minor.Case1.AdministratieCursusenCursistenApiTest.DAL
                 },
                 new CursusInstantie()
                 {
-                    CursusCode = "TESTCURSUS2",
+                    //CursusCode = "TESTCURSUS2",
                     StartDatum = new DateTime(2016, 1, 1),
                     Cursus = new Cursus()
                     {

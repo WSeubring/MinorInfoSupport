@@ -21,7 +21,7 @@ namespace Minor.Case1.AdministratieCursusenCursistenApiTest
             {
                 new CursusInstantie()
                 {
-                    CursusCode = "Code",
+                    //CursusCode = "Code",
                     StartDatum = new DateTime(2016, 10, 10),
                     Cursus = new Cursus()
                     {

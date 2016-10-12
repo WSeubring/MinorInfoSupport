@@ -56,7 +56,7 @@ namespace Minor.Case1.AdministratieCursusenCursistenApi.Services
 
                         cursusInstanties.Add(new CursusInstantie()
                         {
-                            CursusCode = cursusCode,
+                            //CursusCode = cursusCode,
                             StartDatum = startDatum,
                             Cursus = new Cursus()
                             {
@@ -64,7 +64,6 @@ namespace Minor.Case1.AdministratieCursusenCursistenApi.Services
                                 Duur = duur,
                                 Titel = title
                             }
-
                         });
                     }
                 }

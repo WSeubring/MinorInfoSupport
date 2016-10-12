@@ -10,8 +10,6 @@ namespace Minor.Case1.AdministratieCursusenCursistenApi.Entiteiten
         [DataType(DataType.Date)]
         public DateTime StartDatum{ get; set; }
 
-        [StringLength(10)]
-        public string CursusCode {get; set;}
         public Cursus Cursus { get; set; }
 
         public bool Equals(CursusInstantie other)
@@ -19,8 +17,7 @@ namespace Minor.Case1.AdministratieCursusenCursistenApi.Entiteiten
             if( this.Cursus.Code == other.Cursus.Code &&
                 this.Cursus.Duur == other.Cursus.Duur &&
                 this.Cursus.Titel == other.Cursus.Titel &&
-                this.StartDatum == other.StartDatum &&
-                this.CursusCode == other.CursusCode)
+                this.StartDatum == other.StartDatum )
             {
                 return true;
             }
@@ -28,7 +25,7 @@ namespace Minor.Case1.AdministratieCursusenCursistenApi.Entiteiten
         }
         public override int GetHashCode()
         {
-            return CursusCode.GetHashCode() ^ Cursus.Code.GetHashCode() ^ Cursus.Duur.GetHashCode() ^ Cursus.Titel.GetHashCode();
+            return  Cursus.Code.GetHashCode() ^ Cursus.Duur.GetHashCode() ^ Cursus.Titel.GetHashCode();
         }
     }
 }

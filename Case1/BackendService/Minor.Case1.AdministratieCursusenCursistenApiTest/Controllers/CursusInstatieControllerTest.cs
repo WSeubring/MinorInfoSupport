@@ -39,7 +39,7 @@ namespace Minor.Case1.AdministratieCursusenCursistenApiTest
 
             //Assert
             Assert.AreEqual(0, mockRepository.AantalCallsOpFindAll);
-            Assert.AreEqual(0, mockRepository.CallsOpAddRange);
+            Assert.AreEqual(0, mockRepository.CallsOpAddRange.Count());
             Assert.IsInstanceOfType(result, typeof(BadRequestResult));
         }
 
@@ -56,7 +56,7 @@ namespace Minor.Case1.AdministratieCursusenCursistenApiTest
 
             //Assert
             Assert.AreEqual(1, mockRepository.AantalCallsOpFindAll);
-            Assert.AreEqual(1, mockRepository.CallsOpAddRange);
+            Assert.AreEqual(1, mockRepository.CallsOpAddRange.Count());
             Assert.IsInstanceOfType(result, typeof(OkObjectResult));
         }
 

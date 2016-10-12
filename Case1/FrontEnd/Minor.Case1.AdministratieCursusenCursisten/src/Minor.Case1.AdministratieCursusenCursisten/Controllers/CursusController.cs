@@ -24,10 +24,10 @@ namespace Minor.Case1.AdministratieCursusenCursisten.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            var model = new List<CursusOverzicht>();
+            var model = new List<CursusOverzichtViewModel>();
             foreach (var item in _cursusInstantieAgent.Get().OrderBy(ci => ci.StartDatum))
             {
-                model.Add(new CursusOverzicht()
+                model.Add(new CursusOverzichtViewModel()
                 {
                     AantalDeelNemers = 1,
                     CursusInstantie = item
@@ -44,22 +44,18 @@ namespace Minor.Case1.AdministratieCursusenCursisten.Controllers
         }
 
         [HttpPost]
-        public IActionResult Importeren(IFormFile file)
+        public IActionResult Importeren(ImporterenViewModel model)
         {
-            if (file != null)
+            if (ModelState.IsValid)
             {
-                using (var streamReader = new StreamReader(file.OpenReadStream(), Encoding.UTF8))
+                using (var streamReader = new StreamReader(model.File.OpenReadStream(), Encoding.UTF8))
                 {
                     var text = streamReader.ReadToEnd();
 
                     _cursusInstantieAgent.AddFromTextFile(text);
                 }
             }
-            else
-            {
-                ModelState.AddModelError("file", "Er dient een bestand geselecteerd te worden.");
-            }
-            return View();
+            return View(model);
         }
     }
 }

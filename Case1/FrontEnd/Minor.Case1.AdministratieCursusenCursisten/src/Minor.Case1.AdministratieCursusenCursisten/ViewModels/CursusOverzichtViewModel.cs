@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Minor.Case1.AdministratieCursusenCursisten.ViewModels
 {
-    public class CursusOverzicht
+    public class CursusOverzichtViewModel
     {
         public  CursusInstantie CursusInstantie{ get; set; }
         public int AantalDeelNemers { get; set; }

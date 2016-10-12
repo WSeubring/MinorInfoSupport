@@ -1,5 +1,8 @@
-﻿<h1> Importeren Cursussen</h1>
+﻿@model Minor.Case1.AdministratieCursusenCursisten.ViewModels.ImporterenViewModel
+
+<h1> Importeren Cursussen</h1>
 <form method="post" asp-action="Importeren" asp-controller="Cursus" enctype="multipart/form-data">
-    <input type="file" name="file"/>
+    <span asp-validation-for="File" class="text-danger"></span>
+    <input asp-for="File" type="file" name="file"/>
     <input type="submit" value="Importeren" class="btn btn-default" />
 </form>
