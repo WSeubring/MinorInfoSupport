@@ -1,0 +1,10 @@
+﻿Titel: Lorem ipsum dolor
+Cursuscode: TESTCODE
+Duur: 5 dagen
+Startdatum: 11/10/2016
+
+
+Titel: Lorem Sumip
+Cursuscode: TESTCODE
+Duur: 5 dagen
+Startdatum: 11/10/2016

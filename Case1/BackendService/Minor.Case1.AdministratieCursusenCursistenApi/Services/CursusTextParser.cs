@@ -10,10 +10,13 @@ namespace Minor.Case1.AdministratieCursusenCursistenApi.Services
 {
     public class CursusTextParser : ICursusTextParser
     {
-        private static readonly Regex _titelPattern = new Regex(@"Titel:\s*(?<titel>.{1,300}$)");
-        private static readonly Regex _cursusCodePattern = new Regex(@"Cursuscode:\s*(?<cursuscode>.{1,10}$)");
-        private static readonly Regex _duurPattern = new Regex(@"Duur:\s*(?<duur>[1-5])\s.*");
-        private static readonly Regex _startDatumPattern = new Regex(@"Startdatum:\s*(?<startdatum>(((0[1-9]|[12]\d|3[01])\/(0[13578]|1[02])\/((1[6-9]|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)\/(0[13456789]|1[012])\/((1[6-9]|[2-9]\d)\d{2}))|((0[1-9]|1\d|2[0-8])\/02\/((1[6-9]|[2-9]\d)\d{2}))|(29\/02\/((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00)))))$");
+        private readonly Regex _titelPattern = new Regex(@"Titel:\s*(.{1,300}$)");
+        private readonly Regex _cursusCodePattern = new Regex(@"Cursuscode:\s*(.{1,10}$)");
+        private readonly Regex _duurPattern = new Regex(@"Duur:\s*([1-5])\s[dagen]");
+        private readonly Regex _startDatumPattern = new Regex(@"Startdatum:\s*((((0[1-9]|[12]\d|3[01])\/(0[13578]|1[02])\/((1[6-9]|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)\/(0[13456789]|1[012])\/((1[6-9]|[2-9]\d)\d{2}))|((0[1-9]|1\d|2[0-8])\/02\/((1[6-9]|[2-9]\d)\d{2}))|(29\/02\/((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00)))))$");
+        private readonly Regex _emptyLinePattern = new Regex(@"\s*");
+
+        private int _currentLineNumber = 0;
 
         public List<CursusInstantie> Parse(string filetext)
         {
@@ -23,59 +26,50 @@ namespace Minor.Case1.AdministratieCursusenCursistenApi.Services
             }
 
             var cursusInstanties = new List<CursusInstantie>();
-            int currentLineNumber = 0;
 
-            using (var text = new StringReader(filetext))
+            using (var reader = new StringReader(filetext))
             {
-                string firstline = null;
-                while ((firstline = text.ReadLine()) != null)
+                while (reader.Peek() > 0)
                 {
-                    currentLineNumber++;
-
-                    if (!string.IsNullOrWhiteSpace(firstline))
+                    string title = ProccesNextLine(_titelPattern, reader);
+                    string cursusCode = ProccesNextLine(_cursusCodePattern, reader);
+                    string duurtext = ProccesNextLine(_duurPattern, reader);
+                    string startDatumText = ProccesNextLine(_startDatumPattern, reader);
+                    if(reader.Peek() > 0)
                     {
-                        string currentLine = firstline;
-                        ValidateSyntax(_titelPattern, currentLine, currentLineNumber);
-                        var title = _titelPattern.Match(currentLine).Groups["titel"].Value;
-
-                        currentLineNumber++;
-                        currentLine = text.ReadLine();
-                        ValidateSyntax(_cursusCodePattern, currentLine, currentLineNumber);
-                        var cursusCode = _cursusCodePattern.Match(currentLine).Groups["cursuscode"].Value;
-
-                        currentLineNumber++;
-                        currentLine = text.ReadLine();
-                        ValidateSyntax(_duurPattern, currentLine, currentLineNumber);
-                        var duur = int.Parse(_duurPattern.Match(currentLine).Groups["duur"].Value);
-
-                        currentLineNumber++;
-                        currentLine = text.ReadLine();
-                        ValidateSyntax(_startDatumPattern, currentLine, currentLineNumber);
-                        var startDatumText = _startDatumPattern.Match(currentLine).Groups["startdatum"].Value;
-                        DateTime startDatum = DateTime.ParseExact(startDatumText, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-
-                        cursusInstanties.Add(new CursusInstantie()
-                        {
-                            //CursusCode = cursusCode,
-                            StartDatum = startDatum,
-                            Cursus = new Cursus()
-                            {
-                                Code = cursusCode,
-                                Duur = duur,
-                                Titel = title
-                            }
-                        });
+                        ProccesNextLine(_emptyLinePattern, reader);
                     }
+
+                    cursusInstanties.Add(new CursusInstantie()
+                    {
+                        //CursusCode = cursusCode,
+                        StartDatum = DateTime.ParseExact(startDatumText, "dd/MM/yyyy", CultureInfo.InvariantCulture),
+                        Cursus = new Cursus()
+                        {
+                            Code = cursusCode,
+                            Duur = int.Parse(duurtext),
+                            Titel = title
+                        }
+                    });
                 }
             }
 
             return cursusInstanties;
         }
-        private void ValidateSyntax(Regex pattern, string line, int linenumber)
+
+        private string ProccesNextLine(Regex pattern, StringReader reader)
+        {
+            _currentLineNumber++;
+            string line = reader.ReadLine();
+            ValidateSyntax(pattern, line);
+            return pattern.Match(line).Groups[1].Value;
+        }
+
+        private void ValidateSyntax(Regex pattern, string line)
         {
             if (!pattern.IsMatch(line))
             {
-                throw new SyntaxException($"Regel: {linenumber} voldoet niet aan de syntax.");
+                throw new SyntaxException($"Regel: {_currentLineNumber} voldoet niet aan de syntax.");
             }
         }
     }

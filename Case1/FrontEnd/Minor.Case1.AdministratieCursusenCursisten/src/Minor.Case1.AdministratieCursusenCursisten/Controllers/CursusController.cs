@@ -9,12 +9,14 @@ using Minor.Case1.AdministratieCursusenCursisten.Agents.Models;
 using System.IO;
 using Microsoft.AspNetCore.Http;
 using System.Text;
+using System.Globalization;
 
 namespace Minor.Case1.AdministratieCursusenCursisten.Controllers
 {
     public class CursusController : Controller
     {
         private ICursusInstantieAgentWrapper _cursusInstantieAgent;
+        private DateTimeFormatInfo _dfi = new DateTimeFormatInfo();
 
         public CursusController(ICursusInstantieAgentWrapper cursusInstantieAgent)
         {
@@ -24,16 +26,11 @@ namespace Minor.Case1.AdministratieCursusenCursisten.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            var model = new List<CursusOverzichtViewModel>();
-            foreach (var item in _cursusInstantieAgent.Get().OrderBy(ci => ci.StartDatum))
-            {
-                model.Add(new CursusOverzichtViewModel()
-                {
-                    AantalDeelNemers = 1,
-                    CursusInstantie = item
-                });
-
-            }
+            var model = new CursusOverzichtViewModel();
+            var calendar = _dfi.Calendar;
+            model.Weeknr = calendar.GetWeekOfYear(DateTime.Now, _dfi.CalendarWeekRule, _dfi.FirstDayOfWeek);
+            model.CursusInstanties = _cursusInstantieAgent.Get();
+            
             return View(model);
         }
 

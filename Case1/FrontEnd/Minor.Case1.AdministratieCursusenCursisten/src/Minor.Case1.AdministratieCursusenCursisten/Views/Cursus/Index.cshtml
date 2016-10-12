@@ -1,39 +1,41 @@
-@model IEnumerable<Minor.Case1.AdministratieCursusenCursisten.ViewModels.CursusOverzicht>
-
+@model Minor.Case1.AdministratieCursusenCursisten.ViewModels.CursusOverzichtViewModel
+<nav aria-label="...">
+    <ul class="pager">
+        <li class="previous"><a href="#"><span aria-hidden="true">&larr;</span> Vorige</a></li>
+        <li> <span class="text-center"> 
+                Week @Model.Weeknr
+            </span> 
+        </li>
+        <li class="next"><a href="#">Volgende <span aria-hidden="true">&rarr;</span></a></li>
+    </ul>
+</nav>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.CursusInstantie.Cursus.Titel)
-            </th>
-
-            <th>
-                @Html.DisplayNameFor(model => model.CursusInstantie.StartDatum)
+                @Html.DisplayNameFor(model => model.CursusInstanties.First().Cursus.Titel)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CursusInstantie.Cursus.Duur)
+                @Html.DisplayNameFor(model => model.CursusInstanties.First().StartDatum)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AantalDeelNemers)
+                @Html.DisplayNameFor(model => model.CursusInstanties.First().Cursus.Duur)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var item in Model.CursusInstanties)
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.CursusInstantie.Cursus.Titel)
+                    @Html.DisplayFor(modelItem => item.Cursus.Titel)
                 </td>
                 <td>
-                    @String.Format("{0:dd/MM/yyyy}", item.CursusInstantie.StartDatum)
+                    @String.Format("{0:dd/MM/yyyy}", item.StartDatum)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.CursusInstantie.Cursus.Duur)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.AantalDeelNemers)
+                    @Html.DisplayFor(modelItem => item.Cursus.Duur)
                 </td>
                 <td>
                     @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ })

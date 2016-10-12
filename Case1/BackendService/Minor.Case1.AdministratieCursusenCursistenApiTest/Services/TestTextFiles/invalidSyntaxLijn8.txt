@@ -1,8 +1,6 @@
 ﻿Titel: Lorem ipsum dolor sit amet
-Cursuscode: TESTCODE",
+Cursuscode: TESTCODE
 Duur: 5 dagen
 Startdatum: 11/10/2016
-
-
 
 SYNTAX ERROR HIERZO!!

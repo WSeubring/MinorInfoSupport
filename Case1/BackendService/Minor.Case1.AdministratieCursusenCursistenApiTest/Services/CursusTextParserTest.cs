@@ -184,7 +184,7 @@ namespace Minor.Case1.AdministratieCursusenCursistenApiTest.Services
             catch (SyntaxException ex)
             {
                 //Assert
-                Assert.AreEqual("Regel: 8 voldoet niet aan de syntax.", ex.Message);
+                Assert.AreEqual("Regel: 6 voldoet niet aan de syntax.", ex.Message);
             }
         }
 
@@ -202,6 +202,22 @@ namespace Minor.Case1.AdministratieCursusenCursistenApiTest.Services
             //Assert
             Assert.ThrowsException<ArgumentNullException>(action);
             
+        }
+
+        [TestMethod]
+        public void Invalid2LegeRegelsNaCursusInstantie()
+        {
+            string path = Path.Combine(_folderPath, @"Invalid2LegeRegelsNaCursusInstantie.txt");
+            var text = File.ReadAllText(path);
+
+            var target = new CursusTextParser();
+
+            //Act
+            Action action = () => target.Parse(text);
+
+            //Assert
+            Assert.ThrowsException<SyntaxException>(action);
+
         }
     }
 }
