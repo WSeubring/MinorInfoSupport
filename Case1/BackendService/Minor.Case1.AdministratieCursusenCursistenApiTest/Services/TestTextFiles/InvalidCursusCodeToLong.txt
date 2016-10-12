@@ -1,0 +1,4 @@
+﻿Titel: TestTitel
+Cursuscode: 12345678910",
+Duur: 5 dagen
+Startdatum: 11/10/2016

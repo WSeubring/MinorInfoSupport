@@ -7,7 +7,8 @@ namespace Minor.Case1.AdministratieCursusenCursistenApiTest
 {
     internal class MockCursusInstantieRepository : IRepository<CursusInstantie, long>
     {
-        public int AantalCallOpFindAll { get; private set; }
+        public int AantalCallsOpFindAll { get; private set; }
+        public List<IEnumerable<CursusInstantie>> CallsOpAddRange = new List<IEnumerable<CursusInstantie>>();
 
         public MockCursusInstantieRepository()
         {
@@ -15,7 +16,7 @@ namespace Minor.Case1.AdministratieCursusenCursistenApiTest
 
         public IEnumerable<CursusInstantie> FindAll()
         {
-            AantalCallOpFindAll++;
+            AantalCallsOpFindAll++;
             return new List<CursusInstantie>()
             {
                 new CursusInstantie()
@@ -30,6 +31,11 @@ namespace Minor.Case1.AdministratieCursusenCursistenApiTest
                     }
                 }
             };
+        }
+
+        public void AddRange(IEnumerable<CursusInstantie> cursusInstanties)
+        {
+            CallsOpAddRange.Add(cursusInstanties);
         }
     }
 }

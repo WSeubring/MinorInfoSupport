@@ -24,6 +24,31 @@
           }
         },
         "deprecated": false
+      },
+      "post": {
+        "tags": [ "CursusInstantie" ],
+        "operationId": "AddFromTextFile",
+        "consumes": [ "application/json", "text/json", "application/json-patch+json" ],
+        "produces": [ "application/json" ],
+        "parameters": [
+          {
+            "name": "text",
+            "in": "body",
+            "required": false,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": { "$ref": "#/definitions/OkResult" }
+          },
+          "400": {
+            "description": "Client Error",
+            "schema": { "$ref": "#/definitions/BadRequestResult" }
+          }
+        },
+        "deprecated": false
       }
     }
   },
@@ -63,6 +88,26 @@
           "maxLength": 300,
           "minLength": 0,
           "type": "string"
+        }
+      }
+    },
+    "OkResult": {
+      "type": "object",
+      "properties": {
+        "statusCode": {
+          "format": "int32",
+          "type": "integer",
+          "readOnly": true
+        }
+      }
+    },
+    "BadRequestResult": {
+      "type": "object",
+      "properties": {
+        "statusCode": {
+          "format": "int32",
+          "type": "integer",
+          "readOnly": true
         }
       }
     }

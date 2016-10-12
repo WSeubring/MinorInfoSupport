@@ -17,10 +17,12 @@ namespace Minor.Case1.AdministratieCursusenCursistenApi.Controllers
     public class CursusInstantieController : Controller
     {
         private IRepository<CursusInstantie, long> _cursusInstantieRepository;
+        private ICursusTextParser _cursusTextParser;
      
-        public CursusInstantieController(IRepository<CursusInstantie, long> cursusInstantieRepository)
+        public CursusInstantieController(IRepository<CursusInstantie, long> cursusInstantieRepository, ICursusTextParser cursusTextParser)
         {
             _cursusInstantieRepository = cursusInstantieRepository;
+            _cursusTextParser = cursusTextParser;
         }
 
         [HttpGet]
@@ -32,16 +34,24 @@ namespace Minor.Case1.AdministratieCursusenCursistenApi.Controllers
 
         [HttpPost]
         [SwaggerOperation("AddFromTextFile")]
-        public IActionResult AddFromTextFile(string text)
+        [ProducesResponseType(typeof(OkResult), 200)]
+        [ProducesResponseType(typeof(BadRequestResult), 400)]
+        public IActionResult AddFromTextFile([FromBody]string text)
         {
-            int nAddedCursussen = 0;
-            int nDuplicates= 0;
+            if (!string.IsNullOrEmpty(text))
+            {
+                List<CursusInstantie> cursusInstanties = _cursusTextParser.Parse(text);
 
-            List<CursusInstantie> cursusInstanties = new CursusTextParser().Parse(text);
+                var allCursusInstanties = _cursusInstantieRepository.FindAll();
+                var nonDuplicateCursusInstanties = cursusInstanties.Except(allCursusInstanties, new CursusInstantieComparer());
+                _cursusInstantieRepository.AddRange(nonDuplicateCursusInstanties);
 
+                int nAddedItems = nonDuplicateCursusInstanties.Count();
+                int nDuplicateItems = cursusInstanties.Count() - nAddedItems;
 
-            return Ok(new { nAddedCursussen, nDuplicates });
+                return Ok("{ nAddedItems:" + nAddedItems + ", nDuplicateItems:" + nDuplicateItems + " }");
+            }
+            return BadRequest();
         }
-
     }
 }

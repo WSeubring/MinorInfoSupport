@@ -42,13 +42,14 @@ namespace Minor.Case1.AdministratieCursusenCursistenApiTest.DAL
         [TestMethod]
         public void GetMetLegeLijstVanCursusInstanties()
         {
+            var mockCursusTextFileParser = new CursusTextParserMock();
             using (var context = new AdministratieCursusenCuristenContext(_options))
             {
                 //Arrange
-                var target = new CursusInstantieController(new CursusInstantieRepository(context));
+                var target = new CursusInstantieRepository(context);
 
                 //Act
-                var result = target.Get();
+                var result = target.FindAll();
 
                 //Assert
                 Assert.AreEqual(0, result.Count());
@@ -59,9 +60,10 @@ namespace Minor.Case1.AdministratieCursusenCursistenApiTest.DAL
         public void Get1Item()
         {
             //Arrange
+            var mockCursusTextFileParser = new CursusTextParserMock();
             var cursusInstantie = new CursusInstantie()
             {
-                CursusCode="TESTCURSUS",
+                CursusCode = "TESTCURSUS",
                 StartDatum = new DateTime(2016, 10, 10),
                 Cursus = new Cursus()
                 {
@@ -78,10 +80,10 @@ namespace Minor.Case1.AdministratieCursusenCursistenApiTest.DAL
 
             using (var context = new AdministratieCursusenCuristenContext(_options))
             {
-                var target = new CursusInstantieController(new CursusInstantieRepository(context));
+                var target = new CursusInstantieRepository(context);
 
                 //Act
-                var result = target.Get();
+                var result = target.FindAll();
 
                 //Assert
                 Assert.AreEqual(new DateTime(2016, 10, 10), result.Single().StartDatum);
@@ -93,6 +95,7 @@ namespace Minor.Case1.AdministratieCursusenCursistenApiTest.DAL
         public void Get2ItemsOrderd()
         {
             //Arrange
+            var mockCursusTextFileParser = new CursusTextParserMock();
             var cursusInstantie = new CursusInstantie()
             {
                 CursusCode = "TESTCURSUS",
@@ -121,14 +124,56 @@ namespace Minor.Case1.AdministratieCursusenCursistenApiTest.DAL
 
             using (var context = new AdministratieCursusenCuristenContext(_options))
             {
-                var target = new CursusInstantieController(new CursusInstantieRepository(context));
+                var target = new CursusInstantieRepository(context);
 
                 //Act
-                var result = target.Get();
+                var result = target.FindAll();
 
                 //Assert
                 Assert.IsTrue(result.OrderBy(ci => ci.StartDatum).SequenceEqual(result));
             }
         }
+
+        [TestMethod]
+        public void AddRange2Items()
+        {
+            //Arrange
+            var mockCursusTextFileParser = new CursusTextParserMock();
+            var cursusInstanties = new List<CursusInstantie>()
+            {
+                new CursusInstantie()
+                {
+                    CursusCode = "TESTCURSUS",
+                    StartDatum = new DateTime(2016, 10, 10),
+                    Cursus = new Cursus()
+                    {
+                        Code = "TESTCURSUS"
+                    }
+                },
+                new CursusInstantie()
+                {
+                    CursusCode = "TESTCURSUS2",
+                    StartDatum = new DateTime(2016, 1, 1),
+                    Cursus = new Cursus()
+                    {
+                        Code = "TESTCURSUS2"
+                    }
+                }
+            };
+
+            using (var context = new AdministratieCursusenCuristenContext(_options))
+            {
+                var target = new CursusInstantieRepository(context);
+
+                //Act
+                target.AddRange(cursusInstanties);
+            }
+
+            using (var context = new AdministratieCursusenCuristenContext(_options))
+            {
+                Assert.AreEqual(2, context.CursusInstanties.Count());
+            }
+        }
     }
 }
+

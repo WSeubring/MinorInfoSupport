@@ -20,7 +20,7 @@ namespace Minor.Case1.AdministratieCursusenCursisten.Agents
 
         public void AddFromTextFile(string text)
         {
-            //_agent.AddFromTextFile(text);
+            _agent.AddFromTextFile(text);
         }
 
         public IEnumerable<CursusInstantie> Get()

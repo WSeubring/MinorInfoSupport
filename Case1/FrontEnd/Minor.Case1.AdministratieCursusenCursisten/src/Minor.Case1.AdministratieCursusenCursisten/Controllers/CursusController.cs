@@ -20,6 +20,7 @@ namespace Minor.Case1.AdministratieCursusenCursisten.Controllers
         {
             _cursusInstantieAgent = cursusInstantieAgent;
         }
+
         [HttpGet]
         public IActionResult Index()
         {
@@ -35,6 +36,7 @@ namespace Minor.Case1.AdministratieCursusenCursisten.Controllers
             }
             return View(model);
         }
+
         [HttpGet]
         public IActionResult Importeren()
         {
@@ -44,11 +46,18 @@ namespace Minor.Case1.AdministratieCursusenCursisten.Controllers
         [HttpPost]
         public IActionResult Importeren(IFormFile file)
         {
-            using (var streamReader = new StreamReader(file.OpenReadStream(), Encoding.UTF8))
+            if (file != null)
             {
-                var text = streamReader.ReadToEnd();
+                using (var streamReader = new StreamReader(file.OpenReadStream(), Encoding.UTF8))
+                {
+                    var text = streamReader.ReadToEnd();
 
-                _cursusInstantieAgent.AddFromTextFile(text);
+                    _cursusInstantieAgent.AddFromTextFile(text);
+                }
+            }
+            else
+            {
+                ModelState.AddModelError("file", "Er dient een bestand geselecteerd te worden.");
             }
             return View();
         }

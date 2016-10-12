@@ -12,6 +12,7 @@ using Minor.Case1.AdministratieCursusenCursistenApi.Entiteiten;
 using Minor.Case1.AdministratieCursusenCursistenApi.DAL;
 using Microsoft.EntityFrameworkCore;
 using Minor.Case1.AdministratieCursusenCursistenApi.DAL.Interfaces;
+using Minor.Case1.AdministratieCursusenCursistenApi.Services;
 
 namespace Minor.Case1.AdministratieCursusenCursistenApi
 {
@@ -56,6 +57,7 @@ namespace Minor.Case1.AdministratieCursusenCursistenApi
             services.AddMvc();
             services.AddDbContext<AdministratieCursusenCuristenContext>(options => options.UseSqlServer(connection));
             services.AddScoped<IRepository<CursusInstantie, long>, CursusInstantieRepository>();
+            services.AddScoped<ICursusTextParser, CursusTextParser>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline

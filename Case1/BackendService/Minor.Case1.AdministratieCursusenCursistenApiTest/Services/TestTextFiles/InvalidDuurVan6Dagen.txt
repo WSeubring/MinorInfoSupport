@@ -1,0 +1,4 @@
+﻿Titel: Lorem
+Cursuscode: TESTCODE",
+Duur: 6 dagen
+Startdatum: 11/10/2016

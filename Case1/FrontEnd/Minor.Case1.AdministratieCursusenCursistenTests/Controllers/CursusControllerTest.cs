@@ -31,7 +31,7 @@ namespace Minor.Case1.AdministratieCursusenCursistenTests
         }
 
         [TestMethod]
-        public void ImportenCallsAddFromFile()
+        public void ImportenCallsAddFromFileWithEmptyFile()
         {
             //Arrange
             var mockAgent = new MockCursusInstantieAgent();
@@ -39,6 +39,20 @@ namespace Minor.Case1.AdministratieCursusenCursistenTests
 
             //Act
             var result = target.Importeren(new FormFile(new MemoryStream(), 0, 0, "TestFile", "TestName"));
+
+            Assert.IsInstanceOfType(result, typeof(ViewResult));
+            Assert.AreEqual(1, mockAgent.AantalCallsOpAddFromFile);
+        }
+
+        [TestMethod]
+        public void ImportenWithOutAFile()
+        {
+            //Arrange
+            var mockAgent = new MockCursusInstantieAgent();
+            var target = new CursusController(mockAgent);
+
+            //Act
+            var result = target.Importeren(null);
 
             Assert.IsInstanceOfType(result, typeof(ViewResult));
             Assert.AreEqual(1, mockAgent.AantalCallsOpAddFromFile);

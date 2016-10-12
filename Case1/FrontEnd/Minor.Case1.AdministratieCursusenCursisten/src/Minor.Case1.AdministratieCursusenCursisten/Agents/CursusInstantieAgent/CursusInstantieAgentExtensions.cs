@@ -39,5 +39,31 @@ namespace Minor.Case1.AdministratieCursusenCursisten.Agents
                 }
             }
 
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='text'>
+            /// </param>
+            public static object AddFromTextFile(this ICursusInstantieAgent operations, string text = default(string))
+            {
+                return Task.Factory.StartNew(s => ((ICursusInstantieAgent)s).AddFromTextFileAsync(text), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='text'>
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<object> AddFromTextFileAsync(this ICursusInstantieAgent operations, string text = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.AddFromTextFileWithHttpMessagesAsync(text, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
     }
 }

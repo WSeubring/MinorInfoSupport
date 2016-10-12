@@ -16,6 +16,13 @@ namespace Minor.Case1.AdministratieCursusenCursistenApi.DAL
         {
             _context = context;
         }
+
+        public void AddRange(IEnumerable<CursusInstantie> cursusInstanties)
+        {
+            _context.AddRange(cursusInstanties);
+            _context.SaveChanges();
+        }
+
         public IEnumerable<CursusInstantie> FindAll()
         {
             return _context.CursusInstanties.Include(ci => ci.Cursus).OrderBy(ci => ci.StartDatum).ToList();
