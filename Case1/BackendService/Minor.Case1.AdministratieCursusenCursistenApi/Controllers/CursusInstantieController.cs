@@ -9,6 +9,7 @@ using Minor.Case1.AdministratieCursusenCursistenApi.Entiteiten;
 using Minor.Case1.AdministratieCursusenCursistenApi.DAL.Interfaces;
 using Swashbuckle.SwaggerGen.Annotations;
 using Minor.Case1.AdministratieCursusenCursistenApi.Services;
+using Minor.Case1.AdministratieCursusenCursistenApi.Exceptions;
 
 namespace Minor.Case1.AdministratieCursusenCursistenApi.Controllers
 {
@@ -18,7 +19,7 @@ namespace Minor.Case1.AdministratieCursusenCursistenApi.Controllers
     {
         private IRepository<CursusInstantie, long> _cursusInstantieRepository;
         private ICursusTextParser _cursusTextParser;
-     
+
         public CursusInstantieController(IRepository<CursusInstantie, long> cursusInstantieRepository, ICursusTextParser cursusTextParser)
         {
             _cursusInstantieRepository = cursusInstantieRepository;
@@ -40,16 +41,26 @@ namespace Minor.Case1.AdministratieCursusenCursistenApi.Controllers
         {
             if (!string.IsNullOrEmpty(text))
             {
-                List<CursusInstantie> cursusInstanties = _cursusTextParser.Parse(text);
+                List<CursusInstantie> cursusInstanties = new List<CursusInstantie>();
+                var addFromFileResultReport = new AddFromFileResultReport();
+                try
+                {
+                    cursusInstanties = _cursusTextParser.Parse(text);
 
-                var allCursusInstanties = _cursusInstantieRepository.FindAll();
-                var nonDuplicateCursusInstanties = cursusInstanties.Except(allCursusInstanties, new CursusInstantieComparer());
-                _cursusInstantieRepository.AddRange(nonDuplicateCursusInstanties);
+                    var allCursusInstanties = _cursusInstantieRepository.FindAll();
+                    var nonDuplicateCursusInstanties = cursusInstanties.Except(allCursusInstanties, new CursusInstantieComparer());
+                    _cursusInstantieRepository.AddRange(nonDuplicateCursusInstanties);
 
-                int nAddedItems = nonDuplicateCursusInstanties.Count();
-                int nDuplicateItems = cursusInstanties.Count() - nAddedItems;
+                    addFromFileResultReport.AantalInsertedCursusInstanties = nonDuplicateCursusInstanties.Count();
+                    addFromFileResultReport.AantalDuplicatesInFile = cursusInstanties.Count() - nonDuplicateCursusInstanties.Count(); ;
 
-                return Ok("{ nAddedItems:" + nAddedItems + ", nDuplicateItems:" + nDuplicateItems + " }");
+                    return Ok("{ nAddedItems:" + nAddedItems + ", nDuplicateItems:" + nDuplicateItems + " }");
+                }
+                catch (InvalidSyntaxException ex)
+                {
+                    addFromFileResultReport.HasSyntaxError = true;
+                    addFromFileResultReport.LineOfSyntaxError = int.Parse(ex.Message);
+                }
             }
             return BadRequest();
         }

@@ -2,17 +2,17 @@
 
 namespace Minor.Case1.AdministratieCursusenCursistenApi.Exceptions
 {
-    public class SyntaxException : Exception
+    public class InvalidSyntaxException : Exception
     {
-        public SyntaxException()
+        public InvalidSyntaxException()
         {
         }
 
-        public SyntaxException(string message) : base(message)
+        public InvalidSyntaxException(string message) : base(message)
         {
         }
 
-        public SyntaxException(string message, Exception innerException) : base(message, innerException)
+        public InvalidSyntaxException(string message, Exception innerException) : base(message, innerException)
         {
         }
     }

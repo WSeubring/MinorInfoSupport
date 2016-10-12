@@ -26,7 +26,7 @@ namespace Minor.Case1.AdministratieCursusenCursistenTests
 
             //Assert
             Assert.IsInstanceOfType(result, typeof(ViewResult));
-            Assert.IsInstanceOfType((result as ViewResult).Model, typeof(List<CursusOverzichtViewModel>));
+            Assert.IsInstanceOfType((result as ViewResult).Model, typeof(CursusOverzichtViewModel));
             Assert.AreEqual(1, mockAgent.AantalCallsOpGet);
         }
 
@@ -42,6 +42,20 @@ namespace Minor.Case1.AdministratieCursusenCursistenTests
 
             Assert.IsInstanceOfType(result, typeof(ViewResult));
             Assert.AreEqual(1, mockAgent.AantalCallsOpAddFromFile);
+        }
+
+        [TestMethod]
+        public void IndexRedirectToRouteWithWeekAndYear()
+        {
+            //Arrange
+            var mockAgent = new MockCursusInstantieAgent();
+            var target = new CursusController(mockAgent);
+
+            //Act
+            var result = target.Index();
+
+            //Assert
+            Assert.IsInstanceOfType(result, typeof(RedirectResult));
         }
     }
 }

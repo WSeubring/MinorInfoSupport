@@ -69,7 +69,7 @@ namespace Minor.Case1.AdministratieCursusenCursistenApi.Services
         {
             if (!pattern.IsMatch(line))
             {
-                throw new SyntaxException($"Regel: {_currentLineNumber} voldoet niet aan de syntax.");
+                throw new InvalidSyntaxException($"Regel: {_currentLineNumber} voldoet niet aan de syntax.");
             }
         }
     }

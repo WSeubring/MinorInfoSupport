@@ -29,7 +29,7 @@ namespace Minor.Case1.AdministratieCursusenCursisten.Controllers
             var model = new CursusOverzichtViewModel();
             var calendar = _dfi.Calendar;
             model.Weeknr = calendar.GetWeekOfYear(DateTime.Now, _dfi.CalendarWeekRule, _dfi.FirstDayOfWeek);
-            model.CursusInstanties = _cursusInstantieAgent.Get();
+            //model.CursusInstanties = _cursusInstantieAgent.Get();
             
             return View(model);
         }

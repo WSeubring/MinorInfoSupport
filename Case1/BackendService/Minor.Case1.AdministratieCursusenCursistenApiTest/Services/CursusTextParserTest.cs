@@ -82,7 +82,7 @@ namespace Minor.Case1.AdministratieCursusenCursistenApiTest.Services
             Action action = () => target.Parse(text);
 
             //Assert
-            Assert.ThrowsException<SyntaxException>(action);
+            Assert.ThrowsException<InvalidSyntaxException>(action);
         }
 
         [TestMethod]
@@ -98,7 +98,7 @@ namespace Minor.Case1.AdministratieCursusenCursistenApiTest.Services
             Action action = () => target.Parse(text);
 
             //Assert
-            Assert.ThrowsException<SyntaxException>(action);
+            Assert.ThrowsException<InvalidSyntaxException>(action);
         }
 
         [TestMethod]
@@ -114,7 +114,7 @@ namespace Minor.Case1.AdministratieCursusenCursistenApiTest.Services
             Action action = () => target.Parse(text);
 
             //Assert
-            Assert.ThrowsException<SyntaxException>(action);
+            Assert.ThrowsException<InvalidSyntaxException>(action);
         }
 
 
@@ -131,7 +131,7 @@ namespace Minor.Case1.AdministratieCursusenCursistenApiTest.Services
             Action action = () => target.Parse(text);
 
             //Assert
-            Assert.ThrowsException<SyntaxException>(action);
+            Assert.ThrowsException<InvalidSyntaxException>(action);
         }
 
         [TestMethod]
@@ -147,7 +147,7 @@ namespace Minor.Case1.AdministratieCursusenCursistenApiTest.Services
             Action action = () => target.Parse(text);
 
             //Assert
-            Assert.ThrowsException<SyntaxException>(action);
+            Assert.ThrowsException<InvalidSyntaxException>(action);
         }
 
         [TestMethod]
@@ -163,7 +163,7 @@ namespace Minor.Case1.AdministratieCursusenCursistenApiTest.Services
             Action action = () => target.Parse(text);
 
             //Assert
-            Assert.ThrowsException<SyntaxException>(action);
+            Assert.ThrowsException<InvalidSyntaxException>(action);
         }
 
         [TestMethod]
@@ -181,7 +181,7 @@ namespace Minor.Case1.AdministratieCursusenCursistenApiTest.Services
                 target.Parse(text);
                 
             }
-            catch (SyntaxException ex)
+            catch (InvalidSyntaxException ex)
             {
                 //Assert
                 Assert.AreEqual("Regel: 6 voldoet niet aan de syntax.", ex.Message);
@@ -216,7 +216,7 @@ namespace Minor.Case1.AdministratieCursusenCursistenApiTest.Services
             Action action = () => target.Parse(text);
 
             //Assert
-            Assert.ThrowsException<SyntaxException>(action);
+            Assert.ThrowsException<InvalidSyntaxException>(action);
 
         }
     }
