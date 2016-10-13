@@ -9,6 +9,8 @@ namespace Minor.Case1.AdministratieCursusenCursisten.ViewModels
     public class CursusOverzichtViewModel
     {
         public IEnumerable<CursusInstantie> CursusInstanties = new List<CursusInstantie>();
+
+        public int Jaar { get; internal set; }
         public int Weeknr { get; set; }
     }
 }

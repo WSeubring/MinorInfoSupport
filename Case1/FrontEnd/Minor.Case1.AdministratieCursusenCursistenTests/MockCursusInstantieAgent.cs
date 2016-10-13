@@ -9,14 +9,18 @@ namespace Minor.Case1.AdministratieCursusenCursistenTests
     {
         public int AantalCallsOpAddFromFile { get; set; }
         public int AantalCallsOpGet { get; internal set; }
+        public int AantalCallsOpGetMetJaarEnWeek { get; private set; }
+        public int LaatstMeegegeveJaarInGet { get; private set; }
+        public int LaatstMeegegeveWeekInGet { get; private set; }
 
         public MockCursusInstantieAgent()
         {
         }
 
-        public void AddFromTextFile(string text)
+        public AddFromFileResultReport AddFromTextFile(string text)
         {
             AantalCallsOpAddFromFile++;
+            return new AddFromFileResultReport();
         }
 
         public IEnumerable<CursusInstantie> Get()
@@ -26,7 +30,6 @@ namespace Minor.Case1.AdministratieCursusenCursistenTests
             {
                 new CursusInstantie()
                 {
-                    CursusCode="Test",
                     StartDatum= new DateTime(2016, 1, 1),
                     Cursus = new Cursus()
                     {
@@ -36,6 +39,15 @@ namespace Minor.Case1.AdministratieCursusenCursistenTests
                     }
                 }
             };
+        }
+
+        public IEnumerable<CursusInstantie> Get(int jaar, int week)
+        {
+            AantalCallsOpGetMetJaarEnWeek++;
+            LaatstMeegegeveJaarInGet = jaar;
+            LaatstMeegegeveWeekInGet = week;
+
+            return new List<CursusInstantie>();
         }
     }
 }

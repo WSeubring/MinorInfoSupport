@@ -10,6 +10,8 @@ using Minor.Case1.AdministratieCursusenCursistenApi.DAL.Interfaces;
 using Swashbuckle.SwaggerGen.Annotations;
 using Minor.Case1.AdministratieCursusenCursistenApi.Services;
 using Minor.Case1.AdministratieCursusenCursistenApi.Exceptions;
+using System.Linq.Expressions;
+using System.Globalization;
 
 namespace Minor.Case1.AdministratieCursusenCursistenApi.Controllers
 {
@@ -26,6 +28,10 @@ namespace Minor.Case1.AdministratieCursusenCursistenApi.Controllers
             _cursusTextParser = cursusTextParser;
         }
 
+        /// <summary>
+        /// Gets all the CursusInstanties in the database
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [SwaggerOperation("Get")]
         public IEnumerable<CursusInstantie> Get()
@@ -33,36 +39,59 @@ namespace Minor.Case1.AdministratieCursusenCursistenApi.Controllers
             return _cursusInstantieRepository.FindAll();
         }
 
+        /// <summary>
+        /// Add the Cursusinstaties from a textfile to the database
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns>A resultreport of the add action</returns>
         [HttpPost]
         [SwaggerOperation("AddFromTextFile")]
-        [ProducesResponseType(typeof(OkResult), 200)]
-        [ProducesResponseType(typeof(BadRequestResult), 400)]
-        public IActionResult AddFromTextFile([FromBody]string text)
+        public AddFromFileResultReport AddFromTextFile([FromBody]string text)
         {
-            if (!string.IsNullOrEmpty(text))
+            List<CursusInstantie> cursusInstanties = new List<CursusInstantie>();
+            try
             {
-                List<CursusInstantie> cursusInstanties = new List<CursusInstantie>();
-                var addFromFileResultReport = new AddFromFileResultReport();
-                try
-                {
-                    cursusInstanties = _cursusTextParser.Parse(text);
+                int nAddedItems = 0;
+                int nDuplicateItems = 0;
+               
 
+                cursusInstanties = _cursusTextParser.Parse(text);
+                if (cursusInstanties.Count() > 0)
+                {
                     var allCursusInstanties = _cursusInstantieRepository.FindAll();
                     var nonDuplicateCursusInstanties = cursusInstanties.Except(allCursusInstanties, new CursusInstantieComparer());
                     _cursusInstantieRepository.AddRange(nonDuplicateCursusInstanties);
 
-                    addFromFileResultReport.AantalInsertedCursusInstanties = nonDuplicateCursusInstanties.Count();
-                    addFromFileResultReport.AantalDuplicatesInFile = cursusInstanties.Count() - nonDuplicateCursusInstanties.Count(); ;
+                    nAddedItems = nonDuplicateCursusInstanties.Count();
+                    nDuplicateItems = cursusInstanties.Count() - nAddedItems;
+                }
 
-                    return Ok("{ nAddedItems:" + nAddedItems + ", nDuplicateItems:" + nDuplicateItems + " }");
-                }
-                catch (InvalidSyntaxException ex)
-                {
-                    addFromFileResultReport.HasSyntaxError = true;
-                    addFromFileResultReport.LineOfSyntaxError = int.Parse(ex.Message);
-                }
+                return new AddFromFileResultReport(nAddedItems, nDuplicateItems);
             }
-            return BadRequest();
+            catch (InvalidSyntaxException ex)
+            {
+                    return new AddFromFileResultReport(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Return a list of CursusInstanties that are active within the range of the given week and year.
+        /// </summary>
+        /// <param name="jaar"></param>
+        /// <param name="week"></param>
+        /// <returns>A list of CursusInstanties</returns>
+        [HttpGet("{jaar}/{week}")]
+        [SwaggerOperation("GetByYearAndWeek")]
+        public IEnumerable<CursusInstantie> GetByYearAndWeek(int jaar, int week)
+        {
+            var _dfi = new DateTimeFormatInfo();
+            var calendar = _dfi.Calendar;
+
+            DateTime beginOfWeek = calendar.AddWeeks(new DateTime(jaar, 1, 1), week - 1); //DatetimeBegint op week 1, vandaar min 1 bij de week
+            DateTime endOfWeek = calendar.AddWeeks(new DateTime(jaar, 1, 1), week);
+            Expression<Func<CursusInstantie, bool>> filter = ci => (ci.StartDatum > beginOfWeek || ci.StartDatum.AddDays(ci.Cursus.Duur) > beginOfWeek) && ci.StartDatum < endOfWeek;
+
+            return _cursusInstantieRepository.FindBy(filter);
         }
     }
 }

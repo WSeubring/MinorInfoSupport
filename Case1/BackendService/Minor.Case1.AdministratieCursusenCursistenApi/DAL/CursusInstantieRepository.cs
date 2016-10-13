@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Linq.Expressions;
 
 namespace Minor.Case1.AdministratieCursusenCursistenApi.DAL
 {
@@ -26,6 +27,10 @@ namespace Minor.Case1.AdministratieCursusenCursistenApi.DAL
         public IEnumerable<CursusInstantie> FindAll()
         {
             return _context.CursusInstanties.Include(ci => ci.Cursus).OrderBy(ci => ci.StartDatum).ToList();
+        }
+        public IEnumerable<CursusInstantie> FindBy(Expression<Func<CursusInstantie, bool>> filter)
+        {
+            return _context.CursusInstanties.Include(ci => ci.Cursus).Where(filter).OrderBy(ci => ci.StartDatum).ToList();
         }
     }
 }

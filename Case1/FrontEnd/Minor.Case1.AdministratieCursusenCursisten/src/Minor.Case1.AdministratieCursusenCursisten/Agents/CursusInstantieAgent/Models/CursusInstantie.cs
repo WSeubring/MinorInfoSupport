@@ -21,11 +21,10 @@ namespace Minor.Case1.AdministratieCursusenCursisten.Agents.Models
         /// <summary>
         /// Initializes a new instance of the CursusInstantie class.
         /// </summary>
-        public CursusInstantie(int? id = default(int?), DateTime? startDatum = default(DateTime?), string cursusCode = default(string), Cursus cursus = default(Cursus))
+        public CursusInstantie(Cursus cursus, int? id = default(int?), DateTime? startDatum = default(DateTime?))
         {
             Id = id;
             StartDatum = startDatum;
-            CursusCode = cursusCode;
             Cursus = cursus;
         }
 
@@ -41,11 +40,6 @@ namespace Minor.Case1.AdministratieCursusenCursisten.Agents.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "cursusCode")]
-        public string CursusCode { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "cursus")]
         public Cursus Cursus { get; set; }
 
@@ -54,16 +48,9 @@ namespace Minor.Case1.AdministratieCursusenCursisten.Agents.Models
         /// </summary>
         public virtual void Validate()
         {
-            if (this.CursusCode != null)
+            if (Cursus == null)
             {
-                if (this.CursusCode.Length > 10)
-                {
-                    throw new ValidationException(ValidationRules.MaxLength, "CursusCode", 10);
-                }
-                if (this.CursusCode.Length < 0)
-                {
-                    throw new ValidationException(ValidationRules.MinLength, "CursusCode", 0);
-                }
+                throw new ValidationException(ValidationRules.CannotBeNull, "Cursus");
             }
             if (this.Cursus != null)
             {

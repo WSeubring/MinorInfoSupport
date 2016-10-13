@@ -17,17 +17,22 @@ namespace Minor.Case1.AdministratieCursusenCursistenApi.Services
         private readonly Regex _emptyLinePattern = new Regex(@"\s*");
 
         private int _currentLineNumber = 0;
-
-        public List<CursusInstantie> Parse(string filetext)
+        
+        /// <summary>
+        /// Parses a text to a list of CursusInstanties
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns></returns>
+        public List<CursusInstantie> Parse(string text)
         {
-            if (string.IsNullOrEmpty(filetext))
+            if (string.IsNullOrEmpty(text))
             {
                 throw new ArgumentNullException();
             }
 
             var cursusInstanties = new List<CursusInstantie>();
 
-            using (var reader = new StringReader(filetext))
+            using (var reader = new StringReader(text))
             {
                 while (reader.Peek() > 0)
                 {
@@ -42,7 +47,6 @@ namespace Minor.Case1.AdministratieCursusenCursistenApi.Services
 
                     cursusInstanties.Add(new CursusInstantie()
                     {
-                        //CursusCode = cursusCode,
                         StartDatum = DateTime.ParseExact(startDatumText, "dd/MM/yyyy", CultureInfo.InvariantCulture),
                         Cursus = new Cursus()
                         {
@@ -69,7 +73,7 @@ namespace Minor.Case1.AdministratieCursusenCursistenApi.Services
         {
             if (!pattern.IsMatch(line))
             {
-                throw new InvalidSyntaxException($"Regel: {_currentLineNumber} voldoet niet aan de syntax.");
+                throw new InvalidSyntaxException($"Fout op regel: {_currentLineNumber}");
             }
         }
     }

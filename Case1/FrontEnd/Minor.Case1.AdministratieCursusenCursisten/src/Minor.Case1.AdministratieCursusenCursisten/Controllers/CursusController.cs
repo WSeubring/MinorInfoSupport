@@ -22,22 +22,56 @@ namespace Minor.Case1.AdministratieCursusenCursisten.Controllers
         {
             _cursusInstantieAgent = cursusInstantieAgent;
         }
-
         [HttpGet]
-        public IActionResult Index()
+        public RedirectToActionResult CurrentWeekRedirect()
+        {
+            var calendar = _dfi.Calendar;
+
+            return RedirectToAction("Index",
+                new {
+                    jaar = DateTime.Now.Year,
+                    week = calendar.GetWeekOfYear(DateTime.Now, _dfi.CalendarWeekRule, _dfi.FirstDayOfWeek)
+                });
+        }
+        /// <summary>
+        /// Show a overview of the CursusInstanties within the given week and year.
+        /// </summary>
+        /// <param name="jaar"></param>
+        /// <param name="week"></param>
+        /// <returns></returns>
+        [HttpGet("Cursus/Jaar/{jaar}/Week/{week}")]
+        public IActionResult Index([Bind("jaar", "week")]int jaar, int week)
         {
             var model = new CursusOverzichtViewModel();
-            var calendar = _dfi.Calendar;
-            model.Weeknr = calendar.GetWeekOfYear(DateTime.Now, _dfi.CalendarWeekRule, _dfi.FirstDayOfWeek);
-            //model.CursusInstanties = _cursusInstantieAgent.Get();
-            
+            if(week > 52)
+            {
+                week = 1;
+                jaar++;
+                return RedirectToAction("Index", new { jaar = jaar, week = week });
+            }
+            if(week < 1)
+            {
+                week = 52;
+                jaar--;
+                return RedirectToAction("Index", new { jaar = jaar, week = week });
+            }
+
+            model.Jaar = jaar;
+            model.Weeknr = week;
+
+            model.CursusInstanties = _cursusInstantieAgent.Get(jaar, week);
+
             return View(model);
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult Importeren()
         {
-            return View();
+            var model = new ImporterenViewModel();
+            return View(model);
         }
 
         [HttpPost]
@@ -49,7 +83,7 @@ namespace Minor.Case1.AdministratieCursusenCursisten.Controllers
                 {
                     var text = streamReader.ReadToEnd();
 
-                    _cursusInstantieAgent.AddFromTextFile(text);
+                    model.Report = _cursusInstantieAgent.AddFromTextFile(text);
                 }
             }
             return View(model);

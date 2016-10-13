@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Minor.Case1.AdministratieCursusenCursisten.Agents.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -11,5 +12,7 @@ namespace Minor.Case1.AdministratieCursusenCursisten.ViewModels
     {
         [Required]
         public IFormFile File { get; set; }
+
+        public AddFromFileResultReport Report { get; set; }
     }
 }

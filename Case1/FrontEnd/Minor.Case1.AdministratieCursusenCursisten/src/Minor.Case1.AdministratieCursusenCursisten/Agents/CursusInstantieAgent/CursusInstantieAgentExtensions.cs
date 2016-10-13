@@ -44,7 +44,7 @@ namespace Minor.Case1.AdministratieCursusenCursisten.Agents
             /// </param>
             /// <param name='text'>
             /// </param>
-            public static object AddFromTextFile(this ICursusInstantieAgent operations, string text = default(string))
+            public static AddFromFileResultReport AddFromTextFile(this ICursusInstantieAgent operations, string text = default(string))
             {
                 return Task.Factory.StartNew(s => ((ICursusInstantieAgent)s).AddFromTextFileAsync(text), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -57,9 +57,39 @@ namespace Minor.Case1.AdministratieCursusenCursisten.Agents
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<object> AddFromTextFileAsync(this ICursusInstantieAgent operations, string text = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<AddFromFileResultReport> AddFromTextFileAsync(this ICursusInstantieAgent operations, string text = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.AddFromTextFileWithHttpMessagesAsync(text, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='jaar'>
+            /// </param>
+            /// <param name='week'>
+            /// </param>
+            public static IList<CursusInstantie> GetByYearAndWeek(this ICursusInstantieAgent operations, int jaar, int week)
+            {
+                return Task.Factory.StartNew(s => ((ICursusInstantieAgent)s).GetByYearAndWeekAsync(jaar, week), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='jaar'>
+            /// </param>
+            /// <param name='week'>
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<IList<CursusInstantie>> GetByYearAndWeekAsync(this ICursusInstantieAgent operations, int jaar, int week, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetByYearAndWeekWithHttpMessagesAsync(jaar, week, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }

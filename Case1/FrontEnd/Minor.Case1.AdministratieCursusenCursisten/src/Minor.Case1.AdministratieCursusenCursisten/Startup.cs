@@ -68,7 +68,7 @@ namespace Minor.Case1.AdministratieCursusenCursisten
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Cursus}/{action=CurrentWeekRedirect}");
             });
         }
     }

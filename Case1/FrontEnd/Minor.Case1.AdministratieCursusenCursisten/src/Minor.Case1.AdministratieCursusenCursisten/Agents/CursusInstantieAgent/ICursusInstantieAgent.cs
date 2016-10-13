@@ -50,7 +50,19 @@ namespace Minor.Case1.AdministratieCursusenCursisten.Agents
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse<object>> AddFromTextFileWithHttpMessagesAsync(string text = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<AddFromFileResultReport>> AddFromTextFileWithHttpMessagesAsync(string text = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <param name='jaar'>
+        /// </param>
+        /// <param name='week'>
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<IList<CursusInstantie>>> GetByYearAndWeekWithHttpMessagesAsync(int jaar, int week, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
     }
 }

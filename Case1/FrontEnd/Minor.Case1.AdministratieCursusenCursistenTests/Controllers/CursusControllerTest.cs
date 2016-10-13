@@ -15,6 +15,20 @@ namespace Minor.Case1.AdministratieCursusenCursistenTests
     public class CursusControllerTest
     {
         [TestMethod]
+        public void CurrentWeekRedirectGeeftRedirectToAction()
+        {
+            //Arrange
+            var mockAgent = new MockCursusInstantieAgent();
+            var target = new CursusController(mockAgent);
+
+            //Act
+            var result = target.CurrentWeekRedirect();
+
+            //Assert
+            Assert.IsInstanceOfType(result, typeof(RedirectToActionResult));
+        }
+
+        [TestMethod]
         public void IndexGeeftActionResultMetViewModel()
         {
             //Arrange
@@ -22,12 +36,15 @@ namespace Minor.Case1.AdministratieCursusenCursistenTests
             var target = new CursusController(mockAgent);
 
             //Act
-            var result = target.Index();
+            var result = target.Index(2015, 1);
 
             //Assert
             Assert.IsInstanceOfType(result, typeof(ViewResult));
             Assert.IsInstanceOfType((result as ViewResult).Model, typeof(CursusOverzichtViewModel));
-            Assert.AreEqual(1, mockAgent.AantalCallsOpGet);
+            Assert.AreEqual(1, mockAgent.AantalCallsOpGetMetJaarEnWeek);
+            Assert.AreEqual(2015, mockAgent.LaatstMeegegeveJaarInGet);
+            Assert.AreEqual(1, mockAgent.LaatstMeegegeveWeekInGet);
+
         }
 
         [TestMethod]
@@ -45,17 +62,81 @@ namespace Minor.Case1.AdministratieCursusenCursistenTests
         }
 
         [TestMethod]
-        public void IndexRedirectToRouteWithWeekAndYear()
+        public void ImporterenGeeftEenLeegModelInViewResult()
         {
             //Arrange
             var mockAgent = new MockCursusInstantieAgent();
             var target = new CursusController(mockAgent);
 
             //Act
-            var result = target.Index();
+            var result = target.Importeren();
 
             //Assert
-            Assert.IsInstanceOfType(result, typeof(RedirectResult));
+            Assert.IsInstanceOfType(result, typeof(ViewResult));
+            Assert.IsInstanceOfType((result as ViewResult).Model, typeof(ImporterenViewModel));
+
+        }
+
+        [TestMethod]
+        public void IndexGeeftCursusOverzichtModel()
+        {
+            //Arrange
+            var mockAgent = new MockCursusInstantieAgent();
+            var target = new CursusController(mockAgent);
+
+            //Act
+            var result = target.Importeren();
+
+            //Assert
+            Assert.IsInstanceOfType(result, typeof(ViewResult));
+            Assert.IsInstanceOfType((result as ViewResult).Model, typeof(ImporterenViewModel));
+        }
+
+        [TestMethod]
+        public void IndexFilterdOpWeek()
+        {
+            //Arrange
+            var mockAgent = new MockCursusInstantieAgent();
+            var target = new CursusController(mockAgent);
+
+            //Act
+            var result = target.Index(2016, 10);
+
+            //Assert
+            Assert.IsInstanceOfType(result, typeof(ViewResult));
+            Assert.IsInstanceOfType((result as ViewResult).Model, typeof(CursusOverzichtViewModel));
+        }
+
+        [TestMethod]
+        public void IndexWeek53GeeftRedirect()
+        {
+            //Arrange
+            var mockAgent = new MockCursusInstantieAgent();
+            var target = new CursusController(mockAgent);
+
+            //Act
+            var result = target.Index(2016, 53);
+
+            //Assert
+            Assert.IsInstanceOfType(result, typeof(RedirectToActionResult));
+            Assert.AreEqual(2017, (result as RedirectToActionResult).RouteValues["jaar"]);
+            Assert.AreEqual(1, (result as RedirectToActionResult).RouteValues["week"]);
+        }
+
+        [TestMethod]
+        public void IndexWeek0GeeftRedirect()
+        {
+            //Arrange
+            var mockAgent = new MockCursusInstantieAgent();
+            var target = new CursusController(mockAgent);
+
+            //Act
+            var result = target.Index(2016, 0);
+
+            //Assert
+            Assert.IsInstanceOfType(result, typeof(RedirectToActionResult));
+            Assert.AreEqual(2015, (result as RedirectToActionResult).RouteValues["jaar"]);
+            Assert.AreEqual(52, (result as RedirectToActionResult).RouteValues["week"]);
         }
     }
 }

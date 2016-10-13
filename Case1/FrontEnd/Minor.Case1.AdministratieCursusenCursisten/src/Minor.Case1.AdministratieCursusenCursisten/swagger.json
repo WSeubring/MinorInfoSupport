@@ -41,11 +41,41 @@
         "responses": {
           "200": {
             "description": "Success",
-            "schema": { "$ref": "#/definitions/OkResult" }
+            "schema": { "$ref": "#/definitions/AddFromFileResultReport" }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/api/CursusInstantie/{jaar}/{week}": {
+      "get": {
+        "tags": [ "CursusInstantie" ],
+        "operationId": "GetByYearAndWeek",
+        "consumes": [],
+        "produces": [ "application/json" ],
+        "parameters": [
+          {
+            "name": "jaar",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
           },
-          "400": {
-            "description": "Client Error",
-            "schema": { "$ref": "#/definitions/BadRequestResult" }
+          {
+            "name": "week",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": { "$ref": "#/definitions/CursusInstantie" }
+            }
           }
         },
         "deprecated": false
@@ -54,6 +84,7 @@
   },
   "definitions": {
     "CursusInstantie": {
+      "required": [ "cursus" ],
       "type": "object",
       "properties": {
         "id": {
@@ -62,11 +93,6 @@
         },
         "startDatum": {
           "format": "date-time",
-          "type": "string"
-        },
-        "cursusCode": {
-          "maxLength": 10,
-          "minLength": 0,
           "type": "string"
         },
         "cursus": { "$ref": "#/definitions/Cursus" }
@@ -91,20 +117,19 @@
         }
       }
     },
-    "OkResult": {
+    "AddFromFileResultReport": {
       "type": "object",
       "properties": {
-        "statusCode": {
+        "errorMessage": {
+          "type": "string",
+          "readOnly": true
+        },
+        "aantalAddedItems": {
           "format": "int32",
           "type": "integer",
           "readOnly": true
-        }
-      }
-    },
-    "BadRequestResult": {
-      "type": "object",
-      "properties": {
-        "statusCode": {
+        },
+        "aantalDuplicateItems": {
           "format": "int32",
           "type": "integer",
           "readOnly": true

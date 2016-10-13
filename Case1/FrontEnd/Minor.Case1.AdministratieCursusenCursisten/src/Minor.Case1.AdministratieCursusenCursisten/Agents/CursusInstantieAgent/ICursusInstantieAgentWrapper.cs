@@ -9,6 +9,7 @@ namespace Minor.Case1.AdministratieCursusenCursisten.Agents
     public interface ICursusInstantieAgentWrapper
     {
         IEnumerable<CursusInstantie> Get();
-        void AddFromTextFile(string text);
+        AddFromFileResultReport AddFromTextFile(string text);
+        IEnumerable<CursusInstantie> Get(int jaar, int week);
     }
 }

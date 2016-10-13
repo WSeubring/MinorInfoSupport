@@ -1,12 +1,13 @@
 @model Minor.Case1.AdministratieCursusenCursisten.ViewModels.CursusOverzichtViewModel
 <nav aria-label="...">
+    <h2 class="text-center"> @Model.Jaar</h2>
     <ul class="pager">
-        <li class="previous"><a href="#"><span aria-hidden="true">&larr;</span> Vorige</a></li>
+        <li class="previous">@Html.ActionLink("Vorige", "Index", new { jaar = Model.Jaar, week = Model.Weeknr-1})</li>
         <li> <span class="text-center"> 
                 Week @Model.Weeknr
             </span> 
         </li>
-        <li class="next"><a href="#">Volgende <span aria-hidden="true">&rarr;</span></a></li>
+        <li class="next">@Html.ActionLink("Volgende", "Index", new { jaar = Model.Jaar, week = Model.Weeknr + 1 })</li>
     </ul>
 </nav>
 <table class="table">
@@ -21,7 +22,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.CursusInstanties.First().Cursus.Duur)
             </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -37,9 +37,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Cursus.Duur)
                 </td>
-                <td>
-                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ })
-                </td>
+
             </tr>
         }
     </tbody>

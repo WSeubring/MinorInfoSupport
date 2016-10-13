@@ -7,6 +7,7 @@ using Minor.Case1.AdministratieCursusenCursistenApi.Entiteiten;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace Minor.Case1.AdministratieCursusenCursistenApiTest.DAL
@@ -57,13 +58,12 @@ namespace Minor.Case1.AdministratieCursusenCursistenApiTest.DAL
         }
 
         [TestMethod]
-        public void Get1Item()
+        public void FindAllWith1Item()
         {
             //Arrange
             var mockCursusTextFileParser = new CursusTextParserMock();
             var cursusInstantie = new CursusInstantie()
             {
-                //CursusCode = "TESTCURSUS",
                 StartDatum = new DateTime(2016, 10, 10),
                 Cursus = new Cursus()
                 {
@@ -92,7 +92,7 @@ namespace Minor.Case1.AdministratieCursusenCursistenApiTest.DAL
         }
 
         [TestMethod]
-        public void Get2ItemsOrderd()
+        public void FindAll2ItemsOrderd()
         {
             //Arrange
             var mockCursusTextFileParser = new CursusTextParserMock();
@@ -149,7 +149,6 @@ namespace Minor.Case1.AdministratieCursusenCursistenApiTest.DAL
                 },
                 new CursusInstantie()
                 {
-                    //CursusCode = "TESTCURSUS2",
                     StartDatum = new DateTime(2016, 1, 1),
                     Cursus = new Cursus()
                     {
@@ -170,6 +169,49 @@ namespace Minor.Case1.AdministratieCursusenCursistenApiTest.DAL
             {
                 Assert.AreEqual(2, context.CursusInstanties.Count());
             }
+        }
+
+        [TestMethod]
+        public void FindbyFilter()
+        {
+            //Arrange
+            var mockCursusTextFileParser = new CursusTextParserMock();
+            var cursusInstanties = new List<CursusInstantie>()
+            {
+                new CursusInstantie()
+                {
+                    StartDatum = new DateTime(2016, 10, 10),
+                    Cursus = new Cursus()
+                    {
+                        Code = "TESTCURSUS"
+                    }
+                },
+                new CursusInstantie()
+                {
+                    StartDatum = new DateTime(2016, 1, 1),
+                    Cursus = new Cursus()
+                    {
+                        Code = "TESTCURSUS2"
+                    }
+                }
+            };
+
+            using (var context = new AdministratieCursusenCuristenContext(_options))
+            {
+                context.AddRange(cursusInstanties);
+                context.SaveChanges();
+
+                var target = new CursusInstantieRepository(context);
+
+
+                //Act
+                Expression<Func<CursusInstantie, bool>> filter = c => c.StartDatum == new DateTime(2016, 10, 10);
+                var result = target.FindBy(filter);
+                
+                //Assert
+                Assert.AreEqual(1, result.Count());
+                Assert.AreEqual("TESTCURSUS", result.Single().Cursus.Code);
+            }   
         }
     }
 }

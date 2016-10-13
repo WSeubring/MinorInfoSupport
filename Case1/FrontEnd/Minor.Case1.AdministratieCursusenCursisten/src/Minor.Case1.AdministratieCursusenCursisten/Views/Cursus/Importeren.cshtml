@@ -1,8 +1,25 @@
 ﻿@model Minor.Case1.AdministratieCursusenCursisten.ViewModels.ImporterenViewModel
 
 <h1> Importeren Cursussen</h1>
+@{if (Model.Report != null)
+    {
+        if (Model.Report.ErrorMessage != null)
+        {
+            <div class="alert alert-danger">
+                @Model.Report.ErrorMessage
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-info">
+               Er zijn @Model.Report.AantalAddedItems; toegevoegd en er zijn @Model.Report.AantalDuplicateItems Dubbelen items in de file.
+            </div>
+        }
+    }
+}
+
 <form method="post" asp-action="Importeren" asp-controller="Cursus" enctype="multipart/form-data">
     <span asp-validation-for="File" class="text-danger"></span>
-    <input asp-for="File" type="file" name="file"/>
+    <input asp-for="File" type="file" name="file" />
     <input type="submit" value="Importeren" class="btn btn-default" />
 </form>

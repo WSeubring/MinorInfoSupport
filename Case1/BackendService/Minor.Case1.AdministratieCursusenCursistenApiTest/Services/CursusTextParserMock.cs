@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Minor.Case1.AdministratieCursusenCursistenApi.Entiteiten;
 using Minor.Case1.AdministratieCursusenCursistenApi.Services;
+using Minor.Case1.AdministratieCursusenCursistenApi.Exceptions;
 
 namespace Minor.Case1.AdministratieCursusenCursistenApiTest
 {
@@ -12,11 +13,33 @@ namespace Minor.Case1.AdministratieCursusenCursistenApiTest
         public List<CursusInstantie> Parse(string text)
         {
             CallsOpParse.Add(text);
+            if(text == "SyntaxError")
+            {
+                throw new InvalidSyntaxException("Fout op regel: 4");
+            }
+            if (string.IsNullOrEmpty(text))
+            {
+                return new List<CursusInstantie>();
+            }
+            if (text == "TestItem")
+            {
+                return new List<CursusInstantie>()
+            {
+                new CursusInstantie()
+                {
+                    StartDatum = new DateTime(2016, 10, 10),
+                    Cursus = new Cursus()
+                    {
+                        Code="CODE21",
+                        Duur=5,
+                        Titel="Mock"
+                    }
+                } };
+            }
             return new List<CursusInstantie>()
             {
                 new CursusInstantie()
                 {
-                    //CursusCode = "Code",
                     StartDatum = new DateTime(2016, 10, 10),
                     Cursus = new Cursus()
                     {
@@ -27,7 +50,6 @@ namespace Minor.Case1.AdministratieCursusenCursistenApiTest
                 },
                 new CursusInstantie()
                 {
-                    //CursusCode = "Code2",
                     StartDatum = new DateTime(2016, 1, 1),
                     Cursus = new Cursus()
                     {
