@@ -3,7 +3,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:32326/",
+      "applicationUrl": "http://localhost:32326/CAS_WS/CASsite/",
       "sslPort": 0
     }
   },
@@ -19,7 +19,7 @@
     "Minor.Case1.AdministratieCursusenCursistenApi": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "http://localhost:5000/api/values",
+      "launchUrl": "http://localhost:5000/CAS_WS/CASsite",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

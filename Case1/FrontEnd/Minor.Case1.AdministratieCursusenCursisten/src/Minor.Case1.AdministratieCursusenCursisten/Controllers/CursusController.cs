@@ -22,6 +22,11 @@ namespace Minor.Case1.AdministratieCursusenCursisten.Controllers
         {
             _cursusInstantieAgent = cursusInstantieAgent;
         }
+        /// <summary>
+        /// Redirects to index with the current week and year as parameter.
+        /// </summary>
+        /// <returns></returns>
+        [Route("CAS_WS/CASsite")]
         [HttpGet]
         public RedirectToActionResult CurrentWeekRedirect()
         {
@@ -39,7 +44,8 @@ namespace Minor.Case1.AdministratieCursusenCursisten.Controllers
         /// <param name="jaar"></param>
         /// <param name="week"></param>
         /// <returns></returns>
-        [HttpGet("Cursus/Jaar/{jaar}/Week/{week}")]
+        [Route("CAS_WS/CASsite/Cursus")]
+        [HttpGet("Jaar/{jaar}/Week/{week}")]
         public IActionResult Index([Bind("jaar", "week")]int jaar, int week)
         {
             var model = new CursusOverzichtViewModel();
@@ -64,9 +70,10 @@ namespace Minor.Case1.AdministratieCursusenCursisten.Controllers
             return View(model);
         }
         /// <summary>
-        /// 
+        /// Show a view where a file can be uploaded to import CursusInstanties
         /// </summary>
         /// <returns></returns>
+        [Route("CAS_WS/CASsite/Importeren")]
         [HttpGet]
         public IActionResult Importeren()
         {
@@ -74,6 +81,12 @@ namespace Minor.Case1.AdministratieCursusenCursisten.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// Converts the uploaded file to text sends it to the API to be converted to CursusInstanties and added to the database
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [Route("CAS_WS/CASsite/Importeren")]
         [HttpPost]
         public IActionResult Importeren(ImporterenViewModel model)
         {

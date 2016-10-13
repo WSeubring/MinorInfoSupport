@@ -38,7 +38,7 @@ namespace Minor.Case1.AdministratieCursusenCursistenApi
 
         public void ConfigureServices(IServiceCollection services)
         {
-            var connection = @"Server=.\SQLEXPRESS;Database=AdministratieCursusenCuristen;Trusted_Connection=True;";
+            var connection = @"Server=.\SQLEXPRESS;Database=CASDB_WS;Trusted_Connection=True;";
             // Add framework services.
             services.AddApplicationInsightsTelemetry(Configuration);
             services.AddSwaggerGen();

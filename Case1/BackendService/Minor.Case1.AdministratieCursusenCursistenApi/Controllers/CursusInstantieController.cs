@@ -16,7 +16,7 @@ using System.Globalization;
 namespace Minor.Case1.AdministratieCursusenCursistenApi.Controllers
 {
     [Produces("application/json")]
-    [Route("api/CursusInstantie")]
+    [Route("CAS_WS/CASservice/[Controller]")]
     public class CursusInstantieController : Controller
     {
         private IRepository<CursusInstantie, long> _cursusInstantieRepository;
@@ -32,6 +32,7 @@ namespace Minor.Case1.AdministratieCursusenCursistenApi.Controllers
         /// Gets all the CursusInstanties in the database
         /// </summary>
         /// <returns></returns>
+       
         [HttpGet]
         [SwaggerOperation("Get")]
         public IEnumerable<CursusInstantie> Get()
