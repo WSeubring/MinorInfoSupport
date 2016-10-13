@@ -164,7 +164,7 @@ namespace Minor.Case1.AdministratieCursusenCursisten.Agents
             }
             // Construct URL
             var _baseUrl = this.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "api/CursusInstantie").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "CAS_WS/CASservice/CursusInstantie").ToString();
             // Create HTTP transport objects
             HttpRequestMessage _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -271,7 +271,7 @@ namespace Minor.Case1.AdministratieCursusenCursisten.Agents
             }
             // Construct URL
             var _baseUrl = this.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "api/CursusInstantie").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "CAS_WS/CASservice/CursusInstantie").ToString();
             // Create HTTP transport objects
             HttpRequestMessage _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -387,7 +387,7 @@ namespace Minor.Case1.AdministratieCursusenCursisten.Agents
             }
             // Construct URL
             var _baseUrl = this.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "api/CursusInstantie/{jaar}/{week}").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "CAS_WS/CASservice/CursusInstantie/{jaar}/{week}").ToString();
             _url = _url.Replace("{jaar}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(jaar, this.SerializationSettings).Trim('"')));
             _url = _url.Replace("{week}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(week, this.SerializationSettings).Trim('"')));
             // Create HTTP transport objects

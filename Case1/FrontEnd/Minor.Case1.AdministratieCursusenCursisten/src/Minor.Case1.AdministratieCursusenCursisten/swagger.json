@@ -8,7 +8,7 @@
   },
   "basePath": "/",
   "paths": {
-    "/api/CursusInstantie": {
+    "/CAS_WS/CASservice/CursusInstantie": {
       "get": {
         "tags": [ "CursusInstantie" ],
         "operationId": "Get",
@@ -47,7 +47,7 @@
         "deprecated": false
       }
     },
-    "/api/CursusInstantie/{jaar}/{week}": {
+    "/CAS_WS/CASservice/CursusInstantie/{jaar}/{week}": {
       "get": {
         "tags": [ "CursusInstantie" ],
         "operationId": "GetByYearAndWeek",

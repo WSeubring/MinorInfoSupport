@@ -9,7 +9,8 @@ namespace Minor.Case1.AdministratieCursusenCursistenApi.Entiteiten
 
         [DataType(DataType.Date)]
         public DateTime StartDatum{ get; set; }
-
+        [StringLength(10)]
+        public string CursusCode { get; set; }
         [Required]
         public Cursus Cursus { get; set; }
 
