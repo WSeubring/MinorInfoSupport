@@ -1,0 +1,24 @@
+{
+  "version": "1.0.0-*",
+  "buildOptions": {
+    "emitEntryPoint": true
+  },
+  "testRunner": "mstest",
+  "dependencies": {
+    "dotnet-test-mstest": "1.1.2-preview",
+    "Microsoft.AspNetCore.Mvc.ViewFeatures": "1.0.1",
+    "Microsoft.NETCore.App": {
+      "type": "platform",
+      "version": "1.0.1"
+    },
+    "Minor.Dag39.SpellenOefening.FronendService.Domain": "1.0.0-*",
+    "Minor.Dag39.SpellenOefening.FronendService.WebApplication": "1.0.0-*",
+    "Moq": "4.6.38-alpha",
+    "MSTest.TestFramework": "1.0.6-preview"
+  },
+  "frameworks": {
+    "netcoreapp1.0": {
+      "imports": "dnxcore50"
+    }
+  }
+}

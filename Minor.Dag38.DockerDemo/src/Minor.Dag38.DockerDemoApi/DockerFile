@@ -1,7 +1,7 @@
 FROM microsoft/dotnet:1.0.1-core
-ARG source=./bin/Debug/netcoreapp1.0/publish
+ARG source=./bin/debug/netcoreapp1.0/publish
 WORKDIR /app
-ENV ASPETCORE_URLS http://*:80
+ENV ASPNETCORE_URLS http://*:80
 EXPOSE 80
 COPY $source .
 ENTRYPOINT ["dotnet", "Minor.Dag38.DockerDemoApi.dll"]

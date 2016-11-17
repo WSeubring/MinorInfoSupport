@@ -13,17 +13,17 @@ namespace Minor.Dag34.ChatApplicationRabitMQ
         private static string _username;
         public static void Main(string[] args)
         {
-            Console.WriteLine("Please enter your username: ");
-            _username = Console.ReadLine();
+            //Console.WriteLine("Please enter your username: ");
+            //_username = Console.ReadLine();
 
-            var factory = new ConnectionFactory() { HostName = "192.168.120.36", UserName="best", Password="best" };
+            var factory = new ConnectionFactory() { HostName = "rabbithutch" };
             using (var connection = factory.CreateConnection())
             using (var channel = connection.CreateModel())
             {
                 var reveiver = new MessageReceiver(channel);
                 var sender = new MessageSender(channel);
                 int counter = 1;
-                while (true)
+                while (counter < 100)
                 {
                     var message = $"Bericht {counter++}";
                     sender.send(message);

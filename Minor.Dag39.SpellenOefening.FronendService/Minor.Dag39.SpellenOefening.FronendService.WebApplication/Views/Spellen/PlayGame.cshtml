@@ -1,0 +1,26 @@
+﻿@model Minor.Dag39.SpellenOefening.FronendService.Facade.ViewModels.PlayGameViewModel
+<br />
+<br />
+<br />
+<br />
+<br />
+<br /> 
+
+@Html.DisplayNameFor(model => model.Game.ID)
+@Html.DisplayFor(model => model.Game.ID)
+
+<h2> players </h2>
+
+@foreach(var player in Model.Game.Players)
+{
+    @Html.DisplayFor(modelPlayer => player.Name);
+    <br />
+}
+
+<form method="post">
+    <input type="hidden" value="@Model.Game.ID" />
+    <input type="submit" value="Play Game" class="btn btn-block bg-success" />
+</form>
+
+<h2> Winner </h2>
+@Html.DisplayFor(model => model.Game.Winner)
