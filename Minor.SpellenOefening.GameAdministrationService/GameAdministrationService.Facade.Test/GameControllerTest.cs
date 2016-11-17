@@ -26,11 +26,11 @@ namespace GameAdministrationService.Facade.Test
             var target = new GameController(mock.Object);
             var command = new StartGameCommand()
             {
-                Players = new List<Player>()
+                Players = new List<StartGamePlayer>()
                 {
-                    new Player("1"),
-                    new Player("2"),
-                    new Player("3")
+                    new StartGamePlayer("1"),
+                    new StartGamePlayer("2"),
+                    new StartGamePlayer("3")
                 }
             };
 

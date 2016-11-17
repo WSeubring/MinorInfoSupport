@@ -1,10 +1,10 @@
 ﻿namespace Commands.Entities
 {
-    public class Player
+    public class StartGamePlayer
     {
         public string Name { get; set; }
 
-        public Player(string name)
+        public StartGamePlayer(string name)
         {
             Name = name;
         }

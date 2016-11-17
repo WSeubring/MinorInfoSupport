@@ -5,6 +5,6 @@ namespace Commands
 {
     public class StartGameCommand
     {
-        public List<Player> Players { get; set; }
+        public List<StartGamePlayer> Players { get; set; }
     }
 }

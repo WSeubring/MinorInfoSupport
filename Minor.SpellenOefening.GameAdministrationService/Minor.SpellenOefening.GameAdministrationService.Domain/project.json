@@ -5,6 +5,7 @@
     "Microsoft.AspNetCore.Mvc.Abstractions": "1.0.1",
     "Minor.SpellenOefening.GameAdministrationService.Common": "1.0.0-*",
     "Minor.SpellenOefening.GameAdministrationService.Incoming": "1.0.0-*",
+    "Minor.SpellenOefening.GameAdministrationService.Outgoing": "1.0.0-*",
     "NETStandard.Library": "1.6.0"
   },
 

@@ -1,11 +1,10 @@
-﻿namespace Models
+﻿using System.Collections.Generic;
+
+namespace Models
 {
     public class Game
     {
-        public Game()
-        {
-        }
-
-        public System.Collections.Generic.List<Player> Players { get; set; }
+        public int ID { get; set; }
+        public List<Player> Players { get; set; } = new List<Player>();
     }
 }
