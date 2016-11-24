@@ -7,13 +7,11 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - 80:3839
+      - 6030:80
     networks:
       - eventbus-network
     links:
       - frontend-db:db
-    external_link:
-      - rabbitmq:latest
 
   frontend-db:
     image: "mysql:latest"
@@ -31,7 +29,7 @@ services:
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
-    container_name: phpmyadmin
+    container_name: phpmyadmin-frontend
     links:
       - frontend-db:db
     ports:
