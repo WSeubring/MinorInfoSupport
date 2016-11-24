@@ -1,9 +1,9 @@
 ﻿{
-  "name": "LapiweCommonPackage",
+  "name": "Lapiwe.Common",
   "version": "1.0.0-*",
   "description": "Lapiwe common package",
   "copyright": "Lapiwe",
-  "title": "LapiweCommonPackage",
+  "title": "Lapiwe Common Package",
   "dependencies": {
     "NETStandard.Library": "1.6.0"
   },

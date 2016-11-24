@@ -11,7 +11,7 @@
     },
     "MSTest.TestFramework": "1.0.6-preview",
     "dotnet-test-mstest": "1.1.2-preview",
-    "Lapiwe.Common": "1.0.0-*"
+    "Lapiwe.Common": "1.0.0-*",
   },
 
   "frameworks": {

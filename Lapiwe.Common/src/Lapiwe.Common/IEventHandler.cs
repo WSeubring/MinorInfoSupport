@@ -1,0 +1,23 @@
+﻿
+namespace Lapiwe.Common
+{
+    /// <summary>
+    ///     Use a handler to subscribe to an event
+    ///     and implement the handle method to add
+    ///     functionality to when the event is fired.
+    /// </summary>
+    /// <example>
+    ///     public class RoomCreatedHandler : IEventHandler<RoomCreatedEvent>
+    /// </example>
+    /// <typeparam name="TEvent"></typeparam>
+    public interface IEventHandler<TEvent>
+        where TEvent : DomainEvent
+    {
+        /// <summary>
+        ///     Add functionality to a triggered event
+        /// </summary>
+        /// <param name="domainCommand"></param>
+        /// <returns></returns>
+        void Handle(TEvent domainEvent);
+    }
+}

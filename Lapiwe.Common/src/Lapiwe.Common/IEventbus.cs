@@ -1,8 +1,6 @@
-﻿using Minor.WSA.Common.Domain;
-using System;
-using System.Threading.Tasks;
+﻿using System;
 
-namespace Minor.WSA.Common.Contracts
+namespace Lapiwe.Common
 {
     public interface IEventbus : IDisposable
     {
