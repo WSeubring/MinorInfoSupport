@@ -1,6 +1,9 @@
 ﻿{
+  "name": "LapiweCommonPackage",
   "version": "1.0.0-*",
-
+  "description": "Lapiwe common package",
+  "copyright": "Lapiwe",
+  "title": "LapiweCommonPackage",
   "dependencies": {
     "NETStandard.Library": "1.6.0"
   },
@@ -9,5 +12,17 @@
     "netstandard1.6": {
       "imports": "dnxcore50"
     }
+  },
+
+  "packOptions": {
+    "summary": "This is the Lapiwe common package",
+    "tags": [ "Common" ],
+    "owners": [ "Pim van Gurp", "Lars Celie", "Wesley Seubring" ]
+  },
+
+  "scripts": {
+    "postcompile": [
+      "dotnet pack -o C:\\_localNugetFeed --no-build --configuration %compile:Configuration%"
+    ]
   }
 }
