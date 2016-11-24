@@ -8,6 +8,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Lapiwe.GMS.FrontEnd.ViewModels;
+using Lapiwe.GMS.FrontEnd.DAL.Interfaces;
+using Lapiwe.GMS.FrontEnd.DAL;
 
 namespace Lapiwe.GMS.FrontEnd
 {
@@ -38,6 +40,9 @@ namespace Lapiwe.GMS.FrontEnd
             services.AddApplicationInsightsTelemetry(Configuration);
 
             services.AddMvc();
+
+            services.AddDbContext<KlantContext>();
+            services.AddScoped<IKlantRepository, KlantRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
