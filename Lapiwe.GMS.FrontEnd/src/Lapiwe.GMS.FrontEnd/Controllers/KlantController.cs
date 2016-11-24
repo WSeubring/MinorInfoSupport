@@ -19,13 +19,15 @@ namespace Lapiwe.GMS.FrontEnd.Controllers
         }
 
         [HttpGet]
-        public IActionResult KlantDetails(long id)
+        public IActionResult Details(long id)
         {
-            //var klant = _klantRepository.Find(id);
+            _klantRepository.Insert(null);
+
+            var klant = _klantRepository.Find(id);
             var viewmodel = new KlantGegegevensViewModel();
 
-            //viewmodel.Klant = klant;
-            viewmodel.Klant = new Klant() { Voornaam = "Henk", Achternaam = "Achternaam222", Telefoonnummer = "123-dier" };
+            viewmodel.Klant = klant;
+            
             return View(viewmodel);
         }
     }

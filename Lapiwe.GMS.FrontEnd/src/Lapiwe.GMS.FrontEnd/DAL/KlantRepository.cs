@@ -39,7 +39,8 @@ namespace Lapiwe.GMS.FrontEnd.DAL
 
         public void Insert(Klant item)
         {
-            throw new NotImplementedException();
+            _context.Add(new Klant() { Voornaam = "henk" });
+            _context.SaveChanges();
         }
 
         public void Update(Klant item)

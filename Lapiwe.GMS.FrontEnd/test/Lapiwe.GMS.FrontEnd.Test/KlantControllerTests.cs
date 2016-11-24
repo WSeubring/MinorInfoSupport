@@ -23,7 +23,7 @@ namespace Lapiwe.GMS.FrontEnd.Test
             var target = new KlantController(mock.Object);
 
             // Act
-            var result = target.KlantDetails(1);
+            var result = target.Details(1);
 
             // Assert
             var viewmodel = ((result as ViewResult).Model as KlantGegegevensViewModel);

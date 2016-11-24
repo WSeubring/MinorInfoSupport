@@ -8,10 +8,11 @@ namespace Lapiwe.GMS.FrontEnd.DAL
     {
         public KlantContext(DbContextOptions options) : base(options)
         {
+            Database.EnsureCreated();
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySQL(" server = frontend-db; userid = root; pwd = 12345; port = 6032 ; database = frontend; sslmode = none; ");
+            optionsBuilder.UseMySQL(" server = frontendDB; userid = admin; pwd = admin; port = 6032 ; database = frontend; sslmode = none; ");
         }
 
         public DbSet<Klant> Klanten { get; set; }

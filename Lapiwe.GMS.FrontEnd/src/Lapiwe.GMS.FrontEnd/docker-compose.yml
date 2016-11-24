@@ -14,28 +14,23 @@ services:
       - frontend-db:db
 
   frontend-db:
-    image: "mysql:latest"
-    volumes: 
-      - "./.data/db:/var/lib/mysql"
+    image: mysql
+    container_name: mysql-frontend
     environment:
-      MYSQL_USER: "admin"
-      MYSQL_PASSWORD: 1234
-      MYSQL_DATABASE: frontend
-      MYSQL_ROOT_PASSWORD: 12344321
+      MYSQL_PASSWORD: admin
+      MYSQL_DATABASE: frontendDB
+      MYSQL_USER: admin
+      MYSQL_ROOT_PASSWORD: 12341234
     ports:
       - 6032:3306
-    networks:
-      - eventbus-network
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     container_name: phpmyadmin-frontend
-    links:
-      - frontend-db:db
     ports:
-      - 6031:80
-    networks: 
-      - eventbus-network
+     - 6031:80
+    links:
+     - frontend-db:db
 
 networks:
   eventbus-network:
