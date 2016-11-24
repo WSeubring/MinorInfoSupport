@@ -1,0 +1,45 @@
+version: '2'
+
+services:
+  lapiwe.gms.frontend:
+    image: lars/lapiwe.gms.frontend${TAG}
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 80:3839
+    networks:
+      - eventbus-network
+    links:
+      - frontend-db:db
+    external_link:
+      - rabbitmq:latest
+
+  frontend-db:
+    image: "mysql:latest"
+    volumes: 
+      - "./.data/db:/var/lib/mysql"
+    environment:
+      MYSQL_USER: "admin"
+      MYSQL_PASSWORD: 1234
+      MYSQL_DATABASE: frontend
+      MYSQL_ROOT_PASSWORD: 12344321
+    ports:
+      - 6032:3306
+    networks:
+      - eventbus-network
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    links:
+      - frontend-db:db
+    ports:
+      - 6031:80
+    networks: 
+      - eventbus-network
+
+networks:
+  eventbus-network:
+    external:
+      name: eventbus-network
