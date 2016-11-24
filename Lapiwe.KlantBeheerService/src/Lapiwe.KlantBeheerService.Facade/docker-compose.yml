@@ -9,28 +9,28 @@ services:
 
   mysql:
     image: mysql
-    container_name: mysql
+    container_name: klantbeheerservice-mysql
     environment:
       MYSQL_PASSWORD: klantbeheer
       MYSQL_DATABASE: klantbeheer
       MYSQL_USER: klantbeheer
       MYSQL_ROOT_PASSWORD: klantbeheer
     ports:
-      - 3306:3306
+      - 6022:3306
     networks: 
-      - eventbus
+      - eventbus-network
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
-    container_name: phpmyadmin
+    container_name: klantbeheerservice-phpmyadmin
     links:
      - mysql:db
     ports:
-     - 9001:80
+     - 6021:80
     networks: 
-      - eventbus
+      - eventbus-network
 
 networks:
-  eventbus:
+  eventbus-network:
     external:
-      name: eventbus
+      name: eventbus-network

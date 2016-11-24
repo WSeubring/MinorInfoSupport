@@ -8,6 +8,7 @@ namespace Lapiwe.KlantBeheerService.Facade
     {
         public static void Main(string[] args)
         {
+            Console.WriteLine("Klanten Beheer Service aan het starten");
         }
     }
 }
