@@ -3,7 +3,7 @@ version: '2'
 services:
   mysql:
     image: mysql
-    container_name: mysql
+    container_name: mysqlAutoBeheerService
     environment:
       MYSQL_PASSWORD: admin
       MYSQL_DATABASE: autobeheerserviceDB
@@ -14,7 +14,7 @@ services:
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
-    container_name: phpmyadmin
+    container_name: phpmyadminAutoBeheerService
     links:
      - mysql:db
     ports:
