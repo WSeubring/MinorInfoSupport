@@ -1,0 +1,85 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{0D2EF833-9E2E-4C94-BC4F-131C838575CF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{7009FA09-0EA2-4E80-9763-6F490BF0EF9B}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "02. Domain", "src\Lapiwe.KlantBeheerService.Domain\02. Domain.xproj", "{5CA61487-D3D5-4CC8-A8BD-01B6A7CCADF5}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "03. Domain Services", "src\Lapiwe.KlantBeheerService.DomainServices\03. Domain Services.xproj", "{1B6307E5-4A91-459F-9620-F5011F17F1DA}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "04. Infrastructure", "src\Lapiwe.KlantBeheerService.Infrastructure\04. Infrastructure.xproj", "{DA06F056-602B-4BBF-A09C-05799CE8DF4D}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "05. Facade", "src\Lapiwe.KlantBeheerService.Facade\05. Facade.xproj", "{5BE8A481-A4C9-44C4-9D66-2B02BB1F7B1B}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "01. Export", "src\Lapiwe.KlantBeheerService.Export\01. Export.xproj", "{40FA9076-5C14-47F1-9F0F-0C0E32D24ACA}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "02. Domain.Test", "test\Lapiwe.KlantBeheerService.Domain.Test\02. Domain.Test.xproj", "{3A555047-6E50-4AD0-A3E1-7E84254591FC}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "03. Domain Services.Test", "test\Lapiwe.KlantBeheerService.DomainServices.Test\03. Domain Services.Test.xproj", "{5B48278A-12DD-44C3-919F-5A8CB97322A7}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "04. Infrastructure.Test", "test\Lapiwe.KlantBeheerService.Infrastructure.Test\04. Infrastructure.Test.xproj", "{D7BADF1A-469A-402E-B3F2-2DB3DDC93013}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "05. Facade.Test", "test\Lapiwe.KlantBeheerService.Facade.Test\05. Facade.Test.xproj", "{0E4BEB01-8B46-4377-AB33-290190D06C27}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5CA61487-D3D5-4CC8-A8BD-01B6A7CCADF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CA61487-D3D5-4CC8-A8BD-01B6A7CCADF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CA61487-D3D5-4CC8-A8BD-01B6A7CCADF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CA61487-D3D5-4CC8-A8BD-01B6A7CCADF5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B6307E5-4A91-459F-9620-F5011F17F1DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B6307E5-4A91-459F-9620-F5011F17F1DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B6307E5-4A91-459F-9620-F5011F17F1DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B6307E5-4A91-459F-9620-F5011F17F1DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA06F056-602B-4BBF-A09C-05799CE8DF4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA06F056-602B-4BBF-A09C-05799CE8DF4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA06F056-602B-4BBF-A09C-05799CE8DF4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA06F056-602B-4BBF-A09C-05799CE8DF4D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5BE8A481-A4C9-44C4-9D66-2B02BB1F7B1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BE8A481-A4C9-44C4-9D66-2B02BB1F7B1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BE8A481-A4C9-44C4-9D66-2B02BB1F7B1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BE8A481-A4C9-44C4-9D66-2B02BB1F7B1B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40FA9076-5C14-47F1-9F0F-0C0E32D24ACA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40FA9076-5C14-47F1-9F0F-0C0E32D24ACA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40FA9076-5C14-47F1-9F0F-0C0E32D24ACA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40FA9076-5C14-47F1-9F0F-0C0E32D24ACA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A555047-6E50-4AD0-A3E1-7E84254591FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A555047-6E50-4AD0-A3E1-7E84254591FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A555047-6E50-4AD0-A3E1-7E84254591FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A555047-6E50-4AD0-A3E1-7E84254591FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B48278A-12DD-44C3-919F-5A8CB97322A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B48278A-12DD-44C3-919F-5A8CB97322A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B48278A-12DD-44C3-919F-5A8CB97322A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B48278A-12DD-44C3-919F-5A8CB97322A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7BADF1A-469A-402E-B3F2-2DB3DDC93013}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7BADF1A-469A-402E-B3F2-2DB3DDC93013}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7BADF1A-469A-402E-B3F2-2DB3DDC93013}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7BADF1A-469A-402E-B3F2-2DB3DDC93013}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E4BEB01-8B46-4377-AB33-290190D06C27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E4BEB01-8B46-4377-AB33-290190D06C27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E4BEB01-8B46-4377-AB33-290190D06C27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E4BEB01-8B46-4377-AB33-290190D06C27}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5CA61487-D3D5-4CC8-A8BD-01B6A7CCADF5} = {0D2EF833-9E2E-4C94-BC4F-131C838575CF}
+		{1B6307E5-4A91-459F-9620-F5011F17F1DA} = {0D2EF833-9E2E-4C94-BC4F-131C838575CF}
+		{DA06F056-602B-4BBF-A09C-05799CE8DF4D} = {0D2EF833-9E2E-4C94-BC4F-131C838575CF}
+		{5BE8A481-A4C9-44C4-9D66-2B02BB1F7B1B} = {0D2EF833-9E2E-4C94-BC4F-131C838575CF}
+		{40FA9076-5C14-47F1-9F0F-0C0E32D24ACA} = {0D2EF833-9E2E-4C94-BC4F-131C838575CF}
+		{3A555047-6E50-4AD0-A3E1-7E84254591FC} = {7009FA09-0EA2-4E80-9763-6F490BF0EF9B}
+		{5B48278A-12DD-44C3-919F-5A8CB97322A7} = {7009FA09-0EA2-4E80-9763-6F490BF0EF9B}
+		{D7BADF1A-469A-402E-B3F2-2DB3DDC93013} = {7009FA09-0EA2-4E80-9763-6F490BF0EF9B}
+		{0E4BEB01-8B46-4377-AB33-290190D06C27} = {7009FA09-0EA2-4E80-9763-6F490BF0EF9B}
+	EndGlobalSection
+EndGlobal
