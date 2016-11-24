@@ -1,0 +1,36 @@
+version: '2'
+
+services:
+  lapiwe.klantbeheerservice.facade:
+    image: user/lapiwe.klantbeheerservice.facade${TAG}
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+  mysql:
+    image: mysql
+    container_name: mysql
+    environment:
+      MYSQL_PASSWORD: klantbeheer
+      MYSQL_DATABASE: klantbeheer
+      MYSQL_USER: klantbeheer
+      MYSQL_ROOT_PASSWORD: klantbeheer
+    ports:
+      - 3306:3306
+    networks: 
+      - eventbus
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    links:
+     - mysql:db
+    ports:
+     - 9001:80
+    networks: 
+      - eventbus
+
+networks:
+  eventbus:
+    external:
+      name: eventbus
