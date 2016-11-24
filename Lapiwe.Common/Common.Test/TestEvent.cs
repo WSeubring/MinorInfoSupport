@@ -1,6 +1,4 @@
-﻿using Lapiwe.Common;
-
-namespace Common.Test
+﻿namespace Lapiwe.Common.Test
 {
     internal class TestEvent : DomainEvent
     {
