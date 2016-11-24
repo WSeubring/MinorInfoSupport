@@ -5,7 +5,7 @@ namespace Lapiwe.Common
 {
     public class FunctionalException : Exception
     {
-        public List<FunctionalError> FunctionalErrors { get; set; }
+        public List<FunctionalError> FunctionalErrors { get; private set; }
 
         public FunctionalException()
         {
