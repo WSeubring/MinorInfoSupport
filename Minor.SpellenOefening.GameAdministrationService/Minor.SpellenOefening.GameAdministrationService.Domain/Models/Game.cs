@@ -6,5 +6,6 @@ namespace Models
     {
         public int ID { get; set; }
         public List<Player> Players { get; set; } = new List<Player>();
+        public Player Winner { get; set; }
     }
 }

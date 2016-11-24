@@ -14,5 +14,7 @@ namespace Minor.SpellenOefening.GameAdministrationService.Domain.Infrastructure
         /// <param name="game"></param>
         
         void Add(Game game);
+        Game FindByID(int gameID);
+        void Update(Game game);
     }
 }

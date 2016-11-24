@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Swashbuckle.Swagger.Model;
 
 namespace Minor.SpellenOefening.GameAdministrationService.Facade
 {
@@ -38,6 +39,18 @@ namespace Minor.SpellenOefening.GameAdministrationService.Facade
             services.AddApplicationInsightsTelemetry(Configuration);
 
             services.AddMvc();
+
+            services.AddSwaggerGen();
+            services.ConfigureSwaggerGen(options =>
+            {
+                options.SingleApiVersion(new Info
+                {
+                    Version = "v1",
+                    Title = "A Monument Service",
+                    Description = "A RESTfull service for monument registration",
+                    TermsOfService = "None"
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline
@@ -51,6 +64,8 @@ namespace Minor.SpellenOefening.GameAdministrationService.Facade
             app.UseApplicationInsightsExceptionTelemetry();
 
             app.UseMvc();
+            app.UseSwagger();
+            app.UseSwaggerUi();
         }
     }
 }

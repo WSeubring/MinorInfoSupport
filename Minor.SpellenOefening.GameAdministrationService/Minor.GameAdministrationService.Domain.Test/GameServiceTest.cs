@@ -4,6 +4,7 @@ using Eventbus;
 using Events;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Minor.SpellenOefening.GameAdministrationService.Domain.Infrastructure;
+using Models;
 using Moq;
 using Services;
 using System;
@@ -24,7 +25,7 @@ namespace Minor.GameAdministrationService.Domain.Test
             var mockPublisher = new Mock<IEventPublisher>(MockBehavior.Strict);
             mockRepo.Setup(repo => repo.Add(It.IsAny<Models.Game>()));
             mockPublisher.Setup(pub => pub.Publish(It.IsAny<GameStartedEvent>()));
-            
+
             var target = new GameService(mockRepo.Object, mockPublisher.Object);
             var command = new StartGameCommand()
             {
@@ -43,14 +44,28 @@ namespace Minor.GameAdministrationService.Domain.Test
             mockRepo.Verify(repo => repo.Add(It.IsAny<Models.Game>()), Times.Once);
             mockPublisher.Verify(pub => pub.Publish(It.IsAny<GameStartedEvent>()), Times.Once);
         }
+
         [TestMethod]
         public void PlayGame()
         {
             // Arrange
-            var mockRepo = new Mock<IGameRepository>(MockBehavior.Strict);
+            var game = new Game()
+            {
+                ID = 1,
+                Players = new List<Player>()
+                {
+                    new Player("player1"),
+                    new Player("player2"),
+                    new Player("player3")
+                },
+            };
+
             var mockPublisher = new Mock<IEventPublisher>(MockBehavior.Strict);
-            mockRepo.Setup(repo => repo.Add(It.IsAny<Models.Game>()));
             mockPublisher.Setup(pub => pub.Publish(It.IsAny<GamePlayedEvent>()));
+
+            var mockRepo = new Mock<IGameRepository>(MockBehavior.Strict);
+            mockRepo.Setup(repo => repo.Update(It.IsAny<Models.Game>()));
+            mockRepo.Setup(repo => repo.FindByID(It.IsAny<int>())).Returns(game);
 
             var target = new GameService(mockRepo.Object, mockPublisher.Object);
             var command = new PlayGameCommand()
@@ -62,8 +77,10 @@ namespace Minor.GameAdministrationService.Domain.Test
             target.PlayGame(command);
 
             // Assert
-            mockRepo.Verify(repo => repo.Add(It.IsAny<Models.Game>()), Times.Once);
-            mockPublisher.Verify(pub => pub.Publish(It.IsAny<GamePlayedEvent>()), Times.Once);
+            mockRepo.Verify(repo => repo.FindByID(1));
+            mockRepo.Verify(repo => repo.Update(It.IsAny<Models.Game>()), Times.Once);
+            mockPublisher.Verify(pub => pub.Publish(It.Is<GamePlayedEvent>(args => args.GameID == 1 &&
+                                                                                   !string.IsNullOrEmpty(args.WinnerName))), Times.Once);
         }
     }
 }

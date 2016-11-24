@@ -11,14 +11,19 @@ namespace Services
 {
     public class GameService : IGameService
     {
+        private Random _random;
+
         private IGameRepository _repo;
         private IEventPublisher _publisher;
-        private Random _random = new Random();
+
         public GameService(IGameRepository repo, IEventPublisher publisher)
         {
             _repo = repo;
             _publisher = publisher;
+
+            _random = new Random();
         }
+
         public void StartGame(StartGameCommand sgc)
         {
             var game = new Game();
@@ -35,11 +40,22 @@ namespace Services
                 Players = sgc.Players
             });
         }
+
         public void PlayGame(PlayGameCommand playGameCommand)
         {
             var game = _repo.FindByID(playGameCommand.GameID);
 
-            var randomIndex = _random()
+            var randomIndex = _random.Next(0, game.Players.Count - 1);
+
+            game.Winner = game.Players[randomIndex];
+
+            _repo.Update(game);
+
+            _publisher.Publish(new GamePlayedEvent()
+            {
+                GameID = game.ID,
+                WinnerName = game.Winner.Name
+            });
         }
     }
-}
+} 
