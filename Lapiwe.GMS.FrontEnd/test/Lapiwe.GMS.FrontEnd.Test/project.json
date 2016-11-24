@@ -9,7 +9,9 @@
     },
     "dotnet-test-mstest": "1.1.2-preview",
     "MSTest.TestFramework": "1.0.6-preview",
-    "Lapiwe.GMS.FrontEnd": "1.0.0-*"
+    "Moq": "4.6.38-alpha",
+    "Lapiwe.GMS.FrontEnd": "1.0.0-*",
+    "Microsoft.EntityFrameworkCore": "1.0.1"
   },
 
   "frameworks": {
