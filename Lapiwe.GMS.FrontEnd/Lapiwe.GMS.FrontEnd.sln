@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{2FFA75B6-1BC4-446D-9253-FCF3400D6C37}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8097AB95-684C-4899-99C4-C5E35AC92A85}"
+	ProjectSection(SolutionItems) = preProject
+		global.json = global.json
+	EndProjectSection
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Lapiwe.GMS.FrontEnd", "src\Lapiwe.GMS.FrontEnd\Lapiwe.GMS.FrontEnd.xproj", "{C288E8C6-4369-4B0C-A461-43F5FA0CF659}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{0B622867-F89C-4909-BCCD-E3F9298D6BEB}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Lapiwe.GMS.FrontEnd.Test", "test\Lapiwe.GMS.FrontEnd.Test\Lapiwe.GMS.FrontEnd.Test.xproj", "{84B80A49-3B8E-4DF0-B99F-6A3B5DF51A59}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C288E8C6-4369-4B0C-A461-43F5FA0CF659}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C288E8C6-4369-4B0C-A461-43F5FA0CF659}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C288E8C6-4369-4B0C-A461-43F5FA0CF659}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C288E8C6-4369-4B0C-A461-43F5FA0CF659}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84B80A49-3B8E-4DF0-B99F-6A3B5DF51A59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84B80A49-3B8E-4DF0-B99F-6A3B5DF51A59}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84B80A49-3B8E-4DF0-B99F-6A3B5DF51A59}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84B80A49-3B8E-4DF0-B99F-6A3B5DF51A59}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C288E8C6-4369-4B0C-A461-43F5FA0CF659} = {2FFA75B6-1BC4-446D-9253-FCF3400D6C37}
+		{84B80A49-3B8E-4DF0-B99F-6A3B5DF51A59} = {0B622867-F89C-4909-BCCD-E3F9298D6BEB}
+	EndGlobalSection
+EndGlobal
