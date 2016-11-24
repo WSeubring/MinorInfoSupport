@@ -12,7 +12,10 @@ namespace Lapiwe.GMS.FrontEnd.DAL
         public KlantContext(DbContextOptions options) : base(options)
         {
         }
-
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseMySQL(" server = ; userid = root; pwd = Pa$$w0rd; port = 3306 ; database = ShopDB; sslmode = none; ");
+        }
         public DbSet<KlantGegegevensViewModel> Klanten { get; set; }
     }
 }
