@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Common.Test
+namespace Lapiwe.Common.Test
 {
     public class Program
     {
