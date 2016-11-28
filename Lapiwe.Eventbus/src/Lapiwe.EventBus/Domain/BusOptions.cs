@@ -11,13 +11,15 @@ namespace Lapiwe.EventBus.Domain
         public string Password { get; set; }
         public string ExchangeName { get; set; }
 
-        public BusOptions()
+        public BusOptions(string hostname = "localhost", int port = 5672,
+                          string username = "guest", string password = "guest",
+                          string exchangeName = "guest")
         {
-            HostName = "localhost";
-            Port = 5672;
-            Username = "guest";
-            Password = "guest";
-            ExchangeName = "Lapiwe.DefaultBus";
+            HostName = hostname;
+            Port = port;
+            Username = username;
+            Password = password;
+            ExchangeName = exchangeName;
         }
     }
 }

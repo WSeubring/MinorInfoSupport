@@ -2,7 +2,7 @@
   "name": "Lapiwe.EventBus",
   "version": "1.0.0-*",
   "description": "An event bus for publishing and dispatching events",
-  "title": "InfoSupport Minor EventBus",
+  "title": "Lapiwe EventBus",
 
   "dependencies": {
     "NETStandard.Library": "1.6.0",
@@ -21,7 +21,7 @@
   },
 
   "packOptions": {
-    "owners": [ "Joery", "Lars", "Pim", "Gert" ]
+    "owners": [ "Lars Celie", "Pim van Gurp", "Wesley Seubring" ]
   },
 
   "scripts": {
