@@ -1,4 +1,4 @@
-﻿namespace Lapiwe.Common
+﻿namespace Lapiwe.Common.Domain
 {
     public class FunctionalError
     {
