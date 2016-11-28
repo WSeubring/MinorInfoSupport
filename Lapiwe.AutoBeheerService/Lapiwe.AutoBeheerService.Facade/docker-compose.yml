@@ -29,6 +29,8 @@ services:
       'ConnectionStrings:DataAccessMySqlProvider': server=db;userid=admin;password=admin;database=autobeheerserviceDB;
     links:
      - mysql:db
+    ports:
+     - 6013:80
     networks:
       - eventbus-network
 
@@ -36,4 +38,3 @@ networks:
   eventbus-network:
     external:
       name: eventbus-network
-      

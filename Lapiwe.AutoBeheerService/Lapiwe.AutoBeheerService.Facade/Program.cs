@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Builder;
 
 namespace Lapiwe.AutoBeheerService.Facade
 {
@@ -10,11 +12,14 @@ namespace Lapiwe.AutoBeheerService.Facade
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine("Started: Lapiwe.AutoBeheerService");
-            while (true)
-            {
-                Thread.Sleep(1000);
-            }
+            var host = new WebHostBuilder()
+                .UseKestrel()
+                .UseContentRoot(Directory.GetCurrentDirectory())
+                .UseIISIntegration()
+                .UseStartup<Startup>()
+                .Build();
+
+            host.Run();
         }
     }
 }
