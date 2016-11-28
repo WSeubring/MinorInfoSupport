@@ -1,0 +1,12 @@
+<keuringsverzoek xmlns="http://www.rdw.nl" xmlns:apk="http://www.rdw.nl/apk" correlatieId="f5ba58ff-7604-49d3-906d-26dedbe7cf25">
+  <voertuig type="personenauto">
+    <kenteken>BV-01-EG</kenteken>
+    <kilometerstand>12345</kilometerstand>
+    <naam>A. Eigenaar</naam>
+  </voertuig>
+  <apk:keuringsdatum>2008-11-19</apk:keuringsdatum>
+  <apk:keuringsinstantie type="garage" kvk="3013 5370">
+    <apk:naam>Garage Voorbeeld B.V.</apk:naam>
+    <apk:plaats>Wijk bij Voorbeeld</apk:plaats>
+  </apk:keuringsinstantie>
+</keuringsverzoek>

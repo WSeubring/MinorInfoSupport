@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://www.rdw.nl/apk"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+           attributeFormDefault="unqualified" 
+           elementFormDefault="qualified" 
+           targetNamespace="http://www.rdw.nl/apk">
+  
+  <xs:element name="keuringsdatum" type="xs:date" />
+  
+  <xs:element name="keuringsinstantie">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="naam" type="xs:string" />
+        <xs:element name="plaats" type="xs:string" />
+      </xs:sequence>
+      <xs:attribute name="type" type="xs:string" use="optional" default="rdw" />
+      <xs:attribute name="kvk" type="tns:kvknummer" use="required" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="steekproef" type="xs:date" nillable="true" />
+
+  <xs:simpleType name="kvknummer">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="\d{4} \d{4}"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="keuringsinstantietype">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="bovag"/>
+      <xs:enumeration value="anwb"/>
+      <xs:enumeration value="rdw"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+</xs:schema>

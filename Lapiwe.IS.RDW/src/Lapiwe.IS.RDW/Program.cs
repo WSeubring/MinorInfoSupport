@@ -5,6 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Builder;
+using System.Xml.Serialization;
+using System.Xml;
 
 namespace Lapiwe.IS.RDW
 {
@@ -12,6 +14,7 @@ namespace Lapiwe.IS.RDW
     {
         public static void Main(string[] args)
         {
+           
             var host = new WebHostBuilder()
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
