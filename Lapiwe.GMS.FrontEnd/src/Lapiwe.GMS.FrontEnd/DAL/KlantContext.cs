@@ -12,7 +12,7 @@ namespace Lapiwe.GMS.FrontEnd.DAL
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySQL(" server = frontendDB; userid = admin; pwd = admin; port = 6032 ; database = frontend; sslmode = none; ");
+           optionsBuilder.UseMySQL(@"server=db;userid=admin;pwd=admin;port=3306;database=frontendDB;sslmode=none;");
         }
 
         public DbSet<Klant> Klanten { get; set; }

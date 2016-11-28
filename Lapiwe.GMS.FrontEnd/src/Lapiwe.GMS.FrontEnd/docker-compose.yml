@@ -1,6 +1,16 @@
 version: '2'
 
 services:
+  mysql:
+    image: mysql
+    container_name: mysql-frontend
+    environment:
+      MYSQL_PASSWORD: admin
+      MYSQL_DATABASE: frontendDB
+      MYSQL_USER: admin
+      MYSQL_ROOT_PASSWORD: 12341234
+
+
   lapiwe.gms.frontend:
     image: lars/lapiwe.gms.frontend${TAG}
     build:
@@ -11,18 +21,7 @@ services:
     networks:
       - eventbus-network
     links:
-      - frontend-db:db
-
-  frontend-db:
-    image: mysql
-    container_name: mysql-frontend
-    environment:
-      MYSQL_PASSWORD: admin
-      MYSQL_DATABASE: frontendDB
-      MYSQL_USER: admin
-      MYSQL_ROOT_PASSWORD: 12341234
-    ports:
-      - 6032:3306
+      - mysql:db
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
@@ -30,7 +29,7 @@ services:
     ports:
      - 6031:80
     links:
-     - frontend-db:db
+     - mysql:db
 
 networks:
   eventbus-network:
