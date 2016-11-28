@@ -1,14 +1,14 @@
 ﻿using System;
 
-namespace Lapiwe.Common
+namespace Lapiwe.Common.Domain
 { 
-    public abstract class DomainCommand
+    public abstract class DomainEvent
     {
         public DateTime TimeStamp { get; set; }
         public Guid CorrelationID { get; set; }
         public string RoutingKey { get; set; }
 
-        public DomainCommand()
+        public DomainEvent()
         {
             TimeStamp = DateTime.Now;
             CorrelationID = new Guid();

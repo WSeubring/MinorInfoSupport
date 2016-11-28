@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Lapiwe.Common
+namespace Lapiwe.Common.Domain
 {
     public class FunctionalException : Exception
     {

@@ -15,4 +15,5 @@ namespace Lapiwe.Common.Test
             Assert.AreEqual("Lapiwe.Common.Test.TestEvent" ,target.RoutingKey);
         }
     }
+
 }
