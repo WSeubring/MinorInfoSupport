@@ -7,8 +7,8 @@
 
   <Import Project="$(VSToolsPath)\DotNet\Microsoft.DotNet.Props" Condition="'$(VSToolsPath)' != ''" />
   <PropertyGroup Label="Globals">
-    <ProjectGuid>b866fff9-5fa8-469c-9f6d-61aee1b041b7</ProjectGuid>
-    <RootNamespace>Lapiwe.IS.RDW.Tests</RootNamespace>
+    <ProjectGuid>6d8556b3-9c4e-4abe-b721-3f6e1b419a7e</ProjectGuid>
+    <RootNamespace>Lapiwe.IS.RDW.Export</RootNamespace>
     <BaseIntermediateOutputPath Condition="'$(BaseIntermediateOutputPath)'=='' ">.\obj</BaseIntermediateOutputPath>
     <OutputPath Condition="'$(OutputPath)'=='' ">.\bin\</OutputPath>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>

@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 // associated with an assembly.
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Lapiwe.IS.RDW.Tests")]
+[assembly: AssemblyProduct("Lapiwe.IS.RDW.Export")]
 [assembly: AssemblyTrademark("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible
@@ -16,4 +16,4 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("b866fff9-5fa8-469c-9f6d-61aee1b041b7")]
+[assembly: Guid("6d8556b3-9c4e-4abe-b721-3f6e1b419a7e")]
