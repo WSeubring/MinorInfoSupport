@@ -1,5 +1,6 @@
 ﻿using Lapiwe.Common.Infastructure;
 using Lapiwe.IS.RDW.Agents;
+using Lapiwe.IS.RDW.Agents.Interfaces;
 using Lapiwe.IS.RDW.Controllers;
 using Lapiwe.IS.RDW.DAL;
 using Lapiwe.IS.RDW.Export.Commands;
@@ -24,38 +25,55 @@ namespace Lapiwe.IS.RDW.Tests
             var mockPublisher = new Mock<IEventPublisher>(MockBehavior.Strict);
             mockPublisher.Setup(publisher => publisher.Publish(It.IsAny<KeuringVerwerktZonderSteekproefEvent>()));
 
-            var verzoek = new keuringsverzoek()
-            {
-
-            };
-
-            var mockContext = new Mock<LogContext>(MockBehavior.Strict);
-            mockContext.Setup(context => context.Logs.Add(It.IsAny<keuringsverzoek>()));
-            mockContext.Setup(context => context.SaveChanges());
-
-            var mockRDWAgent = new Mock<RDWAgent>(MockBehavior.Strict);
-            mockRDWAgent.Setup(rdwAgent => rdwAgent.SendKeuringsVerzoek(It.IsAny<keuringsverzoek>()))
-                .Returns(verzoek);
-
-            var target = new KeuringController(mockContext.Object, mockPublisher.Object);
-
             var keuringsVerzoekCommand = new KeuringsVerzoekCommand()
             {
-                Kenteken = "12-23-d3",
+                OnderhoudsGuid = Guid.ParseExact("c4ab88e8-b266-4816-a174-d4cf26b3832b", "D"),
+                Kenteken = "12-23-dd",
                 Kilometerstand = 1234,
                 Klantnaam = "Harry de lois"
             };
+
+            var response = new keuringsregistratie
+            {
+                steekproefSpecified = false,
+                kenteken = "12-23-dd",
+            };
+
+            var verzoek = new keuringsverzoek
+            {
+                voertuig = new keuringsverzoekVoertuig
+                {
+                    kenteken = "12-23-dd",
+                    kilometerstand = 1234,
+                    naam = "Harry de lois"
+                }
+            };
+            var mockContext = new Mock<LogContext>();
+            mockContext.Setup(context => context.KeuringsVerzoeken.Add(It.IsAny<keuringsverzoek>()));
+            mockContext.Setup(context => context.KeuringsRegistraties.Add(It.IsAny<keuringsregistratie>()));
+            mockContext.Setup(context => context.SaveChanges());
+
+            var mockRDWAgent = new Mock<IRDWAgent>(MockBehavior.Strict);
+            mockRDWAgent.Setup(rdwAgent => rdwAgent.SendKeuringsVerzoekAsync(It.IsAny<keuringsverzoek>()))
+                .ReturnsAsync(response);
+
+            var target = new KeuringController(mockContext.Object, mockPublisher.Object, mockRDWAgent.Object);
+
             // Act
-            var result = target.KeuringsVerzoek(keuringsVerzoekCommand);
+            var result = target.Verzoek(keuringsVerzoekCommand).Result;
 
             //Assert
             Assert.IsInstanceOfType(result, typeof(OkResult));
-            mockPublisher.Verify(publisher => publisher.Publish(new KeuringVerwerktZonderSteekproefEvent()
-            {
-                Kenteken = "12-23-d3"
-            }), Times.Once);
+            mockPublisher.Verify(publisher => publisher.Publish(It.Is<KeuringVerwerktZonderSteekproefEvent>(e =>
+                                                                e.OnderhoudsGuid == Guid.ParseExact("c4ab88e8-b266-4816-a174-d4cf26b3832b", "D")))
+                                                                ,Times.Once);
 
-            mockContext.Verify(context => context.Logs.Add(verzoek), Times.Once);
+            mockContext.Verify(context => context.KeuringsRegistraties.Add(response), Times.Once);
+            mockContext.Verify(context => context.KeuringsVerzoeken.Add(It.Is<keuringsverzoek>(keuringsverzoek => 
+                                                                                               keuringsverzoek.voertuig.kenteken == verzoek.voertuig.kenteken &&
+                                                                                               keuringsverzoek.voertuig.kilometerstand == verzoek.voertuig.kilometerstand &&
+                                                                                               keuringsverzoek.voertuig.naam == verzoek.voertuig.naam))
+                                                                                               , Times.Once);
             mockContext.Verify(context => context.SaveChanges(), Times.Once);
 
         }

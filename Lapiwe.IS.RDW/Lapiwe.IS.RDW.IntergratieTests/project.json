@@ -9,12 +9,11 @@
       "type": "platform",
       "version": "1.0.1"
     },
+    "moq": "4.6.38-alpha",
     "MSTest.TestFramework": "1.0.7-preview",
     "dotnet-test-mstest": "1.1.2-preview",
-    "Moq": "4.6.38-alpha",
-    "Lapiwe.IS.RDW.Export": "1.0.0-*",
     "Lapiwe.IS.RDW": "1.0.0-*",
-    "Lapiwe.EventBus": "1.0.1"
+    "Lapiwe.IS.RDW.Export": "0.5.1-*"
   },
 
   "frameworks": {

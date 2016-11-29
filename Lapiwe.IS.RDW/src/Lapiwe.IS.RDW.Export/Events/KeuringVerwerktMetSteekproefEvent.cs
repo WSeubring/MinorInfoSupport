@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Lapiwe.IS.RDW.Export.Events
 {
-    public class KeuringVerwerktZonderSteekproefEvent : DomainEvent
+    public class KeuringVerwerktMetSteekproefEvent : DomainEvent
     {
-        public string Kenteken { get; set; }
+        public Guid OnderhoudsGuid{ get; set; }
     }
 }

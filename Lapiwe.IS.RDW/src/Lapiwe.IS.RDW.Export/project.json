@@ -1,14 +1,27 @@
 ﻿{
-  "version": "1.0.0-*",
+  "name": "Lapiwe.IS.RDW.Export",
+  "version": "0.5.1-*",
+  "description": "Lapiwe Export package",
+  "copyright": "Lapiwe",
+  "title": "Lapiwe Export Package",
 
   "dependencies": {
     "NETStandard.Library": "1.6.0",
     "Lapiwe.Common": "1.2.0"
   },
-
   "frameworks": {
     "netstandard1.6": {
       "imports": "dnxcore50"
     }
+  },
+  "packOptions": {
+    "summary": "This is the Lapiwe Export package",
+    "tags": [ "Export", "RDW" ],
+    "owners": [ "Pim van Gurp", "Lars Celie", "Wesley Seubring" ]
+  },
+  "scripts": {
+    "postcompile": [
+      "dotnet pack -o C:\\_localNugetFeed --no-build --configuration %compile:Configuration%"
+    ]
   }
 }

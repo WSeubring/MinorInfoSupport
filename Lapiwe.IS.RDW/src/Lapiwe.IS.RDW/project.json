@@ -19,8 +19,7 @@
     "Microsoft.EntityFrameworkCore": "1.0.1",
     "MySql.Data.EntityFrameworkCore": "7.0.6-IR31",
     "Lapiwe.EventBus": "1.0.1",
-    "Lapiwe.IS.RDW.Export": "1.0.0-*"
-    "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0",
+    "Lapiwe.IS.RDW.Export": "1.0.0-*",
     "System.Xml.XmlSerializer": "4.0.11"
   },
   "tools": {
