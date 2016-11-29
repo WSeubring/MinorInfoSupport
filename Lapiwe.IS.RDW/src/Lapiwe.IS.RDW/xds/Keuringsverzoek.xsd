@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+           xmlns:apk="http://www.rdw.nl/apk" 
+           xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+           xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+           attributeFormDefault="unqualified" 
+           elementFormDefault="qualified"
+           xmlns:tns="http://www.rdw.nl"
+           targetNamespace="http://www.rdw.nl">
+  
+  <xsd:import namespace="http://www.rdw.nl/apk" />
+  
+  <xsd:element name="keuringsverzoek">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="voertuig">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="kenteken" type="xsd:string" />
+              <xsd:element name="kilometerstand" type="xsd:int" />
+              <xsd:element name="naam" type="xsd:string" />
+            </xsd:sequence>
+            <xsd:attribute name="type" type="tns:voertuigtype" use="optional" default="personenauto" />
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element ref="apk:keuringsdatum" />
+        <xsd:element ref="apk:keuringsinstantie" />
+      </xsd:sequence>
+      <xsd:attribute name="correlatieId" type="tns:guid" use="required" />
+    </xsd:complexType>
+  </xsd:element>
+
+  <xsd:element name="keuringsregistratie">C:\TFS\Lapiwe\Lapiwe.IS.RDW\src\Lapiwe.IS.RDW\appsettings.json
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="kenteken" type="xsd:string" />
+        <xsd:element ref="apk:keuringsdatum" />
+        <xsd:element ref="apk:steekproef" minOccurs="0" />
+      </xsd:sequence>
+      <xsd:attribute name="correlatieId" type="tns:guid" use="required" />
+    </xsd:complexType>
+  </xsd:element>
+
+  <xs:simpleType name="guid">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[\da-fA-F]{8}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{12}"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="voertuigtype">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="personenauto"/>
+      <xs:enumeration value="motor"/>
+      <xs:enumeration value="vrachttransport"/>
+      <xs:enumeration value="personentransport"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>
