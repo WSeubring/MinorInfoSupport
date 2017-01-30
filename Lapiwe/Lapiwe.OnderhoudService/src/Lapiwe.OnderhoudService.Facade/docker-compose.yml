@@ -1,0 +1,48 @@
+version: '2'
+
+services:
+  lapiwe.onderhoudservice.facade:
+    image: lapiwe/lapiwe.onderhoudservice
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 6050:80
+    links:
+      - onderhoud-db:db
+    networks:
+      lapiwe-eventbus-network:
+        aliases:
+          - lapiwe-onderhoudservice
+
+
+  onderhoud-db:
+    image: "mysql:latest"
+    container_name: "lapiwe_onderhoudservice_mysql"
+    volumes: 
+      - "./.data/db:/var/lib/mysql"
+    environment:
+      'ConnectionStrings:DataAccessMySqlProvider': server=db;userid=admin;password=1234;database=onderhoud;
+      MYSQL_USER: "admin"
+      MYSQL_PASSWORD: 1234
+      MYSQL_DATABASE: onderhoud
+      MYSQL_ROOT_PASSWORD: 12344321
+    ports:
+      - 6052:3306
+    networks:
+      - lapiwe-eventbus-network
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: "lapiwe_onderhoudservice_phpmyadmin"
+    links:
+      - onderhoud-db:db
+    ports:
+      - 6051:80
+    networks: 
+      - lapiwe-eventbus-network
+
+networks:
+  lapiwe-eventbus-network:
+    external:
+      name: lapiwe-eventbus-network

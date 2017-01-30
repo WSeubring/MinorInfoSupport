@@ -1,0 +1,6 @@
+#:C:\Development\MinorInfosupport\MinorInfoSupport\Minor.RPCTestProject\CommandReceivingService\CommandReceivingService.xproj
+C:\Development\MinorInfosupport\MinorInfoSupport\Minor.RPCTestProject\CommandReceivingService\CommandReceivingService.xproj|C:\Development\MinorInfosupport\MinorInfoSupport\Minor.RPCTestProject\Minor.RPCTestProject.Common\Minor.RPCTestProject.Common.xproj
+#:C:\Development\MinorInfosupport\MinorInfoSupport\Minor.RPCTestProject\CommandSendingService\CommandSendingService.xproj
+C:\Development\MinorInfosupport\MinorInfoSupport\Minor.RPCTestProject\CommandSendingService\CommandSendingService.xproj|C:\Development\MinorInfosupport\MinorInfoSupport\Minor.RPCTestProject\CommandReceivingService\CommandReceivingService.xproj
+C:\Development\MinorInfosupport\MinorInfoSupport\Minor.RPCTestProject\CommandSendingService\CommandSendingService.xproj|C:\Development\MinorInfosupport\MinorInfoSupport\Minor.RPCTestProject\Minor.RPCTestProject.Common\Minor.RPCTestProject.Common.xproj
+C:\Development\MinorInfosupport\MinorInfoSupport\Minor.RPCTestProject\CommandReceivingService\CommandReceivingService.xproj|C:\Development\MinorInfosupport\MinorInfoSupport\Minor.RPCTestProject\Minor.RPCTestProject.Common\Minor.RPCTestProject.Common.xproj

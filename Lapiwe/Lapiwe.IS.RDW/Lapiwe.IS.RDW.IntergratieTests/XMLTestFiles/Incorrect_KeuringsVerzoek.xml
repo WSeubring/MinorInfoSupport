@@ -1,0 +1,7 @@
+  <keuringsverzoek xmlns="http://www.rdw.nl" xmlns:apk="http://www.rdw.nl/apk" correlatieId="e5a45ed9-4d8a-400a-96d8-8d8e5b32a825">
+    <voertuig>
+      <kilometerstand>12345</kilometerstand>
+      <naam>A. Eigenaar</naam>
+    </voertuig>
+  </keuringsverzoek>
+</apkKeuringsverzoekRequestMessage>

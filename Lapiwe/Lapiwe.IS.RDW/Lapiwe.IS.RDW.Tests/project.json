@@ -1,0 +1,23 @@
+﻿{
+  "version": "1.0.0-*",
+  "testRunner": "mstest",
+  "dependencies": {
+    "dotnet-test-mstest": "1.1.2-preview",
+    "Lapiwe.EventBus": "1.0.5",
+    "Lapiwe.IS.RDW": "1.0.0-*",
+    "Lapiwe.IS.RDW.Export": "1.0.0",
+    "LapiweCommonPackage": "1.0.1",
+    "Microsoft.NETCore.App": {
+      "type": "platform",
+      "version": "1.0.1"
+    },
+    "Moq": "4.6.38-alpha",
+    "MSTest.TestFramework": "1.0.7-preview"
+  },
+
+  "frameworks": {
+    "netcoreapp1.0": {
+      "imports": "dnxcore50"
+    }
+  }
+}

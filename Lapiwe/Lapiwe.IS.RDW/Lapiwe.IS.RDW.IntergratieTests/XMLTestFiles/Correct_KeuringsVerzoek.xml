@@ -1,0 +1,10 @@
+<apkKeuringsverzoekRequestMessage xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <keuringsverzoek xmlns="http://www.rdw.nl" xmlns:apk="http://www.rdw.nl/apk" correlatieId="e5a45ed9-4d8a-400a-96d8-8d8e5b32a825">
+    <voertuig>
+      <kenteken>BV-01-EG</kenteken>
+      <kilometerstand>12345</kilometerstand>
+      <naam>A. Eigenaar</naam>
+    </voertuig>
+    <apk:keuringsdatum>2008-11-19</apk:keuringsdatum>
+  </keuringsverzoek>
+</apkKeuringsverzoekRequestMessage>

@@ -1,0 +1,21 @@
+﻿<h1>Meld auto klaar</h1>
+<form class="" asp-action="Toevoegen" asp-controller="KeuringsVerzoek" method="post">
+    <div class="row">
+        <div class="form-group col-sm-6">
+            <label for="klant-voorletter">Klantnaam:</label>
+            <input type="text" class="form-control" id="klant-voorletter" name="voornaam" placeholder="Voornaam" required>
+            <input type="text" class="form-control" id="klant-voorletter" name="tussenvoegsel" placeholder="Tussenvoegsel">
+            <input type="text" class="form-control" id="klant-achternaam" name="achternaam" placeholder="Achternaam" required>
+        </div>
+        <div class="form-group col-sm-6">
+            <label for="auto-kenteken">Kenteken auto:</label>
+            <input type="text" class="form-control" id="auto-kenteken" name="kenteken" placeholder="Kenteken" required>
+            <br />
+            <label for="auto-kilometerstand">Kilometerstand:</label>
+            <input type="number" class="form-control" id="auto-kilometerstand" name="kilometerstand" placeholder="Kilometerstand" required>
+        </div>
+        <div class="form-group col-sm-6">
+            <button type="submit" class="btn btn-primary">Klaar melden</button>
+        </div>
+    </div>
+</form>

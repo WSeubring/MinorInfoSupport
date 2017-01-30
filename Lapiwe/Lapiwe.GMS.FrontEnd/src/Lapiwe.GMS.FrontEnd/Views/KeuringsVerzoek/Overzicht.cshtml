@@ -1,0 +1,34 @@
+﻿@model Lapiwe.GMS.FrontEnd.ViewModels.KeuringsVerzoekenViewModel
+
+<div style="margin-top:20px">
+    <h1 style="float:left; margin-top:0px;">Keuringsverzoeken</h1>
+    <a class="btn btn-success" style="float:right; margin-top:10px"
+       asp-controller="KeuringsVerzoek"
+       asp-action="Invullen">
+        Keuringsverzoek toevoegen
+    </a>
+</div>
+<div style="clear:both; margin-bottom:10px"></div>
+
+<div class="row">
+    @foreach (var verzoek in Model.Verzoeken)
+    {
+        <div class="col-sm-6 col-lg-4">
+            <div class="panel panel-@(verzoek.HeeftSteekproef ? "danger" : "primary")">
+                <div class="panel-heading">
+                    <p>
+                        Keuringsverzoek
+                        @if (verzoek.HeeftSteekproef)
+                        {
+                            <span style="float:right; font-style:italic;">Gekozen voor kwaliteitssteekproef!</span>
+                        }
+                    </p>
+                </div>
+                <div class="panel-body">
+                    <i class="fa fa-wrench"> @verzoek.OnderhoudsOpdrachtGuid</i>
+                    <br />
+                </div>
+            </div>
+        </div>
+    }
+</div>

@@ -1,0 +1,49 @@
+version: '2'
+
+services:
+  lapiwe.is.rdw:
+    image: lapiwe/lapiwe_is_rdw
+    container_name: lapiweisrdw_lapiwe.is.rdw
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 6060:80
+    links:
+      - is-rdw-db:db
+    networks:
+      eventbus-network:
+        aliases:
+          - lapiwe-rdw-api  
+
+  is-rdw-db:
+    image: "mysql:latest"
+    container_name: "lapiwe_is_rdw_mysql"
+    volumes: 
+      - "./.data/db:/var/lib/mysql"
+    environment:
+      MYSQL_USER: "admin"
+      MYSQL_PASSWORD: 1234
+      MYSQL_DATABASE: is-rdw-db
+      MYSQL_ROOT_PASSWORD: 12344321
+    ports:
+      - 6062:3306
+    networks:
+      lapiwe-eventbus-network:
+        aliases:
+          - lapiwe-rdw-api
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: "lapiwe_is_rdw_phpmyadmin"
+    links:
+      - is-rdw-db:db
+    ports:
+      - 6061:80
+    networks: 
+      - lapiwe-eventbus-network
+
+networks:
+  lapiwe-eventbus-network:
+    external:
+      name: lapiwe-eventbus-network

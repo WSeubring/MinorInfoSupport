@@ -1,0 +1,32 @@
+{
+  "name": "Lapiwe.EventBus",
+  "version": "1.0.5-*",
+  "description": "An event bus for publishing and dispatching events",
+  "title": "Lapiwe EventBus",
+
+  "dependencies": {
+    "NETStandard.Library": "1.6.0",
+    "Newtonsoft.Json": "9.0.1",
+    "RabbitMQ.Client": "4.1.1",
+    "System.Reflection.TypeExtensions": "4.1.0",
+    "Microsoft.CodeCoverage": "1.0.2",
+    "Lapiwe.Common": "1.2.3"
+  },
+
+
+  "frameworks": {
+    "netstandard1.6": {
+      "imports": "dnxcore50"
+    }
+  },
+
+  "packOptions": {
+    "owners": [ "Lars Celie", "Pim van Gurp", "Wesley Seubring" ]
+  },
+
+  "scripts": {
+    "postcompile": "dotnet pack -o C:\\_localNugetFeed --no-build --configuration %compile:Configuration%"
+
+  }
+
+}

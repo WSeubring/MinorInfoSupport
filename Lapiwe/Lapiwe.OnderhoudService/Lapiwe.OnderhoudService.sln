@@ -1,0 +1,90 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{2A895D40-AAF0-4346-825A-709581D1E8A2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{34257B3D-7697-41A3-8B31-FD504ACF053A}"
+	ProjectSection(SolutionItems) = preProject
+		global.json = global.json
+	EndProjectSection
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Lapiwe.OnderhoudService.Domain", "src\Lapiwe.OnderhoudService.Domain\Lapiwe.OnderhoudService.Domain.xproj", "{2D52BE37-F2A5-4321-8183-D5F60778A33A}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Lapiwe.OnderhoudService.DomainService", "src\Lapiwe.OnderhoudService.DomainService\Lapiwe.OnderhoudService.DomainService.xproj", "{AEA8511F-39B3-4F04-98BC-8FEA788C4AE8}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Lapiwe.OnderhoudService.Infrastructure", "src\Lapiwe.OnderhoudService.Infrastructure\Lapiwe.OnderhoudService.Infrastructure.xproj", "{C68291A9-5758-4AA2-A831-895C4BA81F68}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Lapiwe.OnderhoudService.Export", "src\Lapiwe.OnderhoudService.Export\Lapiwe.OnderhoudService.Export.xproj", "{D8550069-DC72-4EA6-A514-25EDF6B6B8D0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{1F180120-591E-47E3-A7E1-7308FB76DA7D}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Lapiwe.OnderhoudService.Domain.Test", "test\Lapiwe.OnderhoudService.Domain.Test\Lapiwe.OnderhoudService.Domain.Test.xproj", "{8237D083-1F5A-489C-945F-7383C4E4AA39}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Lapiwe.OnderhoudService.DomainService.Test", "test\Lapiwe.OnderhoudService.DomainService.Test\Lapiwe.OnderhoudService.DomainService.Test.xproj", "{A65C9F61-A8B5-443C-BE71-2729DE173D45}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Lapiwe.OnderhoudService.Infrastructure.Test", "test\Lapiwe.OnderhoudService.Infrastructure.Test\Lapiwe.OnderhoudService.Infrastructure.Test.xproj", "{446C74D4-6485-45F2-9615-AC7A8085F878}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Lapiwe.OnderhoudService.Facade.Test", "test\Lapiwe.OnderhoudService.Facade.Test\Lapiwe.OnderhoudService.Facade.Test.xproj", "{22FDFF3B-AB7B-499B-BEA4-F898C8AC4F2D}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Lapiwe.OnderhoudService.Facade", "src\Lapiwe.OnderhoudService.Facade\Lapiwe.OnderhoudService.Facade.xproj", "{D2055D70-934B-496D-A89E-163AE9187101}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2D52BE37-F2A5-4321-8183-D5F60778A33A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D52BE37-F2A5-4321-8183-D5F60778A33A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D52BE37-F2A5-4321-8183-D5F60778A33A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D52BE37-F2A5-4321-8183-D5F60778A33A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AEA8511F-39B3-4F04-98BC-8FEA788C4AE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEA8511F-39B3-4F04-98BC-8FEA788C4AE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEA8511F-39B3-4F04-98BC-8FEA788C4AE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEA8511F-39B3-4F04-98BC-8FEA788C4AE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C68291A9-5758-4AA2-A831-895C4BA81F68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C68291A9-5758-4AA2-A831-895C4BA81F68}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C68291A9-5758-4AA2-A831-895C4BA81F68}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C68291A9-5758-4AA2-A831-895C4BA81F68}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8550069-DC72-4EA6-A514-25EDF6B6B8D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8550069-DC72-4EA6-A514-25EDF6B6B8D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8550069-DC72-4EA6-A514-25EDF6B6B8D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8550069-DC72-4EA6-A514-25EDF6B6B8D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8237D083-1F5A-489C-945F-7383C4E4AA39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8237D083-1F5A-489C-945F-7383C4E4AA39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8237D083-1F5A-489C-945F-7383C4E4AA39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8237D083-1F5A-489C-945F-7383C4E4AA39}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A65C9F61-A8B5-443C-BE71-2729DE173D45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A65C9F61-A8B5-443C-BE71-2729DE173D45}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A65C9F61-A8B5-443C-BE71-2729DE173D45}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A65C9F61-A8B5-443C-BE71-2729DE173D45}.Release|Any CPU.Build.0 = Release|Any CPU
+		{446C74D4-6485-45F2-9615-AC7A8085F878}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{446C74D4-6485-45F2-9615-AC7A8085F878}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{446C74D4-6485-45F2-9615-AC7A8085F878}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{446C74D4-6485-45F2-9615-AC7A8085F878}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22FDFF3B-AB7B-499B-BEA4-F898C8AC4F2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22FDFF3B-AB7B-499B-BEA4-F898C8AC4F2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22FDFF3B-AB7B-499B-BEA4-F898C8AC4F2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22FDFF3B-AB7B-499B-BEA4-F898C8AC4F2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2055D70-934B-496D-A89E-163AE9187101}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2055D70-934B-496D-A89E-163AE9187101}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2055D70-934B-496D-A89E-163AE9187101}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2055D70-934B-496D-A89E-163AE9187101}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2D52BE37-F2A5-4321-8183-D5F60778A33A} = {2A895D40-AAF0-4346-825A-709581D1E8A2}
+		{AEA8511F-39B3-4F04-98BC-8FEA788C4AE8} = {2A895D40-AAF0-4346-825A-709581D1E8A2}
+		{C68291A9-5758-4AA2-A831-895C4BA81F68} = {2A895D40-AAF0-4346-825A-709581D1E8A2}
+		{D8550069-DC72-4EA6-A514-25EDF6B6B8D0} = {2A895D40-AAF0-4346-825A-709581D1E8A2}
+		{8237D083-1F5A-489C-945F-7383C4E4AA39} = {1F180120-591E-47E3-A7E1-7308FB76DA7D}
+		{A65C9F61-A8B5-443C-BE71-2729DE173D45} = {1F180120-591E-47E3-A7E1-7308FB76DA7D}
+		{446C74D4-6485-45F2-9615-AC7A8085F878} = {1F180120-591E-47E3-A7E1-7308FB76DA7D}
+		{22FDFF3B-AB7B-499B-BEA4-F898C8AC4F2D} = {1F180120-591E-47E3-A7E1-7308FB76DA7D}
+		{D2055D70-934B-496D-A89E-163AE9187101} = {2A895D40-AAF0-4346-825A-709581D1E8A2}
+	EndGlobalSection
+EndGlobal

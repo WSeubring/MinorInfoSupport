@@ -1,0 +1,31 @@
+{
+  "name":  "Lapiwe.OnderhoudService.Export",
+  "version": "1.0.1-*",
+  "description": "Lapiwe OnderhoudService export package",
+  "copyright": "Lapiwe",
+  "title": "Lapiwe OnderhoudService export Package",
+
+  "dependencies": {
+    "Lapiwe.Common": "1.2.3",
+    "NETStandard.Library": "1.6.0",
+    "System.ComponentModel.Annotations": "4.1.0"
+  },
+
+  "frameworks": {
+    "netstandard1.6": {
+      "imports": "dnxcore50"
+    }
+  },
+
+  "packOptions": {
+    "summary": "This is the Lapiwe OnderhoudService Export package",
+    "tags": [ "Export", "OnderhoudService" ],
+    "owners": [ "Pim van Gurp", "Lars Celie", "Wesley Seubring" ]
+  },
+
+  "scripts": {
+    "postcompile": [
+      "dotnet pack -o C:\\_localNugetFeed --no-build --configuration %compile:Configuration%"
+    ]
+  }
+}

@@ -1,0 +1,36 @@
+﻿@model Lapiwe.GMS.FrontEnd.ViewModels.OnderhoudsOpdrachtenViewModel
+
+<div style="margin-top:20px">
+    <h1 style="float:left; margin-top:0px;">Onderhoudsopdrachten</h1>
+    <a class="btn btn-success" style="float:right; margin-top:10px"
+       asp-controller="OnderhoudsOpdrachten"
+       asp-action="Invullen">
+        Onderhoudsopdracht toevoegen
+    </a>
+</div>
+<div style="clear:both; margin-bottom:10px"></div>
+
+<div class="row">
+    @foreach (var onderhoudsOpdracht in Model.OnderhoudsOpdrachten)
+    {
+        <div class="col-sm-6 col-lg-4">
+            <div class="panel panel-@(onderhoudsOpdracht.Apk ? "primary" : "success")">
+                <div class="panel-heading">
+                    <p>
+                        @onderhoudsOpdracht.Auto.Kenteken
+                        @if (onderhoudsOpdracht.Apk)
+                        {
+                            <span style="float:right; font-style:italic;">Apk keuring</span>
+                        }
+                    </p>
+                </div>
+                <div class="panel-body">
+                    <i class="fa fa-dashboard"> @onderhoudsOpdracht.Auto.Kilometerstand kilometer</i>
+                    <hr />
+                    <i class="fa fa-comment"> @onderhoudsOpdracht.OpdrachtOmschrijving</i>
+                    <br />
+                </div>
+            </div>
+        </div>
+    }
+</div>

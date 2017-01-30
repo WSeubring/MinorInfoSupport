@@ -1,0 +1,42 @@
+version: '2'
+
+services:
+  lapiwe.audit:
+    image: lapiwe/lapiwe.audit
+    build:
+      context: .
+      dockerfile: Dockerfile
+    links:
+      - audit-db:db
+    networks:
+      - lapiwe-eventbus-network
+
+  audit-db:
+    image: "mysql:latest"
+    container_name: "lapiwe_audit_mysql"
+    volumes: 
+      - "./.data/db:/var/lib/mysql"
+    environment:
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: 1234
+      MYSQL_DATABASE: auditlog
+      MYSQL_ROOT_PASSWORD: 12344321
+    ports:
+      - 6042:3306
+    networks:
+      - lapiwe-eventbus-network
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: "lapiwe_audit_phpmyadmin"
+    links:
+      - audit-db:db
+    ports:
+      - 6041:80
+    networks: 
+      - eventbus-network
+
+networks:
+  lapiwe-eventbus-network:
+    external:
+      name: lapiwe-eventbus-network
