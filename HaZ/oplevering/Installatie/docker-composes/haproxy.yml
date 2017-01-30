@@ -1,0 +1,19 @@
+version: '2'
+services:
+  haproxy:
+    image: haproxy
+    container_name: haproxy
+    ports:
+      - 80:80
+    volumes:
+     - ./haproxy.conf:/usr/local/etc/haproxy/haproxy.cfg
+    external_links:
+      - haz.fewebshop.api:webshop
+      - haz.febestellingen.api:bestellingen
+    networks:
+      - eventbus
+
+networks:
+  eventbus:
+    external:
+      name: eventbus

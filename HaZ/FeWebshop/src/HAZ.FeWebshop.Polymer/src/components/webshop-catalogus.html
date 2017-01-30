@@ -1,0 +1,32 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="webshop-artikel.html">
+<link rel="import" href="kantilever-dialog.html">
+
+<dom-module id="webshop-catalogus">
+
+    <template>
+        <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+        <style>
+        </style>
+
+        <div class="catalogus row">
+            <template is="dom-repeat" items="{{artikelen}}">
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <webshop-artikel artikel="{{item}}"></webshop-artikel>
+                </div>
+            </template>
+        </div>
+
+    </template>
+
+    <script>
+        Polymer({
+            is: 'webshop-catalogus',
+            properties: {
+                artikelen: {
+                    type: Object
+                }
+            }
+        });
+    </script>
+</dom-module>

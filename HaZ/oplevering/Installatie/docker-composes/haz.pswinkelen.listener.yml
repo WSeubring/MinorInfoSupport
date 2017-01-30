@@ -1,0 +1,24 @@
+version: '2'
+
+services:
+  haz.pswinkelen.listener:
+    image: heroesandzeroes/haz.pswinkelen.listener:${TAG}
+    environment:
+      'ConnectionStrings:DataAccessMySqlProvider': server=db;userid=pswinkelen;password=pswinkelen;database=pswinkelen;
+      eventbus-exchangename: "KantileverBus"
+      eventbus-hostname: "kantilever-eventbus"
+      eventbus-username: "Kantilever"
+      eventbus-password: "Kant1lever"
+      startup-replay-endpoint : "ReplayService"
+    volumes:
+    - ../logs/haz.pswinkelen.listener:/logs
+    external_links:
+    - kantilever.eventbus:rabbitmq
+    - haz.pswinkelen.mysql:db
+    networks:
+    - eventbus
+
+networks:
+  eventbus:
+    external:
+      name: eventbus

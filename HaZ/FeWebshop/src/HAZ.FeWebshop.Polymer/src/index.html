@@ -1,0 +1,39 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>Kantilever Webshop</title>
+
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/Reset.css" rel="stylesheet">
+	<link rel="icon" type="image/ico" href="images/favicon.ico">
+     
+    <link rel="import" href="components/kantilever-webshop.html" async>
+
+    <style>
+        body {
+            background-color: rgb(170,177,228) !important;
+        }
+    </style>
+</head>
+<body>
+    <kantilever-webshop unresolved></kantilever-webshop>
+    <script>
+        Polymer = {lazyRegister: true, dom: 'shadow'};
+    (function() {
+      if ('registerElement' in document
+          && 'import' in document.createElement('link')
+          && 'content' in document.createElement('template')) {
+        // platform is good!
+      } else {
+        // polyfill the platform!
+        var e = document.createElement('script');
+        e.src = '/bower_components/webcomponentsjs/webcomponents.min.js';
+        document.body.appendChild(e);
+      }
+    })();
+    </script>
+</body>
+</html>

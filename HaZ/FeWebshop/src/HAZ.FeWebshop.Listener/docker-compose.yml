@@ -1,0 +1,24 @@
+version: '2'
+
+services:
+  haz.fewebshop.listener:
+    image: heroesandzeroes/haz.fewebshop.listener:${TAG}
+    environment:
+      'ConnectionStrings:DataAccessMySqlProvider': server=db;userid=fewebshop;password=fewebshop;database=fewebshop;
+      eventbus-exchangename: "KantileverBus"
+      eventbus-hostname: "kantilever-eventbus"
+      eventbus-username: "Kantilever"
+      eventbus-password: "Kant1lever" 
+      startup-replay-endpoint : "ReplayService"
+    volumes:
+    - ../logs/haz.fewebshop.listener:/logs
+    external_links:
+    - kantilever.eventbus:kantilever-eventbus
+    - haz.fewebshop.mysql:db
+    networks:
+    - eventbus
+
+networks:
+  eventbus:
+    external:
+      name: eventbus

@@ -1,0 +1,49 @@
+version: '2'
+
+services:
+  haz.fewebshop.api:
+    image: heroesandzeroes/haz.fewebshop.api:${TAG}
+    links:
+    - haz.fewebshop.mysql:db
+    ports:
+    - 14000:80
+    environment:
+      'ConnectionStrings:DataAccessMySqlProvider': server=db;userid=fewebshop;password=fewebshop;database=fewebshop;
+      'ConnectionStrings:RabbitMQ': rabbitmq
+      'ConnectionStrings:WinkelenServiceUri': http://haz.pswinkelen.api
+    external_links:
+      - haz.pswinkelen.api
+    volumes:
+    - ../logs/haz.fewebshop.api:/logs
+    volumes_from:
+    - haz.fewebshop.wwwroot
+    networks:
+    - eventbus
+  haz.fewebshop.wwwroot:
+    image: heroesandzeroes/haz.fewebshop.wwwroot:${TAG}
+
+  haz.fewebshop.mysql:
+    image: mysql
+    environment:
+      MYSQL_DATABASE: fewebshop
+      MYSQL_USER: fewebshop
+      MYSQL_PASSWORD: fewebshop
+      MYSQL_ROOT_PASSWORD: 12341234
+    volumes:
+    - ../data/haz.fewebshop:/var/lib/mysql
+    networks:
+    - eventbus
+
+  haz.fewebshop.phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    links:
+    - haz.fewebshop.mysql:db
+    ports:
+    - 14001:80
+    networks:
+    - eventbus
+
+networks:
+  eventbus:
+    external:
+      name: eventbus

@@ -1,0 +1,50 @@
+version: '2'
+
+services:
+  haz.febestellingen.api:
+    image:  heroesandzeroes/haz.febestellingen.api:${TAG}
+    links:
+    - haz.febestellingen.mysql:db
+    ports:
+    - 14030:80
+    environment:
+      'ConnectionStrings:DataAccessMySqlProvider': server=db;userid=febestellingen;password=febestellingen;database=febestellingen;
+      'ConnectionStrings:RabbitMQ': rabbitmq
+      'ConnectionStrings:WinkelenServiceUri': http://haz.pswinkelen.facet
+      eventbus-exchangename: "KantileverBus"
+      eventbus-hostname: "kantilever-eventbus"
+      eventbus-username: "Kantilever"
+      eventbus-password: "Kant1lever"
+    volumes:
+    - ../logs/haz.febestellingen.api:/logs
+    networks:
+    - eventbus
+    external_links:
+     - haz.pswinkelen.facet
+     - kantilever.eventbus:kantilever-eventbus
+
+  haz.febestellingen.mysql:
+    image: mysql
+    environment:
+      MYSQL_DATABASE: febestellingen
+      MYSQL_USER: febestellingen
+      MYSQL_PASSWORD: febestellingen
+      MYSQL_ROOT_PASSWORD: 12341234
+    volumes:
+    - ../data/haz.febestellingen:/var/lib/mysql
+    networks:
+    - eventbus
+  
+  haz.febestellingen.phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    links:
+    - haz.febestellingen.mysql:db
+    ports:
+    - 14031:80
+    networks:
+    - eventbus
+
+networks:
+  eventbus:
+    external:
+      name: eventbus

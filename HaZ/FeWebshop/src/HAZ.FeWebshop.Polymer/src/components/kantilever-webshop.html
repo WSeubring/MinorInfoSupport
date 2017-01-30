@@ -1,0 +1,179 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/app-route/app-location.html">
+<link rel="import" href="../bower_components/app-route/app-route.html">
+<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../bower_components/paper-fab/paper-fab.html">
+<link rel="import" href="../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="webshop-catalogus.html">
+<link rel="import" href="webshop-winkelmandje.html">
+<link rel="import" href="formulier-registratie.html">
+<link rel="import" href="webshop-winkelmandje-overzicht.html">
+
+<dom-module id="kantilever-webshop">
+    <style>
+        .header-image{
+            min-height: 130px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .wrapper{
+            font-family: Calibri;
+        }
+        .kantilever-navbar{
+            margin-top: 10px;
+            background-color:#888db6 !important;
+            border: 1px solid #888db6 !important;
+        }
+        .navbar-btn{
+            margin-left: 10px;
+        }
+        footer{
+            margin-top: 15px;
+            padding: 30px;
+            background-color:#888db6;
+            color: #FFFFFF;
+        }
+        footer a{
+            text-decoration: none;
+            color: #FFFFFF;
+        }
+    </style>
+    <template>
+        <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+        <div class="container">
+            <webshop-winkelmandje></webshop-winkelmandje>
+            <iron-ajax auto
+                       url="/api/artikelen"
+                       handle-as="json"
+                       on-response="handleResponse"
+                       on-error="handleErrorResponse"
+                       method="GET">
+            </iron-ajax>
+           
+            <header class="row">
+                <div class="col-md-12">
+                    <img class="img-responsive header-image" src="../images/banner.png" alt="Kantilever Webshop" on-click="goToHome">
+                </div>
+            </header>
+            <nav class="navbar navbar-default kantilever-navbar">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="btn btn-primary navbar-btn" on-tap="goToHome"><i class="fa fa-book" aria-hidden="true"></i> Catalogus</button>
+                    </div>
+                </div>
+            </nav>
+            <app-location route="{{route}}" use-hash-as-path="true"></app-location>
+            <app-route route="{{route}}"
+                       pattern="/:view"
+                       data="{{routeData}}"
+                       tail="{{subroute}}"></app-route>
+            <iron-pages selected="[[path]]" attr-for-selected="name">
+                <div class="row" name="home">
+                    <div class="col-md-12 text-center">
+                        <h1>Catalogus</h1>
+                    </div>
+                    <div class="col-md-12">
+                        <webshop-catalogus id="webshopcatalog" artikelen="{{artikelen}}">
+                        </webshop-catalogus>
+                        <kantilever-dialog type="error" id="catalogusError"
+                           message="Er is een fout opgetreden waardoor de artikelen niet geladen konden worden, probeer het later nog eens. Excuses voor het ongemak."
+                           title="Oeps!"></kantilever-dialog>
+                           <kantilever-dialog type="information" id="catalogusLeegError"
+                           message="De catalogus is helaas leeg op dit moment, probeer het later nogmaals. Excuses voor het ongemak."
+                           title="Oeps!"></kantilever-dialog>                        
+                    </div>
+                </div>
+                <div name="bestellen">
+                    <formulier-registratie></formulier-registratie>
+                </div>
+                <div name="winkelmandje">
+                    <webshop-winkelmandje-overzicht></webshop-winkelmandje-overzicht>
+                </div>
+            </iron-pages>
+        </div>
+        <footer class="row">
+            <div class="col-md-12 text-center">
+                <p>
+                    <span>&copy; 2017 Kantilever B.V.</span> ||
+                    <a href="/files/kantilever_voorwaarden_2017.pdf" target="_blank">Algemene Voorwaarden</a> ||
+                    <span>Ontwikkeld door: HaZ</span>
+                </p>
+            </div>
+        </footer>
+    </template>
+
+    <script>
+        Polymer({
+            is: 'kantilever-webshop',
+            properties: {
+                artikelen: {
+                    type: Array
+                },
+                path: {
+                    type: String,
+                    computed: '_computePath(routeData)'
+                },
+            },
+            listeners: {
+                'addToWinkelmandje': 'addToWinkelmandje',
+                'goTo' : 'handleGoTo',
+                'artikel-added': 'artikelAdded',
+                'bestelling-geplaatst' : 'calculateWinkelmandje'
+            },
+            created: function() {
+                window.performance && performance.mark && performance.mark('shop-app.created');
+                // Custom elements polyfill safe way to indicate an element has been upgraded.
+                this.removeAttribute('unresolved');
+            },
+            _computePath: function (route) {
+                return !route.view || route.view == '' ? 'home' : route.view;
+            },
+            addToWinkelmandje: function (event) {
+                var artikel = event.detail;
+                Polymer.dom(this.root).querySelector('webshop-winkelmandje').addArtikel(artikel);
+            },
+            calculateWinkelmandje: function(event){
+                Polymer.dom(this.root).querySelector('webshop-winkelmandje').calculateWinkelmandje();
+            },
+            handleGoTo: function(event){
+                var route = event.detail;
+                switch (route) {
+                    case "home":
+                        this.goToHome();
+                        break;
+                    case "winkelmandje":
+                        this.goToWinkelmandje();
+                        break;
+                    case "bestellen":
+                        this.goToBestellen();
+                        break;
+                }
+            },
+            goToWinkelmandje: function() {
+                this.set('route.path', '/winkelmandje');
+            },
+            goToBestellen: function () {
+                this.set('route.path', '/bestellen');
+            },
+            goToHome: function () {
+                this.set('route.path', '/home');
+            },
+            handleResponse: function (event) {
+                this.set("artikelen", event.detail.response);
+                if(event.detail.response.length > 0){
+                    this.set("artikelen", event.detail.response);
+                } else {
+                    Polymer.dom(this.root).querySelector('#catalogusLeegError').toggle();
+                }
+            },
+            handleErrorResponse: function (event) {
+                Polymer.dom(this.root).querySelector('#catalogusError').toggle();
+            },
+            artikelAdded: function(event){
+                Polymer.dom(this.root).querySelector('webshop-winkelmandje-overzicht').refresh();
+            }
+        });
+    </script>
+</dom-module>

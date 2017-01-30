@@ -1,0 +1,142 @@
+<link rel="import" href="../bower_components/iron-localstorage/iron-localstorage.html">
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../bower_components/paper-styles/color.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="../bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../bower_components/neon-animation/animations/fade-out-animation.html">
+<link rel="import" href="../bower_components/neon-animation/animations/scale-up-animation.html">
+<link rel="import" href="../bower_components/iron-form/iron-form.html">
+<link rel="import" href="../bower_components/iron-scroll-threshold/iron-scroll-threshold.html">
+<link rel="import" href="../components/webshop-winkelmandje-artikel.html">
+
+<dom-module id="webshop-winkelmandje-overzicht">
+    <template>
+        <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+        <style is="custom-style">
+            paper-card {
+                width: 100%;
+                padding: 20px;
+                margin-top: 20px;
+            }
+
+            paper-button.green {
+                background-color: var(--paper-green-500);
+                color: white;
+                margin-top: 16px;
+            }
+
+            #winkelmandje-totaalprijs-bar {
+                font-size: 16px;
+                margin-top: 16px;
+            }
+            #winkelmandje-totaalprijs-excl {
+                font-weight: bold;
+            }
+            #winkelmandje-totaalprijs-incl {
+                font-size: 20px;
+                font-weight: bold;
+            }
+        </style>
+        <paper-card heading="Winkelmandje">
+            <template is="dom-repeat" items="[[artikelen]]">
+                <webshop-winkelmandje-artikel artikel="[[item]]"></webshop-winkelmandje-artikel>
+            </template>
+            <div class="row" id="winkelmandje-totaalprijs-bar">
+                <div class="col-md-6">
+                    Totaalprijs exclusief btw: <span id="winkelmandje-totaalprijs-excl">&euro;[[totaalPrijsExcl]]</span>
+                    </div>
+                <div class="col-md-6">
+                    Totaalprijs inclusief btw: <span id="winkelmandje-totaalprijs-incl">&euro;[[totaalPrijsIncl]]</span>
+                </div>
+            </div>
+            <paper-button raised class="custom green" on-tap="goToHome">Verder winkelen</paper-button>
+            <paper-button raised class="custom green" on-tap="goToBestellen">Bestellen</paper-button>
+        </paper-card>
+        <webshop-winkelmandje-data></webshop-winkelmandje-data>        
+    </template>
+
+    <script>
+        Polymer({
+            is: 'webshop-winkelmandje-overzicht',
+            properties: {
+                path: {
+                    type: String,
+                    computed: '_computePath(routeData)'
+                },
+                totaalPrijsIncl: {
+                    type: Number,
+                    value: 0
+                },
+                totaalPrijsExcl: {
+                    type: Number,
+                    value: 0
+                },
+                artikelen: {
+                    type: Array
+                }
+            },
+            attached: function(){
+                this.refresh();
+            },
+            refresh: function(){
+                var artikelen = Polymer.dom(this.root).querySelector('webshop-winkelmandje-data').getArtikelen();
+                this.set('artikelen', this.convertArtikelenArray(artikelen));
+                this.set('totaalPrijsIncl', this._berekenTotaalPrijs(true));
+                this.set('totaalPrijsExcl', this._berekenTotaalPrijs(false));
+            },
+            _berekenTotaalPrijs: function(inclusiefBtw){
+                if (this.artikelen == null){
+                    return 0;
+                }
+                var sumTotaalprijs = 0;
+
+                for(i = 0; i < this.artikelen.length; i++){
+                    var artikel = this.artikelen[i];
+                    if(artikel != null){
+                        if(inclusiefBtw) {
+                            sumTotaalprijs += artikel.totaalprijs;
+                        } else {
+                            sumTotaalprijs += artikel.prijs * artikel.aantal;
+                        }
+                    }
+                }
+                return (Math.round(sumTotaalprijs * 100) / 100).toFixed(2);
+            },
+            convertArtikelenArray: function(artikelen){
+                var convertedList = [];
+
+                if(artikelen !== null && artikelen !== undefined){
+                    for(var i = 0; i < artikelen.length; i++){
+                        var artikelIsFound = false;
+                        var artikel = artikelen[i];
+                        for(var j = 0; j < convertedList.length; j++){
+                            var foundArtikel = convertedList[j];
+                            if(foundArtikel.artikelnummer === artikel.artikelnummer){
+                                foundArtikel.aantal++;
+                                foundArtikel.totaalprijs += artikel.prijsInclBtw;
+                                artikelIsFound = true;
+                            } 
+                        }
+                        if(!artikelIsFound){
+                            artikel.aantal = 1;
+                            artikel.totaalprijs = artikel.prijsInclBtw;
+                            convertedList.push(artikel);
+                        }
+                    }
+                }
+                return convertedList;
+            },
+            goToBestellen: function () {
+                this.fire("goTo", "bestellen");
+            },
+            goToHome: function () {
+                this.fire('goTo', 'home');
+            }
+        });
+    </script>
+</dom-module>

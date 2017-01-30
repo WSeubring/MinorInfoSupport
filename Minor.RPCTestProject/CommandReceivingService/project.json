@@ -11,7 +11,10 @@
     },
     "RawRabbit": "1.10.2",
     "RawRabbit.vNext": "1.10.2",
-    "RabbitMQ": "3.6.2"
+    "RabbitMQ": "3.6.2",
+    "Minor.WSA.WSAEventbus": "0.1.0",
+    "Minor.WSA.Common": "0.1.0",
+    "Minor.RPCTestProject.Common": "1.0.0-*"
   },
 
   "frameworks": {

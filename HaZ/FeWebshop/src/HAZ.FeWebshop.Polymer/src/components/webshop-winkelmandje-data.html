@@ -1,0 +1,36 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/iron-localstorage/iron-localstorage.html">
+
+<dom-module id="webshop-winkelmandje-data">
+    <template>
+    </template>
+</dom-module>
+
+<script>
+    Polymer({
+        is: 'webshop-winkelmandje-data',
+        // use path set api to propagate changes to localstorage
+        addArtikel: function (artikel) {
+            if(artikel == null)
+                return;
+
+            if (localStorage.getItem("winkelmandje-data") === null) {
+                localStorage.setItem("winkelmandje-data", JSON.stringify([]));
+            }
+            var winkelmandje = JSON.parse(localStorage.getItem("winkelmandje-data"));
+            winkelmandje.push(artikel);
+            localStorage.setItem("winkelmandje-data", JSON.stringify(winkelmandje));
+
+            this.fire("artikel-added", winkelmandje);
+        },
+        _findArtikel: function (artikel) {
+            // find the artikel from the localstorage matching the parameter
+        },
+        getArtikelen: function(){
+            if (localStorage.getItem("winkelmandje-data") == false) {
+                localStorage.setItem("winkelmandje-data", JSON.stringify([]));
+            }
+            return JSON.parse(localStorage.getItem("winkelmandje-data"));
+        }
+    });
+</script>

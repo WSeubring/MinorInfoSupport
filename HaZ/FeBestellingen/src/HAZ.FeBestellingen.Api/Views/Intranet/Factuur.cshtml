@@ -1,0 +1,91 @@
+﻿@using HAZ.FeBestellingen.Api.Models.FactuurViewModels
+@model FactuurViewModel
+@{
+    ViewData["Title"] = "Factuur";
+}
+<div class="container">
+    <h2 class="no-print">Factuur</h2>
+    <div class="row">
+        <div class="col-xs-6 col-md-6">
+            <div class="thumbnail">
+                <p>@Model.KlantViewModel.Naam</p>
+                <p>@Model.KlantViewModel.Straatnaam @Model.KlantViewModel.Huisnummer</p>
+                <p>@Model.KlantViewModel.Postcode @Model.KlantViewModel.Woonplaats</p>
+                <p>@Model.KlantViewModel.Land</p>
+            </div>
+        </div>
+        <div class="col-xs-6 col-md-6">
+            <img src="/images/Logo.png" class="factuur-img" alt="Logo Kantilever B.V.">
+        </div>
+    </div>
+
+    <table class="table table-hover factuur">
+        <thead>
+            <tr>
+                <th>Artikel nummer</th>
+                <th>Naam</th>
+                <th>Artikelprijs</th>
+                <th>Aantal</th>
+                <th>Totale prijs</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (BestellingRegelViewModel bestellingRegel in Model.BestellingRegelViewModels)
+            {
+                <tr>
+                    <td>@bestellingRegel.ArtikelId</td>
+                    <td>@bestellingRegel.ArtikelNaam</td>
+                    <td>@String.Format("{0:0.00}", bestellingRegel.PrijsPerArtikelInc)</td>
+                    <td>@bestellingRegel.AantalArtikelen</td>
+                    <td>&euro; @String.Format("{0:0.00}", bestellingRegel.AantalArtikelen * bestellingRegel.PrijsPerArtikelInc)</td>
+                </tr>
+            }
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td style="border-top: 2px solid #000000">Totaal incl.</td>
+                <td style="border-top: 2px solid #000000">&euro; @String.Format("{0:0.00}", Model.TotaalBedragInc)</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>Totaal excl.</td>
+                <td>&euro; @String.Format("{0:0.00}", Model.TotaalBedragExc)</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="row text-center">
+        <div class="col-xs-4 col-md-4">
+            <p>K.v.K.: 3013 5370</p>
+        </div>
+        <div class="col-xs-4 col-md-4">
+            <p>Kantilever B.V.</p>
+        </div>
+        <div class="col-xs-4 col-md-4">
+            <p>IBAN: NL44 INGB 00058 54051</p>
+        </div>
+    </div>
+    <div class="row text-center">
+        <div class="col-xs-4 col-md-4">
+            <p>Kruisboog 42</p>
+            <p>3905 TG Veenendaal</p>
+        </div>
+        <div class="col-xs-4 col-md-4">
+            <p>Tel: +31 318 552020</p>
+            <p>Email: info@kantilever.nl</p>
+        </div>
+        <div class="col-xs-4 col-md-4">
+            <p>BTW NL8062.30.277.B01</p>
+        </div>
+    </div>
+    <div class="row">
+        <a onclick="window.print()" class="no-print btn btn-info factuur-print-btn">Printen</a>
+    </div>
+    <div class="row">
+        <a asp-controller="Intranet" asp-action="PickBestellingAndPause" asp-route-bestelnummer="@Model.Bestelnummer" class="no-print btn btn-success">Klaar</a>
+        <a asp-controller="Intranet" asp-action="PickBestellingAndContinue" asp-route-bestelnummer="@Model.Bestelnummer" class="no-print btn btn-success">Klaar en volgende bestelling picken</a>
+    </div>
+</div>

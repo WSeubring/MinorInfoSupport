@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>kantilever-webshop test</title>
+
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../../web-component-tester/browser.js"></script>
+
+    <link rel="import" href="../kantilever-webshop.html">
+  </head>
+  <body>
+    <test-fixture id="basic">
+      <template>
+        <kantilever-webshop></kantilever-webshop>
+      </template>
+    </test-fixture>
+
+    <script>
+      suite('kantilever-webshop', function() {
+        test('instantiating the element works', function() {
+          var element = fixture('basic');
+          assert.equal(element.is, 'kantilever-webshop');
+        });
+      });
+    </script>
+  </body>
+</html>

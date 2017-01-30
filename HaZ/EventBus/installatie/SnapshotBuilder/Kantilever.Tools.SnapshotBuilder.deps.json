@@ -1,0 +1,129 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v1.0",
+    "signature": "4c8264301d28071392a5dd8b66b30793409449ae"
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v1.0": {
+      "Kantilever.Tools.SnapshotBuilder/1.0.0": {
+        "dependencies": {
+          "InfoSupport.WSA.InfraStructure": "1.6.4",
+          "InfoSupport.WSA.Auditlog.Shared": "1.0.0",
+          "Kantilever.Catalogusbeheer.Common": "1.0.0",
+          "Kantilever.Magazijnbeheer.Common": "1.0.0"
+        },
+        "runtime": {
+          "Kantilever.Tools.SnapshotBuilder.dll": {}
+        }
+      },
+      "Common/1.6.0": {
+        "dependencies": {
+          "Newtonsoft.Json": "9.0.1"
+        },
+        "runtime": {
+          "lib/netstandard1.6/InfoSupport.WSA.Common.dll": {}
+        }
+      },
+      "InfoSupport.WSA.Auditlog.Shared/1.0.0": {
+        "dependencies": {
+          "InfoSupport.WSA.InfraStructure": "1.6.4"
+        },
+        "runtime": {
+          "lib/netstandard1.6/InfoSupport.WSA.Auditlog.Shared.dll": {}
+        }
+      },
+      "InfoSupport.WSA.InfraStructure/1.6.4": {
+        "dependencies": {
+          "Common": "1.6.0",
+          "Newtonsoft.Json": "9.0.1",
+          "RabbitMQ.Client": "4.0.2-rc1"
+        },
+        "runtime": {
+          "lib/netstandard1.6/InfoSupport.WSA.InfraStructure.dll": {}
+        }
+      },
+      "Kantilever.Catalogusbeheer.Common/1.0.0": {
+        "dependencies": {
+          "InfoSupport.WSA.InfraStructure": "1.6.4"
+        },
+        "runtime": {
+          "lib/netstandard1.6/Kantilever.Catalogusbeheer.Common.dll": {}
+        }
+      },
+      "Kantilever.Magazijnbeheer.Common/1.0.0": {
+        "dependencies": {
+          "InfoSupport.WSA.InfraStructure": "1.6.4"
+        },
+        "runtime": {
+          "lib/netstandard1.6/Kantilever.Magazijnbeheer.Common.dll": {}
+        }
+      },
+      "Newtonsoft.Json/9.0.1": {
+        "dependencies": {
+          "System.Runtime.Serialization.Primitives": "4.1.1"
+        },
+        "runtime": {
+          "lib/netstandard1.0/Newtonsoft.Json.dll": {}
+        }
+      },
+      "RabbitMQ.Client/4.0.2-rc1": {
+        "runtime": {
+          "lib/netstandard1.5/RabbitMQ.Client.dll": {}
+        }
+      },
+      "System.Runtime.Serialization.Primitives/4.1.1": {
+        "runtime": {
+          "lib/netstandard1.3/System.Runtime.Serialization.Primitives.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Kantilever.Tools.SnapshotBuilder/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Common/1.6.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-d+q+1kpyu/A4bkKbjYb9TBuqZp2t6sHusSmSl6csNCi84J8SP8ZtpozwIgcUBsCP8h/wxaykQllSJyp8cmFMeg=="
+    },
+    "InfoSupport.WSA.Auditlog.Shared/1.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-cmwwKTNQfpg9blzTmZCcogbaufUWBsNU0Enb3rM6RQM4tv3/xEkPHM2jkQQOg/HTPJmcaG3u7jX39Tt2wbkmhw=="
+    },
+    "InfoSupport.WSA.InfraStructure/1.6.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-XpsGzdOoDJ+EXfTFO9N4nUDWW+Q5PUKnyE8is9ESKYRtpL1HaC8py31iDvU5EDfcDmUBHjMe103uq2TG6/E18w=="
+    },
+    "Kantilever.Catalogusbeheer.Common/1.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-1e4pxepBR/oeSCaPdSwmTo2Kd9pB2qyRfl4GlO0YezDPI2KtGHMzmZs7R0ReW34l3NNvhhDV0fQH8qk/cXK3/g=="
+    },
+    "Kantilever.Magazijnbeheer.Common/1.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-cUGMMcA8rRyiY+FLM6mMuiNVWd9rSiUBafrGR6h6HS+RkVc2J4i7QhvLg4rjW6KDVLlRdnLKTwBYuANT4dZEDw=="
+    },
+    "Newtonsoft.Json/9.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-U82mHQSKaIk+lpSVCbWYKNavmNH1i5xrExDEquU1i6I5pV6UMOqRnJRSlKO3cMPfcpp0RgDY+8jUXHdQ4IfXvw=="
+    },
+    "RabbitMQ.Client/4.0.2-rc1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-CuF1juYLqgZn3YkReSTMGFA/eU1qa9floMDYMPE53YE9NevdsR1zLwvwYDk+vWqDljT3K5P0sCsr/SiS9Z8Uwg=="
+    },
+    "System.Runtime.Serialization.Primitives/4.1.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-HZ6Du5QrTG8MNJbf4e4qMO3JRAkIboGT5Fk804uZtg3Gq516S7hAqTm2UZKUHa7/6HUGdVy3AqMQKbns06G/cg=="
+    }
+  }
+}

@@ -1,0 +1,85 @@
+<link rel="import" href="../bower_components/iron-localstorage/iron-localstorage.html">
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../bower_components/paper-styles/color.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="../bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../bower_components/neon-animation/animations/fade-out-animation.html">
+<link rel="import" href="../bower_components/neon-animation/animations/scale-up-animation.html">
+<link rel="import" href="../bower_components/iron-form/iron-form.html">
+<link rel="import" href="../bower_components/iron-scroll-threshold/iron-scroll-threshold.html">
+
+<dom-module id="webshop-winkelmandje-artikel">
+    <template>
+        <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+        <style is="custom-style">
+            .artikel {
+                padding-top: 16px;
+                padding-bottom: 8px;
+                border-bottom: 1px solid #888db6;
+                font-size: 16px;
+            }
+
+            .artikel-afbeelding {
+                width: 130px;
+            }
+
+            .artikel-naam{
+                font-weight: bold;
+            }
+        </style>
+
+        <div class="row artikel">
+            <div class="col-md-12 col-sm-12">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <div class="artikel-naam">[[artikel.naam]]</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 col-sm-6 col-xs-6">
+                        <img class="artikel-afbeelding img-responsive" src="images/artikelen/[[artikel.afbeeldingUrl]]">
+                    </div>
+                    <div class="col-md-8 col-sm-6 col-xs-6">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="artikel-aantal">aantal: [[artikel.aantal]]</div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="artikel-prijs">&euro;[[formattedPrice]]</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</template>
+
+<script>
+        Polymer({
+            is: 'webshop-winkelmandje-artikel',
+            properties: {
+                artikel: {
+                    type: Object
+                },
+                formattedPrice: {
+                    type: String,
+                    computed: '_formatPrice(artikel.totaalprijs)'
+                },
+            },
+            _formatPrice: function (price) {
+                var formattedPrice = price.toString();
+                if (formattedPrice.match(/\d+\.\d$/)) {
+                    formattedPrice += "0";
+                } else if (formattedPrice.match(/^\d+$/)) {
+                    formattedPrice += ".-";
+                }
+                return formattedPrice;
+            }
+        });
+    </script>
+</dom-module>

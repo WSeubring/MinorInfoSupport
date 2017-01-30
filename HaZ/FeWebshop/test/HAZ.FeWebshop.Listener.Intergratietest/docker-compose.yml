@@ -1,0 +1,40 @@
+﻿# Run tests in docker
+
+version: '2'
+services:
+  haz.fewebshop.listener.test:
+    container_name: haz.fewebshop.listener.test
+    image: heroesandzeroes/haz.fewebshop.listener.test:test
+    build:
+      context: ../../
+      dockerfile: test/HAZ.FeWebshop.Listener.Intergratietest/Dockerfile
+      args:
+        source: .
+    environment:
+      'ConnectionStrings:DataAccessMySqlProvider': server=db;userid=opdrachten;password=opdrachten;database=opdrachten;
+      'ConnectionStrings:WinkelenServiceUri': http://haz.pswinkelen.facet
+      eventbus-exchangename: "Testkantileverbus"
+      eventbus-queuename: "ReplayService"
+      eventbus-hostname: "kantilever-eventbus"
+      eventbus-username: "Kantilever"
+      eventbus-password: "Kant1lever"
+    links:
+     - haz.fewebshop.mysql.test:db
+     - haz.fewebshop.eventbus-test:kantilever-eventbus
+  haz.fewebshop.mysql.test:
+    container_name: haz.fewebshop.mysql.test
+    image: mysql
+    environment:
+      MYSQL_DATABASE: opdrachten
+      MYSQL_USER: opdrachten
+      MYSQL_PASSWORD: opdrachten
+      MYSQL_ROOT_PASSWORD: 12341234
+  haz.fewebshop.eventbus-test:
+    image: rabbitmq:3-management
+    container_name: kantilever-eventbus
+    environment:
+      RABBITMQ_DEFAULT_USER: "Kantilever"
+      RABBITMQ_DEFAULT_PASS: "Kant1lever"
+    ports:
+      - 20000:5672
+      - 20001:15672

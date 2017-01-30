@@ -1,0 +1,46 @@
+version: '2'
+
+services:
+  haz.dsbestellingenbeheer.facade:
+    image: heroesandzeroes/haz.dsbestellingenbeheer.facade:${TAG}
+    links:
+    - haz.dsbestellingenbeheer.mysql:db
+    ports:
+    - 14020:80
+    environment:
+      'ConnectionStrings:DataAccessMysqlProvider': server=db;userid=dsbestellingenbeheer;password=dsbestellingenbeheer;database=dsbestellingenbeheer;
+      eventbus-exchangename: "KantileverBus"
+      eventbus-queuename: "ReplayService"
+      eventbus-hostname: "kantilever-eventbus"
+      eventbus-username: "Kantilever"
+      eventbus-password: "Kant1lever"
+    networks:
+    - eventbus
+    volumes:
+    - ../logs/haz.dsbestellingenbeheer.api:/logs
+      
+  haz.dsbestellingenbeheer.mysql:
+    image: mysql
+    environment:
+      MYSQL_DATABASE: dsbestellingenbeheer
+      MYSQL_USER: dsbestellingenbeheer
+      MYSQL_PASSWORD: dsbestellingenbeheer
+      MYSQL_ROOT_PASSWORD: 12341234
+    volumes:
+    - ../data/haz.dsbestellingenbeheer:/var/lib/mysql
+    networks:
+    - eventbus
+
+  haz.dsbestellingenbeheer.phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    links:
+    - haz.dsbestellingenbeheer.mysql:db
+    ports:
+    - 14021:80
+    networks:
+    - eventbus
+
+networks:
+  eventbus:
+    external:
+      name: eventbus

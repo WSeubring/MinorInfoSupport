@@ -1,0 +1,27 @@
+version: '2'
+
+services:
+  haz.fewebshop.api:
+    image: heroesandzeroes/haz.fewebshop.api${TAG}
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        source: obj/Docker/empty/
+    labels:
+      - "com.microsoft.visualstudio.targetoperatingsystem=linux"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - DOTNET_USE_POLLING_FILE_WATCHER=1
+    volumes:
+      - .:/app
+      - ~/.nuget/packages:/root/.nuget/packages:ro
+      - ~/clrdbg:/clrdbg:ro
+      - ../HAZ.FeWebshop.Polymer/src:/app/wwwroot
+    entrypoint: tail -f /dev/null
+  haz.fewebshop.wwwroot:
+    image: alpine
+    command: 'ls'
+  haz.fewebshop.mysql:
+    volumes:
+    - /c/docker/fewebshop/mysql:/var/lib/mysql

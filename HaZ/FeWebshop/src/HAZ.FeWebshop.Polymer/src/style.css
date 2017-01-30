@@ -1,0 +1,11 @@
+﻿body, .form-group {
+    padding: 16px;
+}
+
+body {
+    margin: auto;
+}
+
+* {
+    font-family: Calibri;
+}

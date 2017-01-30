@@ -1,0 +1,30 @@
+﻿@using HAZ.FeBestellingen.Api.Models.BestellingViewModels
+@model BestellingViewModel
+@{
+    ViewData["Title"] = "Bestelling";
+}
+<div class="container">
+    <h2>Bestelling picken</h2>
+    <table class="table table-hover">
+        <tbody>
+            <thead>
+                <tr>
+                    <th>Afbeelding</th>
+                    <th>Naam</th>
+                    <th>LeveranciersCode</th>
+                    <th>Aantal</th>
+                </tr>
+            </thead>
+            @foreach (BestellingRegelViewModel bestellingRegel in Model.BestellingRegelViewModels)
+                {
+                <tr>
+                    <td><img class="artikel-image" src="/images/@bestellingRegel.AfbeeldingUrl" /></td>
+                    <td>@bestellingRegel.Naam</td>
+                    <td>@bestellingRegel.LeveranciersCode</td>
+                    <td>@bestellingRegel.Aantal</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <a asp-controller="Intranet" asp-action="Factuur" asp-route-bestelnummer="@Model.Bestelnummer" class="btn btn-success">Ga verder naar facturatie</a>
+</div>

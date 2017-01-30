@@ -1,0 +1,82 @@
+﻿<!-- IMPORTS -->
+<link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+<link rel="import" href="../bower_components/paper-styles/color.html">
+<link rel="import" href="../bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="../bower_components/neon-animation/animations/scale-up-animation.html">
+<link rel="import" href="../bower_components/neon-animation/animations/fade-out-animation.html">
+
+<!-- Kantilever-dialog module-->
+<dom-module id="kantilever-dialog">
+    <style is="custom-style">
+        paper-dialog{
+            border: 2px solid;
+            background-color: var(--dialog-color);
+            border-color: var(--dialog-border-color);
+            color: var(--text-color);
+        }
+
+        :host {
+            font-family: 'Vladimir Script';
+            --dialog-color: paper-white;
+            --dialog-outline-color: paper-black-25;
+            --text-color: paper-black;
+        }
+
+        .error {
+            background-color: var(--paper-red-50);
+            border-color:  var(--paper-red-500);
+        }
+
+        .success {
+            border-color: var(--paper-green-500);
+            background-color: var(--paper-green-50);
+        }
+
+        .information{
+            border-color:  var(--paper-black-25);
+            background-color: var(--paper-white-50);
+        }
+
+    </style>
+    <template>
+        <paper-dialog entry-animation="scale-up-animation" exit-animation="fade-out-animation" id="dialog" class$="[[type]]">
+            <h2>[[title]]</h2>
+            <p>[[message]]</p>
+            <paper-button dialog-close autofocus on-tap="close">[[buttonTitle]]</paper-button>
+        </paper-dialog>
+    </template>
+    <script>
+        Polymer({
+            is: 'kantilever-dialog',
+            properties: {
+                message: {
+                    type: String,
+                    reflectToAttribute: true,
+                    notify: true,
+                },
+                title: {
+                    type: String,
+                    reflectToAttribute: true,
+                    notify: true
+                },
+                type: {
+                    type: String,
+                    reflectToAttribute: true,
+                    notify:true
+                },
+                buttonTitle:{
+                    type: String, 
+                    reflectToAttribute: true,
+                    notify: true,
+                    value:"Sluiten"
+                }
+            },
+            toggle: function () {
+                Polymer.dom(this.root).querySelector('paper-dialog').toggle();
+            },
+            close: function () {
+                Polymer.dom(this.root).querySelector('paper-dialog').close();
+            }
+        });
+    </script>
+</dom-module>

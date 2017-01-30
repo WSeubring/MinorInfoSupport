@@ -1,0 +1,1 @@
+docker-compose -f magazijnbeheer-docker-compose.yml up

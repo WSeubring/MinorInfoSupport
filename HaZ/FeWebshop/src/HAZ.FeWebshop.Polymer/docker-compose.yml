@@ -1,0 +1,11 @@
+version: '2'
+
+services:
+  ngnix:
+    image: nginx
+    ports:
+     - 4000:80
+    volumes_from:
+     - static
+  static:
+    image: static-test

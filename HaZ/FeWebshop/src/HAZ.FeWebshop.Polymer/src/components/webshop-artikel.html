@@ -1,0 +1,131 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+
+<dom-module id="webshop-artikel">
+
+    <template>
+        <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+        <style>
+            .artikel {
+                padding: 5px;
+                border: 2px solid #F9F9F9;
+                border-radius: 5px;
+                background-color: #FFFFFF;
+                margin-bottom: 10px;
+                box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
+                height: 245px;
+            }
+
+            .artikel-image {
+                text-align: center;
+                border-radius: 3px;
+            }
+
+            .artikel-image img{
+                width: 150px;
+                height: 100px;
+                margin: auto;
+            }
+
+            .artikel-description {
+                text-align: center;
+            }
+
+            .artikel-naam {
+                font-size: 20px;
+            }
+
+            .artikel-prijs {
+                font-size: 18px;
+            }
+
+            .artikel-voorraad {
+                padding: 4px;
+                font-size: 12px;
+            }
+
+            .artikel-opties {
+                margin-top: 5px;
+                text-align: center;
+            }
+
+            .truncate {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        </style>
+
+        <div class="artikel">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="artikel-image">
+                        <img class="img-responsive img-rounded" src$="images/artikelen/[[artikel.afbeeldingUrl]]" alt$="[[artikel.naam]]">
+                    </div>
+                </div>
+            </div>
+            <div class="row artikel-description">
+                <div class="col-md-12 truncate">
+                    <span class="artikel-naam">[[artikel.naam]]</span>
+                </div>
+                <div class="col-md-6 col-xs-6 artikel-prijs">
+                    <span>&euro;[[formattedPrice]]</span>
+                </div>
+                <div class="col-md-6 col-xs-6 artikel-voorraad">
+                    <span>[[formattedVoorraad]]</span>
+                </div>
+            </div>
+            <div class="row artikel-opties">
+                <div class="col-md-12">
+                    <button type="button" class="btn btn-default btn-lg" aria-label="Left Align" on-click="addToWinkelmandje">
+                        <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Toevoegen
+                    </button>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <script>
+        Polymer({
+            is: 'webshop-artikel',
+            properties: {
+                artikel:{
+                    type: Object
+                },
+                formattedPrice:{
+                    type: String,
+                    computed: '_formatPrice(artikel.prijsInclBtw)'
+                },
+                formattedVoorraad:{
+                    type: String,
+                    computed: '_formatVoorraad(artikel.voorraad)'
+                }
+            },
+            addToWinkelmandje: function () {
+                this.fire('addToWinkelmandje', this.artikel);
+            },
+            _formatPrice: function (price) {
+                var formattedPrice = price.toString();
+                if (formattedPrice.match(/\d+\.\d$/)) {
+                    formattedPrice += "0";
+                } else if (formattedPrice.match(/^\d+$/)) {
+                    formattedPrice += ".-";
+                }
+               return formattedPrice;
+            },
+            _formatVoorraad(voorraad){
+                var formattedVoorraad = "";
+                if(voorraad > 0){
+                    formattedVoorraad += "Voorraad: " + voorraad.toString();
+                } else {
+                    formattedVoorraad = "Tijdelijk niet op voorraad";
+                } 
+                if(voorraad > 8){
+                    formattedVoorraad = "Voorraad: 8";
+                }
+                return formattedVoorraad;
+            }
+        });
+    </script>
+
+</dom-module>

@@ -1,0 +1,27 @@
+﻿{
+  "version": "1.0.0-*",
+  "testRunner": "mstest",
+
+  "dependencies": {
+    "Microsoft.EntityFrameworkCore": "1.1.0",
+    "Microsoft.NETCore.App": {
+      "type": "platform",
+      "version": "1.0.1"
+    },
+    "MSTest.TestFramework": "1.0.8-rc2",
+    "dotnet-test-mstest": "1.1.2-preview",
+    "Microsoft.Extensions.Configuration.Abstractions": "1.1.0",
+    "Microsoft.Extensions.Configuration": "1.1.0",
+    "Microsoft.Extensions.Configuration.Json": "1.0.0",
+    "Microsoft.Extensions.Configuration.EnvironmentVariables": "1.1.0",
+    "Pomelo.EntityFrameworkCore.MySql": "1.1.0",
+    "InfoSupport.WSA.InfraStructure": "1.7.1",
+    "Kantilever.Catalogusbeheer.Common": "1.0.0"
+  },
+
+  "frameworks": {
+    "netcoreapp1.0": {
+      "imports": "dnxcore50"
+    }
+  }
+}

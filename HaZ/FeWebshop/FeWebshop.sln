@@ -1,0 +1,83 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{DEAF7C1A-5205-4F77-9041-E9A385D93C5A}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "HAZ.FeWebshop.Infrastructure", "src\HAZ.FeWebshop.Infrastructure\HAZ.FeWebshop.Infrastructure.xproj", "{BC3C181D-11BC-414B-B167-FDF0F04C6E8A}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "HAZ.FeWebshop.Listener", "src\HAZ.FeWebshop.Listener\HAZ.FeWebshop.Listener.xproj", "{87DFB966-E551-4023-B678-53A41DCFBA48}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{A7B9FCD3-4D8C-4D2C-8B9E-5824262342CF}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "HAZ.FeWebshop.Domain", "src\HAZ.FeWebshop.Domain\HAZ.FeWebshop.Domain.xproj", "{13004485-6B5F-47CD-80D4-2A542CD0CBFF}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "HAZ.FeWebshop.Api", "src\HAZ.FeWebshop.Api\HAZ.FeWebshop.Api.xproj", "{204AE9E4-6192-4FD1-A6BA-A2173DD70F9C}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "HAZ.FeWebshop.Api.Test", "test\HAZ.FeWebshop.Api.Test\HAZ.FeWebshop.Api.Test.xproj", "{D5958936-E825-49A0-B515-18E8E9C0C5E4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{15552B0C-1621-4E32-A84A-BEA183DF9D59}"
+	ProjectSection(SolutionItems) = preProject
+		global.json = global.json
+	EndProjectSection
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "HaZ.FeWebshop.Domain.Test", "test\HaZ.FeWebshop.Domain.Test\HaZ.FeWebshop.Domain.Test.xproj", "{54F78926-7490-428F-BBB7-753B18FB565C}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "HAZ.FeWebshop.Listener.Intergratietest", "test\HAZ.FeWebshop.Listener.Intergratietest\HAZ.FeWebshop.Listener.Intergratietest.xproj", "{02791459-5E58-488B-8484-DB46EA072B9C}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "HAZ.FeWebshop.Api.UnitTests", "test\HAZ.FeWebshop.Api.UnitTests\HAZ.FeWebshop.Api.UnitTests.xproj", "{378F4822-B329-4F44-B880-4FF86EE9163B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BC3C181D-11BC-414B-B167-FDF0F04C6E8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC3C181D-11BC-414B-B167-FDF0F04C6E8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC3C181D-11BC-414B-B167-FDF0F04C6E8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC3C181D-11BC-414B-B167-FDF0F04C6E8A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87DFB966-E551-4023-B678-53A41DCFBA48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87DFB966-E551-4023-B678-53A41DCFBA48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87DFB966-E551-4023-B678-53A41DCFBA48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87DFB966-E551-4023-B678-53A41DCFBA48}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13004485-6B5F-47CD-80D4-2A542CD0CBFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13004485-6B5F-47CD-80D4-2A542CD0CBFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13004485-6B5F-47CD-80D4-2A542CD0CBFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13004485-6B5F-47CD-80D4-2A542CD0CBFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{204AE9E4-6192-4FD1-A6BA-A2173DD70F9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{204AE9E4-6192-4FD1-A6BA-A2173DD70F9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{204AE9E4-6192-4FD1-A6BA-A2173DD70F9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{204AE9E4-6192-4FD1-A6BA-A2173DD70F9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5958936-E825-49A0-B515-18E8E9C0C5E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5958936-E825-49A0-B515-18E8E9C0C5E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5958936-E825-49A0-B515-18E8E9C0C5E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5958936-E825-49A0-B515-18E8E9C0C5E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54F78926-7490-428F-BBB7-753B18FB565C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54F78926-7490-428F-BBB7-753B18FB565C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54F78926-7490-428F-BBB7-753B18FB565C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54F78926-7490-428F-BBB7-753B18FB565C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02791459-5E58-488B-8484-DB46EA072B9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02791459-5E58-488B-8484-DB46EA072B9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02791459-5E58-488B-8484-DB46EA072B9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02791459-5E58-488B-8484-DB46EA072B9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{378F4822-B329-4F44-B880-4FF86EE9163B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{378F4822-B329-4F44-B880-4FF86EE9163B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{378F4822-B329-4F44-B880-4FF86EE9163B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{378F4822-B329-4F44-B880-4FF86EE9163B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BC3C181D-11BC-414B-B167-FDF0F04C6E8A} = {DEAF7C1A-5205-4F77-9041-E9A385D93C5A}
+		{87DFB966-E551-4023-B678-53A41DCFBA48} = {DEAF7C1A-5205-4F77-9041-E9A385D93C5A}
+		{13004485-6B5F-47CD-80D4-2A542CD0CBFF} = {DEAF7C1A-5205-4F77-9041-E9A385D93C5A}
+		{204AE9E4-6192-4FD1-A6BA-A2173DD70F9C} = {DEAF7C1A-5205-4F77-9041-E9A385D93C5A}
+		{D5958936-E825-49A0-B515-18E8E9C0C5E4} = {A7B9FCD3-4D8C-4D2C-8B9E-5824262342CF}
+		{54F78926-7490-428F-BBB7-753B18FB565C} = {A7B9FCD3-4D8C-4D2C-8B9E-5824262342CF}
+		{02791459-5E58-488B-8484-DB46EA072B9C} = {A7B9FCD3-4D8C-4D2C-8B9E-5824262342CF}
+		{378F4822-B329-4F44-B880-4FF86EE9163B} = {A7B9FCD3-4D8C-4D2C-8B9E-5824262342CF}
+	EndGlobalSection
+EndGlobal

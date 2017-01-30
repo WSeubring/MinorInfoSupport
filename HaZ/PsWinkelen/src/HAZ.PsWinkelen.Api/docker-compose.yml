@@ -1,0 +1,48 @@
+version: '2'
+
+services:
+  haz.pswinkelen.api:
+    image: heroesandzeroes/haz.pswinkelen.api:${TAG}
+    build:
+      context: .
+      dockerfile: Dockerfile
+    links:
+    - haz.pswinkelen.mysql:db
+    ports:
+    - 14010:80
+    environment:
+      ds-bestellingen-beheer-service: http://haz.dsbestellingenbeheer.facade
+      'ConnectionStrings:DataAccessMySqlProvider': server=db;userid=pswinkelen;password=pswinkelen;database=pswinkelen;
+      'ConnectionStrings:RabbitMQ': rabbitmq
+    external_links:
+     - haz.dsbestellingenbeheer.facade
+    networks:
+      - eventbus
+    volumes:
+    - ../logs/haz.pswinkelen.api:/logs
+      
+  haz.pswinkelen.mysql:
+    image: mysql
+    environment:
+      MYSQL_DATABASE: pswinkelen
+      MYSQL_USER: pswinkelen
+      MYSQL_PASSWORD: pswinkelen
+      MYSQL_ROOT_PASSWORD: 12341234
+    volumes:
+    - ../data/haz.pswinkelen:/var/lib/mysql
+    networks:
+    - eventbus
+
+  haz.pswinkelen.phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    links:
+    - haz.pswinkelen.mysql:db
+    ports:
+    - 14011:80
+    networks:
+    - eventbus
+
+networks:
+  eventbus:
+    external:
+      name: eventbus

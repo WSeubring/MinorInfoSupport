@@ -1,0 +1,17 @@
+version: '2'
+
+services:
+  haz.pswinkelen.listener:
+    image: heroesandzeroes/haz.pswinkelen.listener${TAG}
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        source: obj/Docker/empty/
+    labels:
+      - "com.microsoft.visualstudio.targetoperatingsystem=linux"
+    volumes:
+      - .:/app
+      - ~/.nuget/packages:/root/.nuget/packages:ro
+      - ~/clrdbg:/clrdbg:ro
+    entrypoint: tail -f /dev/null

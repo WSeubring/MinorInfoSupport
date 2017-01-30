@@ -1,0 +1,15 @@
+{
+  "name": "haz.fewebshop.polymer",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "postinstall": "./node_modules/.bin/bower install",
+    "prepublish": "./node_modules/.bin/gulp prepublish"
+  },
+  "devDependencies": {
+    "bower": "^1.8.0",
+    "del": "^2.2.2",
+    "gulp": "^3.9.1",
+    "gulp-vulcanize": "^6.1.0"
+  }
+}

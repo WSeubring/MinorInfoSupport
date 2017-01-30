@@ -1,0 +1,8 @@
+version: '2'
+
+services:
+  kantilever.auditlogservice:
+    build:
+      context: .
+      dockerfile: AuditlogDockerfile
+    

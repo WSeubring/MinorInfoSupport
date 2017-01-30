@@ -1,0 +1,21 @@
+version: '2'
+
+services:      
+  kantilever.snapshotbuilder:
+    image: heroesandzeroes/kantilever.snapshotbuilder
+    container_name: kantilever-snapshotbuilder
+    environment:
+      eventbus-exchangename: "KantileverBus"
+      eventbus-hostname: "kantilever-eventbus"
+      eventbus-username: "Kantilever"
+      eventbus-password: "Kant1lever" 
+      startup-delay-in-seconds : 0
+    networks:
+      - kantilever_eventbus_network
+
+networks:
+  kantilever_eventbus_network: 
+    external:
+      name: eventbus
+ 
+  

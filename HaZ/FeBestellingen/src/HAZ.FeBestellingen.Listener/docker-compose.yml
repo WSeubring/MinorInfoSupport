@@ -1,0 +1,24 @@
+version: '2'
+
+services:
+  haz.febestellingen.listener:
+    image: heroesandzeroes/haz.febestellingen.listener:${TAG}
+    environment:
+      'ConnectionStrings:DataAccessMySqlProvider': server=db;userid=febestellingen;password=febestellingen;database=febestellingen;
+      eventbus-exchangename: "KantileverBus"
+      eventbus-hostname: "kantilever-eventbus"
+      eventbus-username: "Kantilever"
+      eventbus-password: "Kant1lever" 
+      startup-replay-endpoint : "ReplayService"
+    volumes:
+    - ../logs/haz.febestellingen.listener:/logs
+    external_links:
+    - kantilever.eventbus:rabbitmq
+    - haz.febestellingen.mysql:db
+    networks:
+    - eventbus
+    
+networks:
+  eventbus:
+    external:
+      name: eventbus

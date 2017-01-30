@@ -1,13 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using RawRabbit;
-using RabbitMQ;
-using RawRabbit.vNext;
-using Export.Responses;
-using Export.Commands;
-using System.Threading;
+﻿using Minor.WSA.WSAEventbus;
+using Minor.RPCTestProject.Common;
 
 namespace CommandSendingService
 {
@@ -15,13 +7,17 @@ namespace CommandSendingService
     {
         public static void Main(string[] args)
         {
-            while (true)
+            ////RPC Send a Command
+            //var client = BusClientFactory.CreateDefault();
+            //Guid guid = new Guid();
+            //JoinRoomResponse test = client.RequestAsync<StartGameCommand, JoinRoomResponse>(new StartGameCommand("Test123"), guid).Result;
+            //Console.WriteLine($"Nu krijg ik Response {test.Status.ToString()}");
+            //Thread.Sleep(500);
+
+            //Publish a event using Minor.WSA.Eventbus 0.1.0
+            using (var bus = new Eventbus())
             {
-                var client = BusClientFactory.CreateDefault();
-                Guid guid = new Guid();
-                JoinRoomResponse test = client.RequestAsync<StartGameCommand, JoinRoomResponse>(new StartGameCommand("Test123"), guid).Result;
-                Console.WriteLine($"Nu krijg ik Response {test.Status.ToString()}");
-                Thread.Sleep(500);
+                bus.PublishEvent(new HypermodernEvent() { HypermodernGetal = 10 });
             }
         }
     }

@@ -1,0 +1,5 @@
+FROM microsoft/dotnet:1.0.1-core
+ENTRYPOINT ["dotnet", "Kantilever.Tools.SnapshotBuilder.dll"]
+ARG source=./SnapshotBuilder
+WORKDIR /app
+COPY $source .

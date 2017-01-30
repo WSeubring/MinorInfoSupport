@@ -1,0 +1,139 @@
+<link rel="import" href="webshop-winkelmandje-data.html">
+<dom-module id="webshop-winkelmandje">
+    <style>
+        #winkelmandje{
+            position: fixed;
+            top: 220px;
+            right: 400px;
+            text-align: center;
+            z-index: 9;
+            width: 75px;
+            height: 50px;
+        }
+
+        #winkelmandje-aantal{
+            position: fixed;
+            min-width: 20px;
+            top: 220px;
+            right: 395px;
+            padding: 3px;
+            border-radius: 50%;
+            background-color:white;
+            -webkit-box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, .5);
+            -moz-box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, .5);
+            box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, .5);
+        }
+
+        #winkelmandje-totaalprijs{
+            position: relative;
+            top: 3px;
+            padding: 2px;
+            border-radius: 15%;
+            background-color:white;
+            border-style: solid;
+            border-width:1px;
+            border-color: rgba(0, 0, 0, .25);
+        }
+        @media only screen and (max-width : 800px) {
+            #winkelmandje {
+                right: 10px;
+                top: 130px;
+            }
+            #winkelmandje-aantal{
+                right: 10px;
+                top: 130px;
+            }
+        }
+
+        @media only screen and (min-width : 801px) {
+            #winkelmandje {
+                right: 10px;
+            }
+            #winkelmandje-aantal{
+                right: 10px;
+            }
+        }
+
+        @media only screen and (min-width : 1880px) {
+            #winkelmandje {
+                right: 300px;
+            }
+             #winkelmandje-aantal{
+                right: 300px;
+            }
+        }
+    </style>
+
+    <template>
+        <div id='winkelmandje'>
+            <paper-fab id="winkelmandje-icon" icon="shopping-cart" on-click="goToWinkelmandje"></paper-fab>
+            <span id="winkelmandje-totaalprijs">&euro;[[totaalprijs]]</span>
+            <span id="winkelmandje-aantal"> [[aantalArtikelen]]</span>
+        </div>
+         <webshop-winkelmandje-data></webshop-winkelmandje-data>
+    </template>
+    
+    <script>
+        Polymer({
+            is: 'webshop-winkelmandje',
+            properties:{
+                totaalprijs:{
+                    type:Number,
+                    value: 0
+                },
+                aantalArtikelen:{
+                    type: Number,
+                    value: 0
+                }
+            },
+            attached: function(){
+                this.totaalprijs = this._berekenTotaalprijs();
+                this.aantalArtikelen = this._berekenAantalArtikelen();
+            },
+            listeners: {
+                'artikel-added': 'artikelAdded',
+            },
+            addArtikel: function (artikel) {
+                    Polymer.dom(this.root).querySelector('webshop-winkelmandje-data').addArtikel(artikel);
+            },
+            _berekenTotaalprijs: function(){
+                var artikelen = Polymer.dom(this.root).querySelector('webshop-winkelmandje-data').getArtikelen();
+                if (artikelen == null){
+                    return 0;
+                }
+                var sumTotaalprijs = 0;
+
+                for(i = 0; i < artikelen.length; i++){
+                    var artikel = artikelen[i];
+                    if(artikel != null){
+                        sumTotaalprijs += artikel.prijsInclBtw;
+                    }
+                }
+                return (Math.round(sumTotaalprijs * 100) / 100).toFixed(2);
+            },
+            _berekenAantalArtikelen: function(){
+                var artikelen = Polymer.dom(this.root).querySelector('webshop-winkelmandje-data').getArtikelen();
+                if(artikelen != null){
+                    return artikelen.length;
+                }
+                return 0;
+            },
+            artikelAdded: function(e){
+                var artikel = e.detail;
+                this.aantalArtikelen = this._berekenAantalArtikelen();
+                this.totaalprijs = this._berekenTotaalprijs();
+            },
+            calculateWinkelmandje: function(){
+                this.aantalArtikelen = this._berekenAantalArtikelen();
+                this.totaalprijs = this._berekenTotaalprijs();
+            },  
+             goToBestellen: function () {
+                this.fire("goTo", "bestellen");
+            },
+            goToWinkelmandje: function () {
+                this.fire("goTo", "winkelmandje")
+            }
+        });
+    </script>
+
+</dom-module>

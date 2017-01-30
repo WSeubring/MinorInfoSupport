@@ -1,0 +1,26 @@
+﻿# Run tests in docker
+
+version: '2'
+services:
+  haz.fewebshop.api.test:
+    container_name: haz.fewebshop.api.test
+    image: heroesandzeroes/haz.fewebshop.api:test
+    build:
+      context: ../../
+      dockerfile: test/HAZ.FeWEbshop.Api.Test/Dockerfile
+      args:
+        source: .
+    environment:
+      'ConnectionStrings:DataAccessMySqlProvider': server=db;userid=opdrachten;password=opdrachten;database=opdrachten;
+      'ConnectionStrings:RabbitMQ': rabbitmq
+      'ConnectionStrings:WinkelenServiceUri': http://haz.pswinkelen.facet
+    links:
+     - haz.fewebshop.mysql.test:db
+  haz.fewebshop.mysql.test:
+    container_name: haz.fewebshop.mysql.test
+    image: mysql
+    environment:
+      MYSQL_DATABASE: opdrachten
+      MYSQL_USER: opdrachten
+      MYSQL_PASSWORD: opdrachten
+      MYSQL_ROOT_PASSWORD: 12341234

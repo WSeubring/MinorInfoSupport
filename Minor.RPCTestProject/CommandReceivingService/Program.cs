@@ -1,6 +1,8 @@
 ﻿using Common;
 using Export.Commands;
 using Export.Responses;
+using Minor.RPCTestProject.Common;
+using Minor.WSA.WSAEventbus;
 using RawRabbit.vNext;
 using System;
 using System.Collections.Generic;
@@ -14,7 +16,7 @@ namespace CommandReceivingService
     {
         public static void Main(string[] args)
         {
-
+            //RPC using RAWRabbit
             var client = BusClientFactory.CreateDefault();
 
             //Init Responses
@@ -22,10 +24,18 @@ namespace CommandReceivingService
             JoinRoomCommand.SetupResponseToClient(client);
             StartGameCommand.SetupResponseToClient(client);
 
-            while (true)
-            {
-                Thread.Sleep(100);
-            }
+            ////Eventlisten using Minor.WSA.Eventbus 0.1.0
+            //using (var bus = new Eventbus())
+            //{
+            //    bus.Subscribe(new HyperModerneEventHandler());
+
+            //    //Keep service active
+            //    while (true)
+            //    {
+            //        Thread.Sleep(100);
+            //    }
+            //}
+
         }
     }
 }

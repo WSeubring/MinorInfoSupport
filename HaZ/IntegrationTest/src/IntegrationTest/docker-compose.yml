@@ -1,0 +1,198 @@
+﻿# Run tests in docker
+
+version: '2'
+services:
+# Test container
+  haz.integration.test:
+    container_name: haz.integration.test
+    image: heroesandzeroes/haz.integration.test:test
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        source: .
+    environment:
+      'ConnectionStrings:FeWebshop': server=haz.fewebshop.mysql;userid=fewebshop;password=fewebshop;database=fewebshop;
+      'ConnectionStrings:FeBestellingen': server=haz.febestellingen.mysql;userid=fewebshop;password=fewebshop;database=fewebshop;
+      'ConnectionStrings:PsWinkelen': server=haz.pswinkelen.mysql;userid=fewebshop;password=fewebshop;database=fewebshop;
+      'ConnectionStrings:DsBestellingen': server=haz.dsbestellingen.mysql;userid=fewebshop;password=fewebshop;database=fewebshop;
+      'ConnectionStrings:WinkelenServiceUri': http://haz.fewebshop.api
+      eventbus-exchangename: "KantileverBus"
+      eventbus-hostname: "kantilever-eventbus"
+      eventbus-username: "Kantilever"
+      eventbus-password: "Kant1lever"
+      startup-replay-endpoint : "ReplayService"
+    links:
+     - haz.fewebshop.mysql.test:haz.fewebshop.mysql
+     - haz.febestellingen.mysql.test:haz.febestellingen.mysql
+     - haz.pswinkelen.mysql.test:haz.pswinkelen.mysql
+     - haz.dsbestellingen.mysql.test:haz.dsbestellingen.mysql
+     - haz.eventbus.test:kantilever-eventbus
+
+     - haz.fewebshop.api.test:haz.fewebshop.api
+
+# FeWebshop
+  haz.fewebshop.api.test:
+    image: heroesandzeroes/haz.fewebshop.api:test
+    build:
+      context: ../../../FeWebshop/src/HAZ.FeWebshop.Api/bin/Debug/netcoreapp1.0/publish
+      dockerfile: Dockerfile
+      args:
+        source: .
+    links:
+    - haz.fewebshop.mysql.test:db
+    - haz.pswinkelen.api.test:haz.pswinkelen.api
+    environment:
+      'ConnectionStrings:DataAccessMySqlProvider': server=db;userid=fewebshop;password=fewebshop;database=fewebshop;
+      'ConnectionStrings:WinkelenServiceUri': http://haz.pswinkelen.api
+      
+  haz.fewebshop.listener.test:
+    image: heroesandzeroes/haz.fewebshop.listener:test
+    build:
+      context: ../../../FeWebshop/src/HAZ.FeWebshop.Listener/bin/Debug/netcoreapp1.0/publish
+      dockerfile: Dockerfile
+      args:
+        source: .
+    links:
+    - haz.fewebshop.mysql.test:db
+    - haz.eventbus.test:kantilever-eventbus
+    environment:
+      'ConnectionStrings:DataAccessMySqlProvider': server=db;userid=fewebshop;password=fewebshop;database=fewebshop;
+      eventbus-exchangename: "KantileverBus"
+      eventbus-hostname: "kantilever-eventbus"
+      eventbus-username: "Kantilever"
+      eventbus-password: "Kant1lever"
+      startup-replay-endpoint : "ReplayService"
+
+  haz.fewebshop.mysql.test:
+    container_name: haz.fewebshop.mysql.test
+    image: mysql
+    environment:
+      MYSQL_DATABASE: fewebshop
+      MYSQL_USER: fewebshop
+      MYSQL_PASSWORD: fewebshop
+      MYSQL_ROOT_PASSWORD: 12341234
+
+# FeBestellingen
+  haz.febestellingen.api.test:
+    image: heroesandzeroes/haz.febestellingen.api:test
+    build:
+      context: ../../../FeBestellingen/src/HAZ.FeBestellingen.Api/bin/Debug/netcoreapp1.0/publish
+      dockerfile: Dockerfile
+      args:
+        source: .
+    links:
+    - haz.febestellingen.mysql.test:db
+    - haz.pswinkelen.api.test:haz.pswinkelen.api
+    - haz.eventbus.test:kantilever-eventbus
+    environment:
+      'ConnectionStrings:DataAccessMySqlProvider': server=db;userid=fewebshop;password=fewebshop;database=fewebshop;
+      'ConnectionStrings:WinkelenServiceUri': http://haz.pswinkelen.api
+      eventbus-exchangename: "KantileverBus"
+      eventbus-hostname: "kantilever-eventbus"
+      eventbus-username: "Kantilever"
+      eventbus-password: "Kant1lever"
+      startup-replay-endpoint : "ReplayService"
+
+      
+  haz.febestellingen.listener.test:
+    image: heroesandzeroes/haz.febestellingen.listener:test
+    build:
+      context: ../../../FeBestellingen/src/HAZ.FeBestellingen.Listener/bin/Debug/netcoreapp1.0/publish
+      dockerfile: Dockerfile
+      args:
+        source: .
+    links:
+    - haz.febestellingen.mysql.test:db
+    - haz.eventbus.test:kantilever-eventbus
+    environment:
+      'ConnectionStrings:DataAccessMySqlProvider': server=db;userid=fewebshop;password=fewebshop;database=fewebshop;
+      eventbus-exchangename: "KantileverBus"
+      eventbus-hostname: "kantilever-eventbus"
+      eventbus-username: "Kantilever"
+      eventbus-password: "Kant1lever"
+      startup-replay-endpoint : "ReplayService"
+
+  haz.febestellingen.mysql.test:
+    container_name: haz.febestellingen.mysql.test
+    image: mysql
+    environment:
+      MYSQL_DATABASE: fewebshop
+      MYSQL_USER: fewebshop
+      MYSQL_PASSWORD: fewebshop
+      MYSQL_ROOT_PASSWORD: 12341234
+
+  # PsWinkelen
+  haz.pswinkelen.api.test:
+    image: heroesandzeroes/haz.pswinkelen.api:test
+    build:
+      context: ../../../PsWinkelen/src/HAZ.PsWinkelen.Api/bin/Debug/netcoreapp1.0/publish
+      dockerfile: Dockerfile
+      args:
+        source: .
+    links:
+    - haz.pswinkelen.mysql.test:db
+    - haz.dsbestellingen.api.test:haz.dsbestellingenbeheer.api
+    environment:
+      ds-bestellingen-beheer-service: http://haz.dsbestellingenbeheer.api
+      'ConnectionStrings:DataAccessMySqlProvider': server=db;userid=fewebshop;password=fewebshop;database=fewebshop;
+  haz.pswinkelen.listener.test:
+    image: heroesandzeroes/haz.pswinkelen.listener:test
+    build:
+      context: ../../../PsWinkelen/src/HAZ.PsWinkelen.Listener/bin/Debug/netcoreapp1.0/publish
+      dockerfile: Dockerfile
+      args:
+        source: .
+    links:
+    - haz.pswinkelen.mysql.test:db
+    - haz.eventbus.test:kantilever-eventbus
+    environment:
+      'ConnectionStrings:DataAccessMySqlProvider': server=db;userid=fewebshop;password=fewebshop;database=fewebshop;
+      eventbus-exchangename: "KantileverBus"
+      eventbus-hostname: "kantilever-eventbus"
+      eventbus-username: "Kantilever"
+      eventbus-password: "Kant1lever"
+      startup-replay-endpoint : "ReplayService"
+  haz.pswinkelen.mysql.test:
+    container_name: haz.pswinkelen.mysql.test
+    image: mysql
+    environment:
+      MYSQL_DATABASE: fewebshop
+      MYSQL_USER: fewebshop
+      MYSQL_PASSWORD: fewebshop
+      MYSQL_ROOT_PASSWORD: 12341234
+
+  # DsBestellingen
+  haz.dsbestellingen.api.test:
+    image: heroesandzeroes/haz.dsbestellingen.api:test
+    build:
+      context: ../../../DSBestellingenBeheer/src/HAZ.DSBestellingenBeheer.Facade/bin/Debug/netcoreapp1.0/publish
+      dockerfile: Dockerfile
+      args:
+        source: .
+    links:
+    - haz.dsbestellingen.mysql.test:db
+    - haz.eventbus.test:kantilever-eventbus
+    environment:
+      'ConnectionStrings:DataAccessMySqlProvider': server=db;userid=fewebshop;password=fewebshop;database=fewebshop;
+      eventbus-exchangename: "KantileverBus"
+      eventbus-hostname: "kantilever-eventbus"
+      eventbus-username: "Kantilever"
+      eventbus-password: "Kant1lever"
+      startup-replay-endpoint : "ReplayService"
+  haz.dsbestellingen.mysql.test:
+    container_name: haz.dsbestellingen.mysql.test
+    image: mysql
+    environment:
+      MYSQL_DATABASE: fewebshop
+      MYSQL_USER: fewebshop
+      MYSQL_PASSWORD: fewebshop
+      MYSQL_ROOT_PASSWORD: 12341234
+
+  # RabbitMQ
+  haz.eventbus.test:
+    image: rabbitmq:3-management
+    container_name: haz.eventbus.test
+    environment:
+      RABBITMQ_DEFAULT_USER: "Kantilever"
+      RABBITMQ_DEFAULT_PASS: "Kant1lever"

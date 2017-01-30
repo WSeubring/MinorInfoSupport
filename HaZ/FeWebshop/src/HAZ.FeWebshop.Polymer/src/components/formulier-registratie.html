@@ -1,0 +1,166 @@
+﻿<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../bower_components/paper-styles/color.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="../bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html" />
+<link rel="import" href="../bower_components/neon-animation/animations/fade-out-animation.html" />
+<link rel="import" href="../bower_components/neon-animation/animations/scale-up-animation.html" />
+<link rel="import" href="../bower_components/iron-form/iron-form.html" />
+<link rel="import" href="kantilever-dialog.html">
+<link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+<dom-module id="formulier-registratie">
+    <template>
+        <style is="custom-style">
+            paper-card {
+                width: 100%;
+                padding: 20px;
+                margin-top: 20px;
+            }
+
+            paper-button.green {
+                background-color: var(--paper-green-500);
+                color: white;
+                margin-top: 16px;
+            }
+
+            paper-input.kantileverzwart {
+                font-family: Calibri;
+                --paper-input-container-focus-color: #2D398E;
+                width: 200px;
+            }
+
+            paper-dropdown-menu.kantileverzwart {
+                width: 100px;
+            }
+
+            #huisnummer{
+                width: 65px;
+                margin-left: 10px;
+            }
+
+            .horizontal {
+                @apply(--layout-horizontal);
+            }
+        </style>
+
+        <paper-card heading="Bestellen">
+            <div class="card-content">
+                <form is="iron-form" id="registratie">
+                    <paper-input label="Naam" class="custom kantileverzwart" value="{{klant.naam::change}}"
+                                 required auto-validate error-message="Naam is verplicht."></paper-input>
+                    <div class="horizontal">
+                        <paper-input label="Straatnaam" class="custom kantileverzwart" value="{{klant.straatnaam::change}}"
+                                     required auto-validate error-message="Straatnaam is verplicht."></paper-input>
+                        <paper-input id="huisnummer" label="Huisnr" class="custom kantileverzwart" value="{{klant.huisnummer::change}}"
+                                     required auto-validate error-message="Huisnummer is verplicht."></paper-input>
+                    </div>
+                    <paper-input label="Postcode" class="custom kantileverzwart" value="{{klant.postcode::change}}"
+                                 auto-validate required pattern="(?:^[1-9]{1}[0-9]{3}$)|(?:^[1-9][0-9]{3}\s?([a-zA-Z]{2})?$)" error-message="Geldige postcode is verplicht."></paper-input>
+                    <paper-input label="Plaats" class="custom kantileverzwart" value="{{klant.plaats::change}}"
+                                 required auto-validate error-message="Plaats is verplicht."></paper-input>
+                    <paper-dropdown-menu required auto-validate error-message="Land is verplicht." label="Land" class="custom kantileverzwart" on-iron-select="landSelected">
+                        <paper-listbox id='land' class="dropdown-content">
+                            <paper-item>Nederland</paper-item>
+                            <paper-item>België</paper-item>
+                        </paper-listbox>
+                    </paper-dropdown-menu><br />
+
+                    <paper-button raised class="custom green" on-tap="plaatsBestelling">Bestellen</paper-button>
+                </form>
+            </div>
+        </paper-card>
+
+        <iron-ajax id="postPlaatsBestelling"
+                   url="/api/v1/Bestellingen"
+                   body='{{bestelling}}'
+                   handle-as="json"
+                   content-type="application/json"
+                   method="POST"></iron-ajax>
+
+        <kantilever-dialog type="error" id="bestellingError"
+                           message="Er is een fout opgetreden bestelling kon niet worden geplaatst. Probeer het later opnieuw"
+                           title="error"></kantilever-dialog>
+
+        <kantilever-dialog type="success" id="bestellingSuccess"
+                           message="Uw bestelling is geplaatst"
+                           title="Bestelling geplaatst"></kantilever-dialog>
+    </template>
+
+    <script>
+        Polymer({
+            is: 'formulier-registratie',
+            properties: {
+                klant: {
+                    type: Object,
+                    value: function () { return {} }
+                },
+                bestelling: {
+                    type: String,
+                },
+                _bestellingGeslaagd:{
+                    type: Boolean,
+                    value: false
+                }
+            },
+            attached: function(){
+                Polymer.dom(this.root).querySelector('#registratie').reset();
+            },
+            listeners: {
+                'error': 'verwerkErrorBestelling',
+                'response': 'verwerkResultaatBestelling',
+                'iron-overlay-closed' : 'handleDialogClosed'
+            },
+            getJsonBestelling: function (klant) {
+                var localstorageArtikelen = JSON.parse(localStorage.getItem('winkelmandje-data'));
+
+                if (localstorageArtikelen !== null) {
+                    var artikelen = [];
+                    for (var i = 0; i < localstorageArtikelen.length; i++) {
+                        var artikel = localstorageArtikelen[i];
+                        artikelen.push(artikel.artikelnummer);
+                    }
+
+                    var bestelling = { klant, artikelen };
+
+                    return bestelling;
+                }
+            },
+            plaatsBestelling: function () {
+                var result = Polymer.dom(this.root).querySelector('#registratie').validate();
+
+                if (result === true) {
+                    var bestelling = this.getJsonBestelling(this.klant);
+                    this.set("bestelling", bestelling);
+                    Polymer.dom(this.root).querySelector('#postPlaatsBestelling').generateRequest();
+                }
+            },
+            verwerkResultaatBestelling: function (result) {
+                localStorage.setItem('winkelmandje-data', JSON.stringify([]));
+                this.set("_bestellingGeslaagd",true);
+                this.klant = {};
+                this.fire("bestelling-geplaatst");
+                Polymer.dom(this.root).querySelector('#registratie').reset();
+                Polymer.dom(this.root).querySelector('#bestellingSuccess').toggle();
+            },
+            verwerkErrorBestelling: function (error, details) {
+                this.set("_bestellingGeslaagd", false);
+                Polymer.dom(this.root).querySelector('#bestellingError').toggle();
+            },
+            landSelected: function (e) {
+                var selectedItem = e.target.selectedItem;
+                this.klant.land = selectedItem.innerText;
+            },
+            handleDialogClosed: function (event) {
+                if (this._bestellingGeslaagd) {
+                    this.set("_bestellingGeslaagd", false);
+                    this.fire("goTo", "home");
+                }
+            }
+        });
+    </script>
+</dom-module>
